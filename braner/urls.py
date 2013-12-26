@@ -6,8 +6,10 @@ from django.conf import settings
 admin.autodiscover()
 
 urlpatterns = i18n_patterns('',
+                            # url(r'^goo$', 'braner.views.home' ),
                             url(r'^admin/', include(admin.site.urls)),
                             url(r'^', include('cms.urls')),
+
                             )
 
 if settings.DEBUG:

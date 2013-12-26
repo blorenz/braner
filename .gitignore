@@ -1,3 +1,4 @@
 *.pyc
 *.sqlite
 *.iml
+braner/settings/localsettings.py

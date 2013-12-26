@@ -17,6 +17,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 import os
 gettext = lambda s: s
 PROJECT_PATH = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
+# Take it from the Braner app to the project path because of the settings file
+# is now in its own directory
+PROJECT_PATH = os.path.join(PROJECT_PATH, '..')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -98,6 +101,7 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, "templates"),
 )
 CMS_TEMPLATES = (
+    ('home.html', 'Home Page Template'),
     ('template_1.html', 'Template One'),
     ('template_2.html', 'Template Two'),
 )
@@ -111,16 +115,6 @@ ROOT_URLCONF = 'braner.urls'
 
 WSGI_APPLICATION = 'braner.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
