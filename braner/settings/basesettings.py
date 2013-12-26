@@ -46,6 +46,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+
+    # my own
+    'braner',
+
     'cms',
     'mptt',
     'menus',
@@ -64,6 +68,8 @@ INSTALLED_APPS = (
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
     'reversion',
+
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -130,7 +136,3 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-STATIC_URL = '/static/'
