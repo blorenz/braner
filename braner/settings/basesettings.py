@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -112,10 +113,17 @@ CMS_TEMPLATES = (
     ('template_2.html', 'Template Two'),
 )
 
+
 LANGUAGES = [
-    ('en', 'English'),
+    ('en', gettext('English')),
+    ('es', gettext('Spanish')),
     ]
 
+CMS_LANGUAGES = LANGUAGES
+CMS_HIDE_UNTRANSLATED = True
+CMS_LANGUAGE_CONF = {
+    'es': ['en',],
+    }
 
 ROOT_URLCONF = 'braner.urls'
 
@@ -135,4 +143,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+CMS_MENU_TITLE_OVERWRITE = True
+CMS_SEO_FIELDS = True
 
+
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)

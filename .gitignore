@@ -2,3 +2,4 @@
 *.sqlite
 *.iml
 braner/settings/localsettings.py
+*.scssc
