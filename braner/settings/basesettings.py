@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'menus',
     'south',
     'sekizai',
+    'easy_thumbnails',
     # 'cms.plugins.flash',
     # 'cms.plugins.googlemap',
     'cms.plugins.link',
@@ -67,6 +68,9 @@ INSTALLED_APPS = (
     'cmsplugin_filer_image',
     'cmsplugin_filer_teaser',
     'cmsplugin_filer_video',
+
+    'cmsplugin_gallery',
+
     'reversion',
 
 
