@@ -456,3 +456,32 @@ body {
   height: 54px;
   background-color: #252525;
 }
+
+/* line 48, ../scss/global.scss */
+h3 {
+  color: #505050;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* line 56, ../scss/global.scss */
+p {
+  color: #191919;
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  font-weight: normal;
+}
+
+/* line 66, ../scss/global.scss */
+#logos,
+#homepage-content {
+  width: 915px;
+  margin: 0 auto;
+}
+
+/* line 71, ../scss/global.scss */
+hr {
+  margin: 35px auto;
+}

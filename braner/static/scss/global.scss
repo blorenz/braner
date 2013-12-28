@@ -44,3 +44,30 @@ body {
   background-color: #252525; // layer fill content
 }
 
+
+h3 {
+  color: #505050; // text color
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+p {
+  color: #191919; // text color
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  font-weight: normal;
+
+}
+
+
+#logos,
+#homepage-content {
+  width: 915px;
+  margin: 0 auto;
+}
+
+hr {
+  margin: 35px auto;
+}

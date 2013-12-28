@@ -2,48 +2,57 @@
 {% load cms_tags %}
 
 {% block base_content %}
-    {% placeholder slideshow_content %}
+    <div id="homepage-slideshow">
+        {% placeholder slideshow_content %}
+    </div>
 
-    {% placeholder homepage_text_content %}
+    <hr/>
 
-    <ul id="logos">
-        <li class="first-row"><a class="acero-prime" href="#"></a></li>
-        <li class="first-row"><a class="cargill" href="#"></a></li>
-        <li class="first-row"><a class="coilplus" href="#"></a></li>
-        <li class="first-row"><a class="feralloy" href="#"></a></li>
-        <li class="first-row"><a class="fortacero" href="#"></a></li>
+    <div id="homepage-content">
+        {% placeholder homepage_text_content %}
+    </div>
 
-        <li class="second-row"><a class="independencetube" href="#"></a></li>
-        <li class="second-row"><a class="jemison-demsey" href="#"></a></li>
-        <li class="second-row"><a class="kenwal" href="#"></a></li>
-        <li class="second-row"><a class="kloeckner" href="#"></a></li>
-        <li class="second-row"><a class="lapham-hickey" href="#"></a></li>
+    <hr/>
 
-        <li class="third-row"><a class="majestic-steel-usa" href="#"></a></li>
-        <li class="third-row"><a class="marino" href="#"></a></li>
-        <li class="third-row"><a class="metal-coaters" href="#"></a></li>
-        <li class="third-row"><a class="metals-usa" href="#"></a></li>
-        <li class="third-row"><a class="mill-steel" href="#"></a></li>
+    <div id="logos">
+        <h3>Featured Clients</h3>
+        <ul>
+            <li class="first-row"><a class="acero-prime" href="#"></a></li>
+            <li class="first-row"><a class="cargill" href="#"></a></li>
+            <li class="first-row"><a class="coilplus" href="#"></a></li>
+            <li class="first-row"><a class="feralloy" href="#"></a></li>
+            <li class="first-row"><a class="fortacero" href="#"></a></li>
 
-        <li class="fourth-row"><a class="misa" href="#"></a></li>
-        <li class="fourth-row"><a class="monarch" href="#"></a></li>
-        <li class="fourth-row"><a class="olympic-steel" href="#"></a></li>
-        <li class="fourth-row"><a class="oneal" href="#"></a></li>
-        <li class="fourth-row"><a class="prolamsa" href="#"></a></li>
+            <li class="second-row"><a class="independencetube" href="#"></a></li>
+            <li class="second-row"><a class="jemison-demsey" href="#"></a></li>
+            <li class="second-row"><a class="kenwal" href="#"></a></li>
+            <li class="second-row"><a class="kloeckner" href="#"></a></li>
+            <li class="second-row"><a class="lapham-hickey" href="#"></a></li>
 
-        <li class="fifth-row"><a class="reliance" href="#"></a></li>
-        <li class="fifth-row"><a class="russel-metals" href="#"></a></li>
-        <li class="fifth-row"><a class="ryerson" href="#"></a></li>
-        <li class="fifth-row"><a class="samuel" href="#"></a></li>
-        <li class="fifth-row"><a class="steel-summit" href="#"></a></li>
+            <li class="third-row"><a class="majestic-steel-usa" href="#"></a></li>
+            <li class="third-row"><a class="marino" href="#"></a></li>
+            <li class="third-row"><a class="metal-coaters" href="#"></a></li>
+            <li class="third-row"><a class="metals-usa" href="#"></a></li>
+            <li class="third-row"><a class="mill-steel" href="#"></a></li>
 
-        <li class="sixth-row"><a class="steel-technologies" href="#"></a></li>
-        <li class="sixth-row"><a class="steel-warehouse" href="#"></a></li>
-        <li class="sixth-row"><a class="thyssenkrupp" href="#"></a></li>
-        <li class="sixth-row"><a class="villacero" href="#"></a></li>
-        <li class="sixth-row"><a class="worthington-industries" href="#"></a></li>
-        <li style="clear:both;"></li>
+            <li class="fourth-row"><a class="misa" href="#"></a></li>
+            <li class="fourth-row"><a class="monarch" href="#"></a></li>
+            <li class="fourth-row"><a class="olympic-steel" href="#"></a></li>
+            <li class="fourth-row"><a class="oneal" href="#"></a></li>
+            <li class="fourth-row"><a class="prolamsa" href="#"></a></li>
 
+            <li class="fifth-row"><a class="reliance" href="#"></a></li>
+            <li class="fifth-row"><a class="russel-metals" href="#"></a></li>
+            <li class="fifth-row"><a class="ryerson" href="#"></a></li>
+            <li class="fifth-row"><a class="samuel" href="#"></a></li>
+            <li class="fifth-row"><a class="steel-summit" href="#"></a></li>
 
-    </ul>
+            <li class="sixth-row"><a class="steel-technologies" href="#"></a></li>
+            <li class="sixth-row"><a class="steel-warehouse" href="#"></a></li>
+            <li class="sixth-row"><a class="thyssenkrupp" href="#"></a></li>
+            <li class="sixth-row"><a class="villacero" href="#"></a></li>
+            <li class="sixth-row"><a class="worthington-industries" href="#"></a></li>
+            <li style="clear:both;"></li>
+        </ul>
+    </div>
 {% endblock %}

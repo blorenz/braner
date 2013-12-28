@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'south',
     'sekizai',
     'easy_thumbnails',
+    'tinymce',
     # 'cms.plugins.flash',
     # 'cms.plugins.googlemap',
     'cms.plugins.link',

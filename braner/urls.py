@@ -8,6 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        url(r'^$', 'braner.views.home' ),
+                       (r'^tinymce/', include('tinymce.urls')),
                        )
 
 urlpatterns = i18n_patterns('',
