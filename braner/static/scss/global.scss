@@ -65,13 +65,15 @@ p {
 }
 
 #homepage-slideshow {
-  width: 800px;
+  width: 790px;
   margin: 30px auto;
+  border: 1px solid #c6cbd0;
+  padding: 5px;
 
   #slideshow {
     width: 790px;
     height: 391px;
-    margin: 50px auto;
+    //margin: 50px auto;
     position: relative;
     //padding: 10px;
     //box-shadow: 0 0 20px rgba(0,0,0,0.4);
@@ -125,9 +127,11 @@ hr {
     bottom: 0px;
     left: 0px;
     color: #fff; // text color
-    font-family: "HelveticaNeueLTStd";
+    font-family: "Helvetica Neue";
+    font-weight: normal;
     font-size: 14px;
-    line-height: 14px;
+    line-height: 28px;
+    text-indent: 8px;
   }
 
   .lozenge {
