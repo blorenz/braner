@@ -423,10 +423,8 @@ body {
 /* line 13, ../scss/global.scss */
 #wrapper {
   width: 960px;
-  color: #b7b7b7;
   font-family: "Helvetica Neue";
   font-size: 12px;
-  font-weight: bold;
   margin: 0 auto;
 }
 
@@ -449,15 +447,82 @@ body {
   background-color: #252525;
   margin: 0 auto 36px;
 }
+/* line 40, ../scss/global.scss */
+#main-nav ul {
+  font-family: Arial, Verdana;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* line 46, ../scss/global.scss */
+#main-nav ul li {
+  display: block;
+  position: relative;
+  float: left;
+}
+/* line 53, ../scss/global.scss */
+#main-nav li ul {
+  display: none;
+}
+/* line 58, ../scss/global.scss */
+#main-nav ul li a {
+  display: block;
+  text-decoration: none;
+  color: #b7b7b7;
+  width: 140px;
+  height: 33px;
+  line-height: 33px;
+  text-align: center;
+  background-color: #252525;
+  white-space: nowrap;
+  font-weight: bold;
+  border-right: 1px solid #555555;
+}
+/* line 73, ../scss/global.scss */
+#main-nav ul li a:hover {
+  background: #464646;
+}
+/* line 79, ../scss/global.scss */
+#main-nav li:hover ul {
+  display: block;
+  position: absolute;
+}
+/* line 83, ../scss/global.scss */
+#main-nav li:hover li {
+  float: none;
+}
+/* line 88, ../scss/global.scss */
+#main-nav li:hover a {
+  background: #ebebeb;
+  width: auto;
+  padding: 10px;
+  color: #505050;
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+}
+/* line 97, ../scss/global.scss */
+#main-nav li:hover li a:hover {
+  background: #464646;
+  color: #ffffff;
+}
+/* line 105, ../scss/global.scss */
+#main-nav > ul > li:hover > a {
+  width: 140px;
+  height: 33px;
+  padding: 0;
+  color: #ffffff;
+  background: #464646;
+}
 
-/* line 41, ../scss/global.scss */
+/* line 124, ../scss/global.scss */
 #footer {
   width: 960px;
   height: 54px;
   background-color: #252525;
 }
 
-/* line 48, ../scss/global.scss */
+/* line 131, ../scss/global.scss */
 h3 {
   color: #505050;
   font-family: "Helvetica Neue";
@@ -466,7 +531,7 @@ h3 {
   text-transform: uppercase;
 }
 
-/* line 56, ../scss/global.scss */
+/* line 139, ../scss/global.scss */
 p {
   color: #191919;
   font-family: "Helvetica Neue";
@@ -474,14 +539,14 @@ p {
   font-weight: normal;
 }
 
-/* line 66, ../scss/global.scss */
+/* line 149, ../scss/global.scss */
 #logos,
 #homepage-content {
   width: 915px;
   margin: 0 auto;
 }
 
-/* line 71, ../scss/global.scss */
+/* line 154, ../scss/global.scss */
 hr {
   margin: 35px auto;
 }
