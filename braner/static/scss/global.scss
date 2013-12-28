@@ -87,10 +87,11 @@ body {
     a {
       background: #ebebeb;
       width: auto;
-      padding: 10px;
+      padding: 5px 10px;
       color: #505050; // text color
       font-family: "Helvetica Neue";
       font-size: 14px;
+      text-align: left;
 
       border: 1px solid #9fa6ac;
       border-top: 0px;
@@ -113,6 +114,7 @@ body {
       font-size: 12px;
       border: 0px;
       border-right: 1px solid #555555;
+      text-align: center;
     }
   }
 
