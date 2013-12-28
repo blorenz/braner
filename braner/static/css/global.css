@@ -516,22 +516,23 @@ body {
   background: #464646;
   font-size: 12px;
   border: 0px;
+  border-right: 1px solid #555555;
 }
-/* line 118, ../scss/global.scss */
+/* line 119, ../scss/global.scss */
 #main-nav > ul > li > a {
   border-right: 1px solid #555555;
   font-size: 12px;
   font-weight: bold;
 }
 
-/* line 135, ../scss/global.scss */
+/* line 136, ../scss/global.scss */
 #footer {
   width: 960px;
   height: 54px;
   background-color: #252525;
 }
 
-/* line 142, ../scss/global.scss */
+/* line 143, ../scss/global.scss */
 h3 {
   color: #505050;
   font-family: "Helvetica Neue";
@@ -540,7 +541,7 @@ h3 {
   text-transform: uppercase;
 }
 
-/* line 150, ../scss/global.scss */
+/* line 151, ../scss/global.scss */
 p {
   color: #191919;
   font-family: "Helvetica Neue";
@@ -548,14 +549,14 @@ p {
   font-weight: normal;
 }
 
-/* line 160, ../scss/global.scss */
+/* line 161, ../scss/global.scss */
 #logos,
 #homepage-content {
   width: 915px;
   margin: 0 auto;
 }
 
-/* line 165, ../scss/global.scss */
+/* line 166, ../scss/global.scss */
 hr {
   margin: 35px auto;
 }
