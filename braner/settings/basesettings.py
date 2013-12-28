@@ -55,7 +55,7 @@ INSTALLED_APPS = (
     'menus',
     'south',
     'sekizai',
-    'easy_thumbnails',
+
     'tinymce',
     # 'cms.plugins.flash',
     # 'cms.plugins.googlemap',
@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'cms.plugins.text',
     # 'cms.plugins.twitter',
     'filer',
+    'easy_thumbnails',
     'cmsplugin_filer_file',
     'cmsplugin_filer_folder',
     'cmsplugin_filer_image',
@@ -76,6 +77,15 @@ INSTALLED_APPS = (
 
 
 )
+
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

@@ -7,6 +7,9 @@
 @import "logos";
 @import "mainnav";
 @import "topnav";
+@import "compass/css3/opacity";
+@import "compass/css3/border-radius";
+@import "compass/css3/background-clip";
 
 body {
   width: 100%;
@@ -61,6 +64,28 @@ p {
 
 }
 
+#homepage-slideshow {
+  width: 800px;
+  margin: 30px auto;
+
+  #slideshow {
+    width: 790px;
+    height: 391px;
+    margin: 50px auto;
+    position: relative;
+    //padding: 10px;
+    //box-shadow: 0 0 20px rgba(0,0,0,0.4);
+
+    .slide {
+      position: absolute;
+      z-index: 1;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+    }
+  }
+}
 
 #logos,
 #homepage-content {
@@ -70,4 +95,50 @@ p {
 
 hr {
   margin: 35px auto;
+}
+
+
+.slideshow-nav {
+  width: 100%;
+  bottom: 0px;
+  height: 29px;
+  position: absolute;
+  display: block;
+  z-index: 1000;
+
+  .nav-bg {
+    @include opacity(.65); // layer alpha
+    background-color: #363636; // layer fill content
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .lozenge {
+    margin: 0 auto;
+    height: 14px;
+    position: absolute;
+    left: 50%;
+    top: 7px;
+    //@include opacity(.75); // layer alpha
+    @include border-radius(7px); // border radius
+    @include background-clip(padding-box); // prevents bg color from leaking outside the border
+    background-color: #000; // layer fill content
+    display: inline-block;
+    padding: 0 2px;
+
+    li {
+      float: left;
+      background: image-url("grey-dot.png") no-repeat;
+      width: 7px;
+      height: 7px;
+      margin: 3px 2px;
+
+      &.active {
+        background: image-url("green-dot.png") no-repeat;
+      }
+    }
+  }
 }

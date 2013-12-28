@@ -485,12 +485,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 #main-nav li:hover ul {
   display: block;
   position: absolute;
+  z-index: 100;
 }
-/* line 50, ../scss/_mainnav.scss */
+/* line 51, ../scss/_mainnav.scss */
 #main-nav li:hover li {
   float: none;
 }
-/* line 55, ../scss/_mainnav.scss */
+/* line 56, ../scss/_mainnav.scss */
 #main-nav li:hover a {
   background: #ebebeb;
   width: auto;
@@ -502,12 +503,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border: 1px solid #9fa6ac;
   border-top: 0px;
 }
-/* line 68, ../scss/_mainnav.scss */
+/* line 69, ../scss/_mainnav.scss */
 #main-nav li:hover li a:hover {
   background: #464646;
   color: #ffffff;
 }
-/* line 76, ../scss/_mainnav.scss */
+/* line 77, ../scss/_mainnav.scss */
 #main-nav > ul > li:hover > a {
   width: 140px;
   height: 33px;
@@ -519,7 +520,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-right: 1px solid #555555;
   text-align: center;
 }
-/* line 89, ../scss/_mainnav.scss */
+/* line 90, ../scss/_mainnav.scss */
 #main-nav > ul > li > a {
   border-right: 1px solid #555555;
   font-size: 12px;
@@ -611,12 +612,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background: url('../img/arrow.png?1388253933') no-repeat 2px 5px;
 }
 
-/* line 11, ../scss/global.scss */
+/* line 14, ../scss/global.scss */
 body {
   width: 100%;
 }
 
-/* line 15, ../scss/global.scss */
+/* line 18, ../scss/global.scss */
 #wrapper {
   width: 960px;
   font-family: "Helvetica Neue";
@@ -624,7 +625,7 @@ body {
   margin: 0 auto;
 }
 
-/* line 26, ../scss/global.scss */
+/* line 29, ../scss/global.scss */
 #top-nav {
   height: 41px;
   width: 800px;
@@ -632,13 +633,13 @@ body {
   background-color: #242424;
 }
 
-/* line 33, ../scss/global.scss */
+/* line 36, ../scss/global.scss */
 #logo {
   display: block;
   margin: 36px 80px 36px;
 }
 
-/* line 40, ../scss/global.scss */
+/* line 43, ../scss/global.scss */
 #footer {
   width: 800px;
   height: 54px;
@@ -646,7 +647,7 @@ body {
   background-color: #252525;
 }
 
-/* line 48, ../scss/global.scss */
+/* line 51, ../scss/global.scss */
 h3 {
   color: #505050;
   font-family: "Helvetica Neue";
@@ -655,7 +656,7 @@ h3 {
   text-transform: uppercase;
 }
 
-/* line 56, ../scss/global.scss */
+/* line 59, ../scss/global.scss */
 p {
   color: #191919;
   font-family: "Helvetica Neue";
@@ -663,14 +664,88 @@ p {
   font-weight: normal;
 }
 
-/* line 66, ../scss/global.scss */
+/* line 67, ../scss/global.scss */
+#homepage-slideshow {
+  width: 800px;
+  margin: 30px auto;
+}
+/* line 71, ../scss/global.scss */
+#homepage-slideshow #slideshow {
+  width: 790px;
+  height: 391px;
+  margin: 50px auto;
+  position: relative;
+}
+/* line 79, ../scss/global.scss */
+#homepage-slideshow #slideshow .slide {
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+/* line 91, ../scss/global.scss */
 #logos,
 #homepage-content {
   width: 800px;
   margin: 0 auto;
 }
 
-/* line 71, ../scss/global.scss */
+/* line 96, ../scss/global.scss */
 hr {
   margin: 35px auto;
+}
+
+/* line 101, ../scss/global.scss */
+.slideshow-nav {
+  width: 100%;
+  bottom: 0px;
+  height: 29px;
+  position: absolute;
+  display: block;
+  z-index: 1000;
+}
+/* line 109, ../scss/global.scss */
+.slideshow-nav .nav-bg {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
+  opacity: 0.65;
+  background-color: #363636;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+/* line 119, ../scss/global.scss */
+.slideshow-nav .lozenge {
+  margin: 0 auto;
+  height: 14px;
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  background-color: #000;
+  display: inline-block;
+  padding: 0 2px;
+}
+/* line 132, ../scss/global.scss */
+.slideshow-nav .lozenge li {
+  float: left;
+  background: url('../img/grey-dot.png?1388264049') no-repeat;
+  width: 7px;
+  height: 7px;
+  margin: 3px 2px;
+}
+/* line 139, ../scss/global.scss */
+.slideshow-nav .lozenge li.active {
+  background: url('../img/green-dot.png?1388264065') no-repeat;
 }

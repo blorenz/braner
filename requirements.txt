@@ -1,7 +1,7 @@
 Django==1.5.5
 Jinja2==2.7.1
 MarkupSafe==0.18
-Pillow==2.0.0
+PIL==1.1.7
 PyYAML==3.10
 Pygments==1.6
 South==0.8.3
@@ -20,6 +20,7 @@ django-mptt==0.5.2
 django-polymorphic==0.5.3
 django-reversion==1.7
 django-sekizai==0.7
+django-tinymce==1.5.2
 easy-thumbnails==1.4
 gunicorn==18.0
 html5lib==0.99

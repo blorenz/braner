@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/global.css"/>
     {% render_block "css" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 {% cms_toolbar %}
@@ -12,7 +13,7 @@
 
         <div id="language-chooser">
 
-                        {% language_chooser "braner/language_chooser.html" %}
+            {% language_chooser "braner/language_chooser.html" %}
 
         </div>
 
