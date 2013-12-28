@@ -2,17 +2,45 @@
 @import "logos/*.png";
 //@include all-logos-sprites;
 
+$SIZE_MODIFIER: .87431694;
+//$SIZE_MODIFIER: 1;
 #logos {
 
   a {
     float: left;
   }
+
+  .first-row a {
+    margin-bottom: 20px;
+  }
+
+  .second-row a {
+    margin-bottom: 20px;
+  }
+
+  .third-row a {
+    margin-bottom: 20px;
+  }
+
+  .fourth-row a {
+    margin-bottom: 20px;
+  }
+
+  .fifth-row a {
+    margin-bottom: 20px;
+  }
+
+  .sixth-row a {
+    margin-bottom: 20px;
+  }
+
+
   .acero-prime    {
 
     @include logos-sprite(acero-prime);
 
-    width: 156px;
-    height: 90px;
+    width: 156px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(acero-prime-color);
@@ -24,8 +52,8 @@
 
     @include logos-sprite(cargill);
 
-    width: 192px;
-    height: 90px;
+    width: 192px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(cargill-color);
@@ -37,8 +65,8 @@
 
     @include logos-sprite(coilplus);
 
-    width: 190px;
-    height: 90px;
+    width: 190px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(coilplus-color);
@@ -49,8 +77,8 @@
 
     @include logos-sprite(feralloy);
 
-    width: 194px;
-    height: 90px;
+    width: 194px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(feralloy-color);
@@ -61,8 +89,8 @@
 
     @include logos-sprite(fortacero);
 
-    width: 183px;
-    height: 90px;
+    width: 183px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(fortacero-color);
@@ -75,8 +103,8 @@
 
     @include logos-sprite(independencetube);
 
-    width: 156px;
-    height: 90px;
+    width: 156px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(independencetube-color);
@@ -88,8 +116,8 @@
 
     @include logos-sprite(jemison-demsey);
 
-    width: 192px;
-    height: 90px;
+    width: 192px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(jemison-demsey-color);
@@ -101,8 +129,8 @@
 
     @include logos-sprite(kenwal);
 
-    width: 190px;
-    height: 90px;
+    width: 190px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(kenwal-color);
@@ -113,8 +141,8 @@
 
     @include logos-sprite(kloeckner);
 
-    width: 194px;
-    height: 90px;
+    width: 194px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(kloeckner-color);
@@ -125,8 +153,8 @@
 
     @include logos-sprite(lapham-hickey);
 
-    width: 183px;
-    height: 90px;
+    width: 183px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(lapham-hickey-color);
@@ -139,8 +167,8 @@
 
     @include logos-sprite(majestic-steel-usa);
 
-    width: 156px;
-    height: 90px;
+    width: 156px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(majestic-steel-usa-color);
@@ -152,8 +180,8 @@
 
     @include logos-sprite(marino-ware);
 
-    width: 192px;
-    height: 90px;
+    width: 192px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(marino-color);
@@ -165,8 +193,8 @@
 
     @include logos-sprite(metal-coaters);
 
-    width: 190px;
-    height: 90px;
+    width: 190px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(metal-coaters-color);
@@ -177,8 +205,8 @@
 
     @include logos-sprite(metals-usa);
 
-    width: 194px;
-    height: 90px;
+    width: 194px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(metals-usa-color);
@@ -189,8 +217,8 @@
 
     @include logos-sprite(mill-steel);
 
-    width: 183px;
-    height: 90px;
+    width: 183px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(mill-steel-color);
@@ -203,8 +231,8 @@
 
     @include logos-sprite(misa);
 
-    width: 156px;
-    height: 90px;
+    width: 156px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(misa-color);
@@ -216,8 +244,8 @@
 
     @include logos-sprite(monarch);
 
-    width: 192px;
-    height: 90px;
+    width: 192px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(monarch-color);
@@ -229,8 +257,8 @@
 
     @include logos-sprite(olympic-steel);
 
-    width: 190px;
-    height: 90px;
+    width: 190px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(olympic-steel-color);
@@ -241,8 +269,8 @@
 
     @include logos-sprite(oneal);
 
-    width: 194px;
-    height: 90px;
+    width: 194px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(oneal-color);
@@ -253,8 +281,8 @@
 
     @include logos-sprite(prolamsa);
 
-    width: 183px;
-    height: 90px;
+    width: 183px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(prolamsa-color);
@@ -267,8 +295,8 @@
 
     @include logos-sprite(reliance);
 
-    width: 156px;
-    height: 90px;
+    width: 156px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(reliance-color);
@@ -280,8 +308,8 @@
 
     @include logos-sprite(russel-metals);
 
-    width: 192px;
-    height: 90px;
+    width: 192px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(russel-metals-color);
@@ -293,8 +321,8 @@
 
     @include logos-sprite(ryerson);
 
-    width: 190px;
-    height: 90px;
+    width: 190px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(ryerson-color);
@@ -305,8 +333,8 @@
 
     @include logos-sprite(samuel);
 
-    width: 194px;
-    height: 90px;
+    width: 194px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(samuel-color);
@@ -317,8 +345,8 @@
 
     @include logos-sprite(steel-summit);
 
-    width: 183px;
-    height: 90px;
+    width: 183px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(steel-summit-color);
@@ -331,8 +359,8 @@
 
     @include logos-sprite(steel-technologies);
 
-    width: 156px;
-    height: 90px;
+    width: 156px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(steel-technologies-color);
@@ -344,8 +372,8 @@
 
     @include logos-sprite(steel-warehouse);
 
-    width: 192px;
-    height: 90px;
+    width: 192px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(steel-warehouse-color);
@@ -357,8 +385,8 @@
 
     @include logos-sprite(thyssenkrupp);
 
-    width: 190px;
-    height: 90px;
+    width: 190px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(thyssenkrupp-color);
@@ -369,8 +397,8 @@
 
     @include logos-sprite(villacero);
 
-    width: 194px;
-    height: 90px;
+    width: 194px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(villacero-color);
@@ -381,8 +409,8 @@
 
     @include logos-sprite(worthington-industries);
 
-    width: 183px;
-    height: 90px;
+    width: 183px * $SIZE_MODIFIER;
+    height: 90px * $SIZE_MODIFIER;
     display: block;
     &:hover {
       @include logos-sprite(worthington-industries-color);

@@ -4,7 +4,11 @@
     <li>
         {% for language in languages %}
             {% language language.0 %}
+
                 {% ifequal current_language language.0 %}
+                    <i>
+                        &nbsp;
+                    </i>
                         {{ language.1 }}
                 {% endifequal %}
             {% endlanguage %}

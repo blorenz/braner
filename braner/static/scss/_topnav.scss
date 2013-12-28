@@ -1,8 +1,10 @@
 
 #language-chooser {
   color: #ffffff;
+  float: right;
+
   ul {
-      font-family: Arial, Verdana;
+    font-family: "Helvetica Neue";
       font-size: 14px;
       margin: 0;
       padding: 0;
@@ -11,6 +13,7 @@
         display: block;
         position: relative;
         float: left;
+        text-indent: 8px;
       }
     }
 
@@ -22,16 +25,13 @@
       display: block;
       text-decoration: none;
       color: #ffffff;
-      border-top: 1px solid #ffffff;
-      padding: 5px 15px 5px 15px;
-      background: #2C5463;
-      margin-left: 1px;
       white-space: nowrap;
-      &:hover {
-        background: #617F8A;
-      }
+      width: 100px;
+      font-weight: normal;
     }
 
+
+    // Hover mode
     li:hover {
       ul {
         display: block;
@@ -39,13 +39,49 @@
       }
       li {
         float: none;
-        font-size: 11px;
+        //font-size: 11px;
       }
       a {
-        background: #617F8A;
+        background: #ebebeb;
+          //padding: 5px 10px;
+        color: #505050; // text color
+        font-family: "Helvetica Neue";
+        font-size: 14px;
+        text-align: left;
+
+        border: 1px solid #9fa6ac;
+        border-left: 0px;
+        border-top: 0px;
+        color: #676d71; // text color
+        font-family: "Helvetica Neue";
+        font-size: 12px;
       }
       li a:hover {
-        background: #95A9B1;
+        background: #464646;
+        color: #fff; // text color
+        font-family: "Helvetica Neue";
+        font-size: 12px;
       }
+  }
+
+  &>ul>li { // root
+    background-color: #252525;
+    width: 100px;
+    height: 15px;
+    line-height: 15px;
+    border: 1px solid #555555;
+    color: #a9a9a9; // text color
+    font-family: "Helvetica Neue";
+    font-size: 12px;
+    font-weight: bold;
+
+    i {
+      float: right;
+      border-left: 1px solid #555555;
+      width: 15px;
+      display: block;
+      text-align: center;
+      background: image-url("arrow.png") no-repeat 2px 5px;
+    }
   }
 }

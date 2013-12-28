@@ -25,6 +25,8 @@ body {
 
 #top-nav {
   height: 41px;
+  width: 800px;
+  margin: 0 auto;
   background-color: #242424; // layer fill content
 }
 
@@ -36,8 +38,9 @@ body {
 
 
 #footer {
-  width: 960px;
+  width: 800px;
   height: 54px;
+  margin: 0 auto;
   background-color: #252525; // layer fill content
 }
 
@@ -61,7 +64,7 @@ p {
 
 #logos,
 #homepage-content {
-  width: 915px;
+  width: 800px;
   margin: 0 auto;
 }
 
