@@ -5,6 +5,8 @@
 
 @import "compass/reset";
 @import "logos";
+@import "mainnav";
+@import "topnav";
 
 body {
   width: 100%;
@@ -30,108 +32,6 @@ body {
   display: block;
   margin: 36px 80px 36px;
 }
-
-#main-nav {
-  width: 800px;
-  height: 33px;
-  background-color: #252525; // layer fill content
-  margin: 0 auto 36px;
-
-  ul {
-    font-family: "Helvetica Neue";
-    font-size: 14px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    li {
-      display: block;
-      position: relative;
-      float: left;
-    }
-  }
-
-  li ul {
-    display: none;
-  }
-
-
-  ul li a {
-    display: block;
-    text-decoration: none;
-    color: #b7b7b7; // text color
-    //border-top: 1px solid #ffffff;
-    //padding: 5px 15px 5px 15px;
-    width: 140px;
-    height: 33px;
-    line-height: 33px;
-    text-align: center;
-    background-color: #252525;
-    //margin-left: 1px;
-    white-space: nowrap;
-    font-weight: normal;
-    &:hover {
-      background: #464646;
-    }
-  }
-
-  li:hover {
-    ul {
-      display: block;
-      position: absolute;
-    }
-    li {
-      float: none;
-      //font-size: 11px;
-    }
-
-    a {
-      background: #ebebeb;
-      width: auto;
-      padding: 5px 10px;
-      color: #505050; // text color
-      font-family: "Helvetica Neue";
-      font-size: 14px;
-      text-align: left;
-
-      border: 1px solid #9fa6ac;
-      border-top: 0px;
-    }
-
-    li a:hover {
-      background: #464646;
-      color: #ffffff;
-    }
-  }
-
-  &>ul>li:hover { // Root
-
-    &>a {
-      width: 140px;
-      height: 33px;
-      padding: 0;
-      color: #ffffff;
-      background: #464646;
-      font-size: 12px;
-      border: 0px;
-      border-right: 1px solid #555555;
-      text-align: center;
-    }
-  }
-
-  &>ul>li>a { // root
-    border-right: 1px solid #555555;
-    font-size: 12px;
-    font-weight: bold;
-
-  }
-
-}
-
-
-
-
-
-
 
 
 
