@@ -449,7 +449,7 @@ body {
 }
 /* line 40, ../scss/global.scss */
 #main-nav ul {
-  font-family: Arial, Verdana;
+  font-family: "Helvetica Neue";
   font-size: 14px;
   margin: 0;
   padding: 0;
@@ -476,23 +476,22 @@ body {
   text-align: center;
   background-color: #252525;
   white-space: nowrap;
-  font-weight: bold;
-  border-right: 1px solid #555555;
+  font-weight: normal;
 }
-/* line 73, ../scss/global.scss */
+/* line 72, ../scss/global.scss */
 #main-nav ul li a:hover {
   background: #464646;
 }
-/* line 79, ../scss/global.scss */
+/* line 78, ../scss/global.scss */
 #main-nav li:hover ul {
   display: block;
   position: absolute;
 }
-/* line 83, ../scss/global.scss */
+/* line 82, ../scss/global.scss */
 #main-nav li:hover li {
   float: none;
 }
-/* line 88, ../scss/global.scss */
+/* line 87, ../scss/global.scss */
 #main-nav li:hover a {
   background: #ebebeb;
   width: auto;
@@ -500,29 +499,39 @@ body {
   color: #505050;
   font-family: "Helvetica Neue";
   font-size: 14px;
+  border: 1px solid #9fa6ac;
+  border-top: 0px;
 }
-/* line 97, ../scss/global.scss */
+/* line 99, ../scss/global.scss */
 #main-nav li:hover li a:hover {
   background: #464646;
   color: #ffffff;
 }
-/* line 105, ../scss/global.scss */
+/* line 107, ../scss/global.scss */
 #main-nav > ul > li:hover > a {
   width: 140px;
   height: 33px;
   padding: 0;
   color: #ffffff;
   background: #464646;
+  font-size: 12px;
+  border: 0px;
+}
+/* line 118, ../scss/global.scss */
+#main-nav > ul > li > a {
+  border-right: 1px solid #555555;
+  font-size: 12px;
+  font-weight: bold;
 }
 
-/* line 124, ../scss/global.scss */
+/* line 135, ../scss/global.scss */
 #footer {
   width: 960px;
   height: 54px;
   background-color: #252525;
 }
 
-/* line 131, ../scss/global.scss */
+/* line 142, ../scss/global.scss */
 h3 {
   color: #505050;
   font-family: "Helvetica Neue";
@@ -531,7 +540,7 @@ h3 {
   text-transform: uppercase;
 }
 
-/* line 139, ../scss/global.scss */
+/* line 150, ../scss/global.scss */
 p {
   color: #191919;
   font-family: "Helvetica Neue";
@@ -539,14 +548,14 @@ p {
   font-weight: normal;
 }
 
-/* line 149, ../scss/global.scss */
+/* line 160, ../scss/global.scss */
 #logos,
 #homepage-content {
   width: 915px;
   margin: 0 auto;
 }
 
-/* line 154, ../scss/global.scss */
+/* line 165, ../scss/global.scss */
 hr {
   margin: 35px auto;
 }

@@ -38,7 +38,7 @@ body {
   margin: 0 auto 36px;
 
   ul {
-    font-family: Arial, Verdana;
+    font-family: "Helvetica Neue";
     font-size: 14px;
     margin: 0;
     padding: 0;
@@ -68,8 +68,7 @@ body {
     background-color: #252525;
     //margin-left: 1px;
     white-space: nowrap;
-    font-weight: bold;
-    border-right: 1px solid #555555;
+    font-weight: normal;
     &:hover {
       background: #464646;
     }
@@ -93,7 +92,10 @@ body {
       font-family: "Helvetica Neue";
       font-size: 14px;
 
+      border: 1px solid #9fa6ac;
+      border-top: 0px;
     }
+
     li a:hover {
       background: #464646;
       color: #ffffff;
@@ -108,7 +110,16 @@ body {
       padding: 0;
       color: #ffffff;
       background: #464646;
+      font-size: 12px;
+      border: 0px;
     }
+  }
+
+  &>ul>li>a { // root
+    border-right: 1px solid #555555;
+    font-size: 12px;
+    font-weight: bold;
+
   }
 
 }
