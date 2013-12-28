@@ -84,6 +84,8 @@ p {
       right: 0px;
       bottom: 0px;
     }
+
+
   }
 }
 
@@ -114,6 +116,18 @@ hr {
     right: 0;
     top: 0;
     bottom: 0;
+    z-index:2000;
+  }
+
+  .title {
+    position: absolute;
+    z-index: 4000;
+    bottom: 0px;
+    left: 0px;
+    color: #fff; // text color
+    font-family: "HelveticaNeueLTStd";
+    font-size: 14px;
+    line-height: 14px;
   }
 
   .lozenge {
@@ -128,8 +142,12 @@ hr {
     background-color: #000; // layer fill content
     display: inline-block;
     padding: 0 2px;
+    z-index:3000;
 
     li {
+      float: left;
+    }
+    a {
       float: left;
       background: image-url("grey-dot.png") no-repeat;
       width: 7px;

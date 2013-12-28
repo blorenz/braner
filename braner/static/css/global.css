@@ -686,19 +686,19 @@ p {
   bottom: 0px;
 }
 
-/* line 91, ../scss/global.scss */
+/* line 93, ../scss/global.scss */
 #logos,
 #homepage-content {
   width: 800px;
   margin: 0 auto;
 }
 
-/* line 96, ../scss/global.scss */
+/* line 98, ../scss/global.scss */
 hr {
   margin: 35px auto;
 }
 
-/* line 101, ../scss/global.scss */
+/* line 103, ../scss/global.scss */
 .slideshow-nav {
   width: 100%;
   bottom: 0px;
@@ -707,7 +707,7 @@ hr {
   display: block;
   z-index: 1000;
 }
-/* line 109, ../scss/global.scss */
+/* line 111, ../scss/global.scss */
 .slideshow-nav .nav-bg {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
   opacity: 0.65;
@@ -717,8 +717,20 @@ hr {
   right: 0;
   top: 0;
   bottom: 0;
+  z-index: 2000;
 }
-/* line 119, ../scss/global.scss */
+/* line 122, ../scss/global.scss */
+.slideshow-nav .title {
+  position: absolute;
+  z-index: 4000;
+  bottom: 0px;
+  left: 0px;
+  color: #fff;
+  font-family: "HelveticaNeueLTStd";
+  font-size: 14px;
+  line-height: 14px;
+}
+/* line 133, ../scss/global.scss */
 .slideshow-nav .lozenge {
   margin: 0 auto;
   height: 14px;
@@ -736,16 +748,21 @@ hr {
   background-color: #000;
   display: inline-block;
   padding: 0 2px;
+  z-index: 3000;
 }
-/* line 132, ../scss/global.scss */
+/* line 147, ../scss/global.scss */
 .slideshow-nav .lozenge li {
+  float: left;
+}
+/* line 150, ../scss/global.scss */
+.slideshow-nav .lozenge a {
   float: left;
   background: url('../img/grey-dot.png?1388264049') no-repeat;
   width: 7px;
   height: 7px;
   margin: 3px 2px;
 }
-/* line 139, ../scss/global.scss */
-.slideshow-nav .lozenge li.active {
+/* line 157, ../scss/global.scss */
+.slideshow-nav .lozenge a.active {
   background: url('../img/green-dot.png?1388264065') no-repeat;
 }
