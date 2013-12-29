@@ -7,6 +7,7 @@
 @import "logos";
 @import "mainnav";
 @import "topnav";
+@import "social";
 @import "compass/css3/opacity";
 @import "compass/css3/border-radius";
 @import "compass/css3/background-clip";
@@ -26,12 +27,7 @@ body {
 
 }
 
-#top-nav {
-  height: 41px;
-  width: 800px;
-  margin: 0 auto;
-  background-color: #242424; // layer fill content
-}
+
 
 #logo {
   display: block;
@@ -41,27 +37,47 @@ body {
 
 
 #footer {
-  width: 800px;
+
+  #social {
+    width: 800px;
+    margin: 0 auto;
+  }
+  width: 100%;
   height: 54px;
-  margin: 0 auto;
   background-color: #252525; // layer fill content
 }
 
 
-h3 {
-  color: #505050; // text color
-  font-family: "Helvetica Neue";
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
+#homepage-content {
+  h3 {
+    color: #505050; // text color
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #191919; // text color
+    font-family: "Helvetica Neue";
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+
+  }
+
 }
 
-p {
-  color: #191919; // text color
-  font-family: "Helvetica Neue";
-  font-size: 14px;
-  font-weight: normal;
-
+#logos {
+  h3 {
+    color: #505050; // text color
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
 }
 
 #homepage-slideshow {

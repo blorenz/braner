@@ -528,11 +528,47 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 2, ../scss/_topnav.scss */
+#top-nav {
+  height: 41px;
+  background-color: #252525;
+  width: 100%;
+}
+/* line 6, ../scss/_topnav.scss */
+#top-nav #top-main {
+  width: 800px;
+  margin: 0 auto;
+}
+/* line 9, ../scss/_topnav.scss */
+#top-nav #top-main > ul {
+  float: right;
+}
+/* line 11, ../scss/_topnav.scss */
+#top-nav #top-main > ul li {
+  float: left;
+  margin-left: 15px;
+}
+/* line 15, ../scss/_topnav.scss */
+#top-nav #top-main > ul li a {
+  color: #b7b7b7;
+  font-family: "Helvetica Neue";
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 41px;
+}
+/* line 23, ../scss/_topnav.scss */
+#top-nav #top-main > ul li a:hover {
+  color: #ffffff;
+}
+
+/* line 33, ../scss/_topnav.scss */
 #language-chooser {
   color: #ffffff;
   float: right;
+  margin-top: 13px;
+  margin-left: 15px;
 }
-/* line 6, ../scss/_topnav.scss */
+/* line 39, ../scss/_topnav.scss */
 #language-chooser ul {
   font-family: "Helvetica Neue";
   font-size: 14px;
@@ -540,18 +576,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 0;
   list-style: none;
 }
-/* line 12, ../scss/_topnav.scss */
+/* line 45, ../scss/_topnav.scss */
 #language-chooser ul li {
   display: block;
   position: relative;
   float: left;
   text-indent: 8px;
 }
-/* line 20, ../scss/_topnav.scss */
+/* line 53, ../scss/_topnav.scss */
 #language-chooser li ul {
   display: none;
 }
-/* line 24, ../scss/_topnav.scss */
+/* line 57, ../scss/_topnav.scss */
 #language-chooser ul li a {
   display: block;
   text-decoration: none;
@@ -560,16 +596,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   width: 100px;
   font-weight: normal;
 }
-/* line 36, ../scss/_topnav.scss */
+/* line 69, ../scss/_topnav.scss */
 #language-chooser li:hover ul {
   display: block;
   position: absolute;
 }
-/* line 40, ../scss/_topnav.scss */
+/* line 73, ../scss/_topnav.scss */
 #language-chooser li:hover li {
   float: none;
 }
-/* line 44, ../scss/_topnav.scss */
+/* line 77, ../scss/_topnav.scss */
 #language-chooser li:hover a {
   background: #ebebeb;
   color: #505050;
@@ -583,14 +619,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-family: "Helvetica Neue";
   font-size: 12px;
 }
-/* line 59, ../scss/_topnav.scss */
+/* line 92, ../scss/_topnav.scss */
 #language-chooser li:hover li a:hover {
   background: #464646;
   color: #fff;
   font-family: "Helvetica Neue";
   font-size: 12px;
 }
-/* line 67, ../scss/_topnav.scss */
+/* line 100, ../scss/_topnav.scss */
 #language-chooser > ul > li {
   background-color: #252525;
   width: 100px;
@@ -602,7 +638,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 12px;
   font-weight: bold;
 }
-/* line 78, ../scss/_topnav.scss */
+/* line 111, ../scss/_topnav.scss */
 #language-chooser > ul > li i {
   float: right;
   border-left: 1px solid #555555;
@@ -612,12 +648,82 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background: url('../img/arrow.png?1388253933') no-repeat 2px 5px;
 }
 
-/* line 14, ../scss/global.scss */
+/* line 130, social/*.png */
+.social-sprite, #social a.gplus, #social a.gplus:hover, #social a.facebook, #social a.facebook:hover, #social a.linkedin, #social a.linkedin:hover, #social a.twitter, #social a.twitter:hover, #social a.vimeo, #social a.vimeo:hover, #social a.youtube, #social a.youtube:hover {
+  background: url('../img/social-sd875ee5009.png') no-repeat;
+}
+
+/* line 7, ../scss/_social.scss */
+#social li {
+  margin-top: 12px;
+  margin-left: 8px;
+  float: left;
+}
+/* line 12, ../scss/_social.scss */
+#social li:first-child {
+  margin-left: 0px;
+}
+/* line 17, ../scss/_social.scss */
+#social a {
+  width: 29px;
+  height: 28px;
+  display: block;
+}
+/* line 22, ../scss/_social.scss */
+#social a.gplus {
+  background-position: 0 -58px;
+}
+/* line 24, ../scss/_social.scss */
+#social a.gplus:hover {
+  background-position: 0 -86px;
+}
+/* line 29, ../scss/_social.scss */
+#social a.facebook {
+  background-position: 0 -228px;
+}
+/* line 31, ../scss/_social.scss */
+#social a.facebook:hover {
+  background-position: 0 -257px;
+}
+/* line 36, ../scss/_social.scss */
+#social a.linkedin {
+  background-position: 0 -286px;
+}
+/* line 38, ../scss/_social.scss */
+#social a.linkedin:hover {
+  background-position: 0 -315px;
+}
+/* line 43, ../scss/_social.scss */
+#social a.twitter {
+  background-position: 0 -170px;
+}
+/* line 45, ../scss/_social.scss */
+#social a.twitter:hover {
+  background-position: 0 -199px;
+}
+/* line 50, ../scss/_social.scss */
+#social a.vimeo {
+  background-position: 0 -114px;
+}
+/* line 52, ../scss/_social.scss */
+#social a.vimeo:hover {
+  background-position: 0 -142px;
+}
+/* line 57, ../scss/_social.scss */
+#social a.youtube {
+  background-position: 0 0;
+}
+/* line 59, ../scss/_social.scss */
+#social a.youtube:hover {
+  background-position: 0 -29px;
+}
+
+/* line 15, ../scss/global.scss */
 body {
   width: 100%;
 }
 
-/* line 18, ../scss/global.scss */
+/* line 19, ../scss/global.scss */
 #wrapper {
   width: 960px;
   font-family: "Helvetica Neue";
@@ -625,59 +731,66 @@ body {
   margin: 0 auto;
 }
 
-/* line 29, ../scss/global.scss */
-#top-nav {
-  height: 41px;
-  width: 800px;
-  margin: 0 auto;
-  background-color: #242424;
-}
-
-/* line 36, ../scss/global.scss */
+/* line 32, ../scss/global.scss */
 #logo {
   display: block;
   margin: 36px 80px 36px;
 }
 
-/* line 43, ../scss/global.scss */
+/* line 39, ../scss/global.scss */
 #footer {
-  width: 800px;
+  width: 100%;
   height: 54px;
-  margin: 0 auto;
   background-color: #252525;
 }
+/* line 41, ../scss/global.scss */
+#footer #social {
+  width: 800px;
+  margin: 0 auto;
+}
 
-/* line 51, ../scss/global.scss */
-h3 {
+/* line 52, ../scss/global.scss */
+#homepage-content h3 {
   color: #505050;
   font-family: "Helvetica Neue";
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
+  margin-bottom: 10px;
 }
-
-/* line 59, ../scss/global.scss */
-p {
+/* line 61, ../scss/global.scss */
+#homepage-content p {
   color: #191919;
   font-family: "Helvetica Neue";
   font-size: 14px;
   font-weight: normal;
+  line-height: 18px;
 }
 
-/* line 67, ../scss/global.scss */
+/* line 73, ../scss/global.scss */
+#logos h3 {
+  color: #505050;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* line 83, ../scss/global.scss */
 #homepage-slideshow {
   width: 790px;
   margin: 30px auto;
   border: 1px solid #c6cbd0;
   padding: 5px;
 }
-/* line 73, ../scss/global.scss */
+/* line 89, ../scss/global.scss */
 #homepage-slideshow #slideshow {
   width: 790px;
   height: 391px;
   position: relative;
 }
-/* line 81, ../scss/global.scss */
+/* line 97, ../scss/global.scss */
 #homepage-slideshow #slideshow .slide {
   position: absolute;
   z-index: 1;
@@ -687,19 +800,19 @@ p {
   bottom: 0px;
 }
 
-/* line 95, ../scss/global.scss */
+/* line 111, ../scss/global.scss */
 #logos,
 #homepage-content {
   width: 800px;
   margin: 0 auto;
 }
 
-/* line 100, ../scss/global.scss */
+/* line 116, ../scss/global.scss */
 hr {
   margin: 35px auto;
 }
 
-/* line 105, ../scss/global.scss */
+/* line 121, ../scss/global.scss */
 .slideshow-nav {
   width: 100%;
   bottom: 0px;
@@ -708,7 +821,7 @@ hr {
   display: block;
   z-index: 1000;
 }
-/* line 113, ../scss/global.scss */
+/* line 129, ../scss/global.scss */
 .slideshow-nav .nav-bg {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
   opacity: 0.65;
@@ -720,7 +833,7 @@ hr {
   bottom: 0;
   z-index: 2000;
 }
-/* line 124, ../scss/global.scss */
+/* line 140, ../scss/global.scss */
 .slideshow-nav .title {
   position: absolute;
   z-index: 4000;
@@ -733,7 +846,7 @@ hr {
   line-height: 28px;
   text-indent: 8px;
 }
-/* line 137, ../scss/global.scss */
+/* line 153, ../scss/global.scss */
 .slideshow-nav .lozenge {
   margin: 0 auto;
   height: 14px;
@@ -753,11 +866,11 @@ hr {
   padding: 0 2px;
   z-index: 3000;
 }
-/* line 151, ../scss/global.scss */
+/* line 167, ../scss/global.scss */
 .slideshow-nav .lozenge li {
   float: left;
 }
-/* line 154, ../scss/global.scss */
+/* line 170, ../scss/global.scss */
 .slideshow-nav .lozenge a {
   float: left;
   background: url('../img/grey-dot.png?1388264049') no-repeat;
@@ -765,7 +878,7 @@ hr {
   height: 7px;
   margin: 3px 2px;
 }
-/* line 161, ../scss/global.scss */
+/* line 177, ../scss/global.scss */
 .slideshow-nav .lozenge a.active {
   background: url('../img/green-dot.png?1388264065') no-repeat;
 }

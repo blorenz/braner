@@ -11,12 +11,17 @@
 <div id="wrapper">
     <div id="top-nav">
 
-        <div id="language-chooser">
+        <div id="top-main">
+            <div id="language-chooser">
+                {% language_chooser "braner/language_chooser.html" %}
+            </div>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
 
-            {% language_chooser "braner/language_chooser.html" %}
 
         </div>
-
 
     </div>
 
@@ -36,7 +41,14 @@
     </div>
 
     <div id="footer">
-
+        <ul id="social">
+            <li><a class="facebook" href=""></a></li>
+            <li><a class="linkedin" href=""></a></li>
+            <li><a class="vimeo" href=""></a></li>
+            <li><a class="youtube" href=""></a></li>
+            <li><a class="twitter" href=""></a></li>
+            <li><a class="gplus" href=""></a></li>
+        </ul>
     </div>
 </div>
 

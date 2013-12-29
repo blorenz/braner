@@ -1,0 +1,68 @@
+@import "compass/utilities/sprites";
+@import "social/*.png";
+
+
+#social {
+
+  li {
+    margin-top: 12px;
+    margin-left: 8px;
+    float: left;
+
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
+
+  a {
+    width: 29px;
+    height: 28px;
+    display: block;
+
+    &.gplus {
+      @include social-sprite(gplus);
+      &:hover {
+        @include social-sprite(gplus-over);
+      }
+    }
+
+    &.facebook {
+      @include social-sprite(facebook);
+      &:hover {
+        @include social-sprite(facebook-over);
+      }
+    }
+
+    &.linkedin {
+      @include social-sprite(linkedin);
+      &:hover {
+        @include social-sprite(linkedin-over);
+      }
+    }
+
+    &.twitter {
+      @include social-sprite(twitter);
+      &:hover {
+        @include social-sprite(twitter-over);
+      }
+    }
+
+    &.vimeo {
+      @include social-sprite(vimeo);
+      &:hover {
+        @include social-sprite(vimeo-over);
+      }
+    }
+
+    &.youtube {
+      @include social-sprite(youtube);
+      &:hover {
+        @include social-sprite(youtube-over);
+      }
+    }
+
+
+  }
+
+
+}

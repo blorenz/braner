@@ -1,7 +1,40 @@
 
+#top-nav {
+  height: 41px;
+  background-color: #252525; // layer fill content
+  width: 100%;
+  #top-main {
+    width: 800px;
+    margin: 0 auto;
+    &>ul {
+      float: right;
+      li {
+        float: left;
+        margin-left: 15px;
+
+        a {
+          color: #b7b7b7; // text color
+          font-family: "Helvetica Neue";
+          font-size: 12px;
+          font-weight: bold;
+          text-decoration: none;
+          line-height: 41px;
+
+          &:hover {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+}
+
+
 #language-chooser {
   color: #ffffff;
   float: right;
+  margin-top: 13px;
+  margin-left: 15px;
 
   ul {
     font-family: "Helvetica Neue";
