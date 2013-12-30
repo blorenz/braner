@@ -718,12 +718,68 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background-position: 0 -29px;
 }
 
-/* line 15, ../scss/global.scss */
+/* line 2, ../scss/_productnav.scss */
+#product-nav {
+  width: 100%;
+}
+/* line 4, ../scss/_productnav.scss */
+#product-nav > ul {
+  display: block;
+}
+/* line 7, ../scss/_productnav.scss */
+#product-nav > ul > li {
+  width: 800px;
+  margin: 0 auto;
+}
+/* line 11, ../scss/_productnav.scss */
+#product-nav > ul > li > a {
+  text-decoration: none;
+  color: #505050;
+  font-family: "Helvetica Neue";
+  font-size: 20px;
+  font-weight: bold;
+}
+/* line 19, ../scss/_productnav.scss */
+#product-nav > ul > li > ul {
+  float: right;
+}
+/* line 22, ../scss/_productnav.scss */
+#product-nav > ul > li > ul li {
+  float: left;
+}
+/* line 25, ../scss/_productnav.scss */
+#product-nav > ul > li > ul li a {
+  color: #676d71;
+  font-family: "Helvetica Neue";
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 3px 5px;
+  margin-left: 5px;
+}
+/* line 34, ../scss/_productnav.scss */
+#product-nav > ul > li > ul li a:hover {
+  color: #fff;
+  font-family: "Helvetica Neue";
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #000000;
+}
+/* line 45, ../scss/_productnav.scss */
+#product-nav > ul > li > ul li.selected a {
+  color: #fff;
+  font-family: "Helvetica Neue";
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #000000;
+}
+
+/* line 16, ../scss/global.scss */
 body {
   width: 100%;
 }
 
-/* line 19, ../scss/global.scss */
+/* line 20, ../scss/global.scss */
 #wrapper {
   width: 960px;
   font-family: "Helvetica Neue";
@@ -731,25 +787,25 @@ body {
   margin: 0 auto;
 }
 
-/* line 32, ../scss/global.scss */
+/* line 33, ../scss/global.scss */
 #logo {
   display: block;
   margin: 36px 80px 36px;
 }
 
-/* line 39, ../scss/global.scss */
+/* line 40, ../scss/global.scss */
 #footer {
   width: 100%;
   height: 54px;
   background-color: #252525;
 }
-/* line 41, ../scss/global.scss */
+/* line 42, ../scss/global.scss */
 #footer #social {
   width: 800px;
   margin: 0 auto;
 }
 
-/* line 52, ../scss/global.scss */
+/* line 53, ../scss/global.scss */
 #homepage-content h3 {
   color: #505050;
   font-family: "Helvetica Neue";
@@ -758,7 +814,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 10px;
 }
-/* line 61, ../scss/global.scss */
+/* line 62, ../scss/global.scss */
 #homepage-content p {
   color: #191919;
   font-family: "Helvetica Neue";
@@ -767,7 +823,7 @@ body {
   line-height: 18px;
 }
 
-/* line 73, ../scss/global.scss */
+/* line 74, ../scss/global.scss */
 #logos h3 {
   color: #505050;
   font-family: "Helvetica Neue";
@@ -777,20 +833,20 @@ body {
   margin-bottom: 10px;
 }
 
-/* line 83, ../scss/global.scss */
+/* line 84, ../scss/global.scss */
 #homepage-slideshow {
   width: 790px;
   margin: 30px auto;
   border: 1px solid #c6cbd0;
   padding: 5px;
 }
-/* line 89, ../scss/global.scss */
+/* line 90, ../scss/global.scss */
 #homepage-slideshow #slideshow {
   width: 790px;
   height: 391px;
   position: relative;
 }
-/* line 97, ../scss/global.scss */
+/* line 98, ../scss/global.scss */
 #homepage-slideshow #slideshow .slide {
   position: absolute;
   z-index: 1;
@@ -800,19 +856,19 @@ body {
   bottom: 0px;
 }
 
-/* line 111, ../scss/global.scss */
+/* line 112, ../scss/global.scss */
 #logos,
 #homepage-content {
   width: 800px;
   margin: 0 auto;
 }
 
-/* line 116, ../scss/global.scss */
+/* line 117, ../scss/global.scss */
 hr {
   margin: 35px auto;
 }
 
-/* line 121, ../scss/global.scss */
+/* line 122, ../scss/global.scss */
 .slideshow-nav {
   width: 100%;
   bottom: 0px;
@@ -821,7 +877,7 @@ hr {
   display: block;
   z-index: 1000;
 }
-/* line 129, ../scss/global.scss */
+/* line 130, ../scss/global.scss */
 .slideshow-nav .nav-bg {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=65);
   opacity: 0.65;
@@ -833,7 +889,7 @@ hr {
   bottom: 0;
   z-index: 2000;
 }
-/* line 140, ../scss/global.scss */
+/* line 141, ../scss/global.scss */
 .slideshow-nav .title {
   position: absolute;
   z-index: 4000;
@@ -846,7 +902,7 @@ hr {
   line-height: 28px;
   text-indent: 8px;
 }
-/* line 153, ../scss/global.scss */
+/* line 154, ../scss/global.scss */
 .slideshow-nav .lozenge {
   margin: 0 auto;
   height: 14px;
@@ -866,11 +922,11 @@ hr {
   padding: 0 2px;
   z-index: 3000;
 }
-/* line 167, ../scss/global.scss */
+/* line 168, ../scss/global.scss */
 .slideshow-nav .lozenge li {
   float: left;
 }
-/* line 170, ../scss/global.scss */
+/* line 171, ../scss/global.scss */
 .slideshow-nav .lozenge a {
   float: left;
   background: url('../img/grey-dot.png?1388264049') no-repeat;
@@ -878,7 +934,7 @@ hr {
   height: 7px;
   margin: 3px 2px;
 }
-/* line 177, ../scss/global.scss */
+/* line 178, ../scss/global.scss */
 .slideshow-nav .lozenge a.active {
   background: url('../img/green-dot.png?1388264065') no-repeat;
 }

@@ -3,3 +3,5 @@
 *.iml
 braner/settings/localsettings.py
 *.scssc
+static/*
+media/*
