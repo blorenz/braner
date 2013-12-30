@@ -1001,7 +1001,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 18, ../scss/_products_features.scss */
 #product-features > ul li {
-  width: 50%;
+  width: 49%;
   margin-bottom: 30px;
   display: inline-block;
   vertical-align: top;
