@@ -1,0 +1,55 @@
+#product-features {
+  width: 800px;
+  margin: 0 auto;
+
+  &>h3 {
+    text-transform: uppercase;
+    color: #505050; // text color
+    font-family: "Helvetica Neue";
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  &>ul {
+
+    display: block;
+    width: 800px;
+
+    li {
+      width: 50%;
+      margin-bottom: 30px;
+      display: inline-block;
+      vertical-align: top;
+
+      a {
+        display: block;
+        width: 345px;
+        text-decoration: none;
+        h3 {
+          color: #252525; // text color
+          font-family: "Helvetica Neue";
+          font-size: 18px;
+          font-weight: bold;
+
+          span {
+            color: #252525; // text color
+            font-family: "Helvetica Neue";
+            font-size: 14px;
+            font-weight: normal;
+          }
+        }
+      }
+
+
+
+    }
+    &:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
+  }
+
+}

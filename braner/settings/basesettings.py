@@ -125,6 +125,7 @@ TEMPLATE_DIRS = (
 CMS_TEMPLATES = (
     ('home.html', 'Home Page Template'),
     ('products.html', 'Products Template'),
+    ('products_features.html', 'Products Features Template'),
 )
 
 
