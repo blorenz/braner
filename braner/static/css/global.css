@@ -495,6 +495,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 #main-nav li:hover a {
   background: #ebebeb;
   width: auto;
+  min-width: 140px;
   padding: 5px 10px;
   color: #505050;
   font-family: "Helvetica Neue";
@@ -503,12 +504,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border: 1px solid #9fa6ac;
   border-top: 0px;
 }
-/* line 69, ../scss/_mainnav.scss */
+/* line 70, ../scss/_mainnav.scss */
 #main-nav li:hover li a:hover {
   background: #464646;
   color: #ffffff;
 }
-/* line 77, ../scss/_mainnav.scss */
+/* line 78, ../scss/_mainnav.scss */
 #main-nav > ul > li:hover > a {
   width: 140px;
   height: 33px;
@@ -520,7 +521,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-right: 1px solid #555555;
   text-align: center;
 }
-/* line 90, ../scss/_mainnav.scss */
+/* line 93, ../scss/_mainnav.scss */
+#main-nav > ul > li > ul > li > ul {
+  display: none !important;
+}
+/* line 96, ../scss/_mainnav.scss */
 #main-nav > ul > li > a {
   border-right: 1px solid #555555;
   font-size: 12px;
@@ -772,6 +777,90 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 12px;
   font-weight: bold;
   background-color: #000000;
+}
+/* line 60, ../scss/_productnav.scss */
+#product-nav hr {
+  margin: 5px auto 25px;
+}
+
+/* line 4, ../scss/_products.scss */
+#product-hero {
+  display: block;
+  width: 800px;
+  margin: 0 auto;
+}
+/* line 9, ../scss/_products.scss */
+#product-hero li {
+  width: 100%;
+}
+/* line 12, ../scss/_products.scss */
+#product-hero li img {
+  border: 1px solid #c6cbd0;
+  padding: 5px;
+  max-width: 548px;
+  float: left;
+}
+/* line 19, ../scss/_products.scss */
+#product-hero li h3 {
+  color: #505050;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0px 0px 20px 570px;
+}
+/* line 27, ../scss/_products.scss */
+#product-hero li p {
+  color: #676d71;
+  font-family: "Helvetica Neue";
+  font-size: 12px;
+  line-height: 1.2em;
+  margin-left: 570px;
+}
+/* line 36, ../scss/_products.scss */
+#product-hero li:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* line 47, ../scss/_products.scss */
+#products {
+  display: block;
+  width: 800px;
+  margin: 0 auto;
+}
+/* line 52, ../scss/_products.scss */
+#products li {
+  float: left;
+  max-width: 240px;
+  margin-left: 34px;
+  margin-bottom: 40px;
+}
+/* line 58, ../scss/_products.scss */
+#products li.first {
+  margin-left: 0px;
+}
+/* line 62, ../scss/_products.scss */
+#products li img {
+  border: 1px solid #c6cbd0;
+  padding: 5px;
+}
+/* line 67, ../scss/_products.scss */
+#products li h3 {
+  color: #505050;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-weight: bold;
+  margin: 15px 0px 10px;
+}
+/* line 75, ../scss/_products.scss */
+#products li p {
+  color: #676d71;
+  font-family: "Helvetica Neue";
+  font-size: 12px;
+  line-height: 1.2em;
 }
 
 /* line 16, ../scss/global.scss */
