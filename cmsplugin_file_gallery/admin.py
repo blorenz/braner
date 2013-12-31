@@ -3,23 +3,19 @@ import forms
 import models
 
 
-class VideoInline(OrderableStackedInline):
+class FileInline(OrderableStackedInline):
 
-    model = models.Video
+    model = models.DownloadableFile
 
     fieldsets = (
         (None,
          {
-             'fields': ( 'src','title',),
+             'fields': ( 'src','downloadable_file'),
              }
         ),
-        ('Video', {
-            'fields': ('extended_content', 'mp4_file', 'ogv_file', 'webm_file', 'video_width', 'video_height',),
-            'classes': ('collapse',),
-        }),
         ('Advanced',
          {
-             'fields': ('inline_ordering_position', 'alt','link',),
+             'fields': ('inline_ordering_position', 'title','extended_content','alt','link',),
              'classes': ('collapse',),
              }
         )
@@ -36,5 +32,5 @@ class VideoInline(OrderableStackedInline):
             kwargs.pop('request', None)
             kwargs['widget'] = forms.AdminImageWidget
             return db_field.formfield(**kwargs)
-        return super(VideoInline, self).\
+        return super(FileInline, self).\
             formfield_for_dbfield(db_field, **kwargs)

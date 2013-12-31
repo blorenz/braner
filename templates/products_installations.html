@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load cms_tags sekizai_tags menu_tags %}
+
+{% block base_content %}
+
+    <div id="product-nav">
+        <ul>
+            {% show_menu 1 %}
+        </ul>
+        <hr/>
+    </div>
+
+
+    <ul id="products-installations">
+        {% placeholder products_installations_content %}
+        <li style="clear:both;float:none;"></li>
+    </ul>
+
+
+{% endblock %}

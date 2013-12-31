@@ -72,8 +72,11 @@ INSTALLED_APPS = (
     'cmsplugin_filer_video',
 
     'cmsplugin_gallery',
+    'cmsplugin_video_gallery',
+    'cmsplugin_file_gallery',
 
     'reversion',
+    'inline_ordering',
 
 
 )
@@ -126,6 +129,7 @@ CMS_TEMPLATES = (
     ('home.html', 'Home Page Template'),
     ('products.html', 'Products Template'),
     ('products_features.html', 'Products Features Template'),
+    ('products_installations.html', 'Products Installations Template'),
 )
 
 

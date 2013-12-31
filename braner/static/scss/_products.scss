@@ -1,4 +1,7 @@
 @import "productnav";
+@import "compass/css3/opacity";
+@import "compass/css3/border-radius";
+@import "compass/css3/background-clip";
 
 
 #product-hero {
@@ -44,12 +47,13 @@
   }
 }
 
-#products {
+#products,
+#products-installations {
   display: block;
   width: 800px;
   margin: 0 auto;
 
-  li {
+  &>li {
     float: left;
     max-width: 240px;
     margin-left: 34px;
@@ -58,6 +62,73 @@
      &.first {
        margin-left: 0px;
      }
+    
+    a {
+      text-decoration: none;
+
+      .img-wrapper {
+        position: relative;
+        margin-bottom: 10px;
+      }
+
+      span.title {
+        padding: 0px 3px;
+        padding-bottom: 3px;
+        color: #676d71; // text color
+        font-family: "Helvetica Neue";
+        font-size: 14px;
+        font-weight: normal;
+        &.bold {
+          padding-top: 0px;
+          padding-bottom: 0px;
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+
+      .hover-title,
+      .hover-bg {
+        display: none;
+        position: absolute;
+        width: 100%;
+        bottom: 6px;
+        left: 6px;
+        height: 39px;
+        line-height: 37px;
+        text-align: center;
+      }
+
+      .hover-title {
+        color: #fefefe; // text color
+        font-family: "Helvetica Neue";
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        z-index: 6;
+        background: image-url('magnifying-glass.png') no-repeat 10px 10px;
+      }
+
+      .hover-bg {
+        @include opacity(.75); // layer alpha
+        background-color: #252525; // layer fill content
+        z-index: 5;
+      }
+
+
+
+      &:hover {
+        .hover-title,
+        .hover-bg {
+          display: block;
+        }
+
+        span {
+          color: #fff; // text color
+          background-color: #000;
+        }
+      }
+    }
+    
 
     img {
       border: 1px solid #c6cbd0;

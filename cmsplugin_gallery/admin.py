@@ -7,6 +7,26 @@ class ImageInline(OrderableStackedInline):
 
     model = models.Image
 
+    fieldsets = (
+        (None,
+         {
+             'fields': ( 'src', 'title',),
+         }
+        ),
+        ('Advanced',
+         {
+             'fields': ('inline_ordering_position','extended_content','alt','link',),
+             'classes': ('collapse',),
+        }
+        )
+
+    )
+    class Media:
+        js = ('js/jqueryFix.js','js/jquery-ui-1.10.3.custom.min.js',)
+        css = {
+            "all": ("css/jquery-ui-1.10.3.custom.min.css",)
+        }
+
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'src':
             kwargs.pop('request', None)

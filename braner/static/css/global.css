@@ -783,24 +783,24 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 5px auto 25px;
 }
 
-/* line 4, ../scss/_products.scss */
+/* line 7, ../scss/_products.scss */
 #product-hero {
   display: block;
   width: 800px;
   margin: 0 auto;
 }
-/* line 9, ../scss/_products.scss */
+/* line 12, ../scss/_products.scss */
 #product-hero li {
   width: 100%;
 }
-/* line 12, ../scss/_products.scss */
+/* line 15, ../scss/_products.scss */
 #product-hero li img {
   border: 1px solid #c6cbd0;
   padding: 5px;
   max-width: 548px;
   float: left;
 }
-/* line 19, ../scss/_products.scss */
+/* line 22, ../scss/_products.scss */
 #product-hero li h3 {
   color: #505050;
   font-family: "Helvetica Neue";
@@ -808,7 +808,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   margin: 0px 0px 20px 570px;
 }
-/* line 27, ../scss/_products.scss */
+/* line 30, ../scss/_products.scss */
 #product-hero li p {
   color: #676d71;
   font-family: "Helvetica Neue";
@@ -816,7 +816,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   line-height: 1.2em;
   margin-left: 570px;
 }
-/* line 36, ../scss/_products.scss */
+/* line 39, ../scss/_products.scss */
 #product-hero li:after {
   content: ".";
   display: block;
@@ -825,38 +825,119 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   visibility: hidden;
 }
 
-/* line 47, ../scss/_products.scss */
-#products {
+/* line 51, ../scss/_products.scss */
+#products,
+#products-installations {
   display: block;
   width: 800px;
   margin: 0 auto;
 }
-/* line 52, ../scss/_products.scss */
-#products li {
+/* line 56, ../scss/_products.scss */
+#products > li,
+#products-installations > li {
   float: left;
   max-width: 240px;
   margin-left: 34px;
   margin-bottom: 40px;
 }
-/* line 58, ../scss/_products.scss */
-#products li.first {
+/* line 62, ../scss/_products.scss */
+#products > li.first,
+#products-installations > li.first {
   margin-left: 0px;
 }
-/* line 62, ../scss/_products.scss */
-#products li img {
+/* line 66, ../scss/_products.scss */
+#products > li a,
+#products-installations > li a {
+  text-decoration: none;
+}
+/* line 69, ../scss/_products.scss */
+#products > li a .img-wrapper,
+#products-installations > li a .img-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+/* line 74, ../scss/_products.scss */
+#products > li a span.title,
+#products-installations > li a span.title {
+  padding: 0px 3px;
+  padding-bottom: 3px;
+  color: #676d71;
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  font-weight: normal;
+}
+/* line 81, ../scss/_products.scss */
+#products > li a span.title.bold,
+#products-installations > li a span.title.bold {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 18px;
+  font-weight: bold;
+}
+/* line 90, ../scss/_products.scss */
+#products > li a .hover-title,
+#products > li a .hover-bg,
+#products-installations > li a .hover-title,
+#products-installations > li a .hover-bg {
+  display: none;
+  position: absolute;
+  width: 100%;
+  bottom: 6px;
+  left: 6px;
+  height: 39px;
+  line-height: 37px;
+  text-align: center;
+}
+/* line 101, ../scss/_products.scss */
+#products > li a .hover-title,
+#products-installations > li a .hover-title {
+  color: #fefefe;
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  z-index: 6;
+  background: url('../img/magnifying-glass.png?1388457759') no-repeat 10px 10px;
+}
+/* line 111, ../scss/_products.scss */
+#products > li a .hover-bg,
+#products-installations > li a .hover-bg {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
+  opacity: 0.75;
+  background-color: #252525;
+  z-index: 5;
+}
+/* line 121, ../scss/_products.scss */
+#products > li a:hover .hover-title,
+#products > li a:hover .hover-bg,
+#products-installations > li a:hover .hover-title,
+#products-installations > li a:hover .hover-bg {
+  display: block;
+}
+/* line 125, ../scss/_products.scss */
+#products > li a:hover span,
+#products-installations > li a:hover span {
+  color: #fff;
+  background-color: #000;
+}
+/* line 133, ../scss/_products.scss */
+#products > li img,
+#products-installations > li img {
   border: 1px solid #c6cbd0;
   padding: 5px;
 }
-/* line 67, ../scss/_products.scss */
-#products li h3 {
+/* line 138, ../scss/_products.scss */
+#products > li h3,
+#products-installations > li h3 {
   color: #505050;
   font-family: "Helvetica Neue";
   font-size: 18px;
   font-weight: bold;
   margin: 15px 0px 10px;
 }
-/* line 75, ../scss/_products.scss */
-#products li p {
+/* line 146, ../scss/_products.scss */
+#products > li p,
+#products-installations > li p {
   color: #676d71;
   font-family: "Helvetica Neue";
   font-size: 12px;
