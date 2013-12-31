@@ -3,70 +3,17 @@
 
 
 
-<video controls="controls" poster="http://google.me" width="640" height="360">
-    <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" />
-    <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" type="video/webm" />
-    <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv" type="video/ogg" />
-    <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360">
-        <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
-        <param name="allowFullScreen" value="true" />
-        <param name="wmode" value="transparent" />
-        <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fgoogle.me',{'url':'http%3A%2F%2Fclips.vorwaerts-gmbh.de%2Fbig_buck_bunny.mp4','autoPlay':false}]}" />
-        <img alt="Big Buck Bunny" src="http://google.me" width="640" height="360" title="No video playback capabilities, please download the video below" />
-    </object>
-</video>
-<p>
-    <strong>Download video:</strong> <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4">MP4 format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv">Ogg format</a> | <a href="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm">WebM format</a>
-</p>
-
-
-<div class="gallery" id="slideshow">
-
-    <div id="slides">
-        {% for image in images %}
-            <div class="slide" data-order="{{ forloop.counter }}">
-                <img src="{% thumbnail image.src 790x391 crop %}" alt="{{ image.alt }}" title="{{ image.title }}"  rel="#cmspluginGalleryImage{{ image.pk }}" />
-
+{% for file in files %}
+    <li class="product {% cycle "first" "second" "third" %}" data-order="{{ forloop.counter }}">
+        <a href="{{ file.downloadable_file.url }}">
+            <div class="img-wrapper">
+                <img src="{% thumbnail file.src 240x240 crop %}" alt="{{ file.alt }}" title="{{ file.title }}"  />
+                <div class="hover-title">Learn More</div>
+                <div class="hover-bg"></div>
             </div>
-        {% endfor %}
-    </div>
 
-    <div class="slideshow-nav">
-        <ul class="lozenge">
-            {% for image in images %}
-                <li>
-                    <a href="#cmspluginGalleryImage{{ image.pk }}" data-order="{{ forloop.counter }}" {% if forloop.counter0 == 0 %}class="active"{% endif %}></a>
-                </li>
-            {% endfor %}
-        </ul>
-
-        <div class="title"></div>
-
-        <div class="nav-bg"></div>
-    </div>
-</div>
-
-<script type="text/javascript">
-    var w = $('.lozenge').width();
-    $('.lozenge').css('width',w).css('margin-left',w/2*-1);
-    $("#slides > div:gt(0)").hide();
-    var $firstSlide = $('#slides > div:first');
-    $('.slideshow-nav .title').html($('img', $firstSlide).attr('title'));
-
-    setInterval(function() {
-        var $nextSlide = $('#slides > div:first')
-                .fadeOut({%  multiply gallery.fade_time 1000 %})
-                .next();
-            $('.lozenge a.active').removeClass('active');
-            var order = $nextSlide.data('order');
-
-
-            $('.lozenge a[data-order=' + order+']').addClass('active');
-            $('.slideshow-nav .title').html($('img', $nextSlide).attr('title'));
-
-            $nextSlide.fadeIn({%  multiply gallery.fade_time 1000 %})
-                .end()
-                .appendTo('#slides');
-
-    },  {%  multiply gallery.slide_duration 1000 %});
-</script>
+            <span class="title bold">{{ file.title }}</span><br/>
+            <span class="title">{{ file.extended_content }}</span>
+        </a>
+    </li>
+{% endfor %}

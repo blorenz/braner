@@ -11,15 +11,19 @@ class VideoInline(OrderableStackedInline):
         (None,
          {
              'fields': ( 'src','title',),
-             }
+        }
         ),
+        ('Info', {
+            'fields': ('extended_content',),
+            'classes': ('collapse',),
+        }),
         ('Video', {
-            'fields': ('extended_content', 'mp4_file', 'ogv_file', 'webm_file', 'video_width', 'video_height',),
+            'fields': ('poster_src', 'mp4_file', 'ogv_file', 'webm_file', 'video_width', 'video_height', 'video_duration'),
             'classes': ('collapse',),
         }),
         ('Advanced',
          {
-             'fields': ('inline_ordering_position', 'alt','link',),
+             'fields': ('alt','link','inline_ordering_position',),
              'classes': ('collapse',),
              }
         )
@@ -32,7 +36,7 @@ class VideoInline(OrderableStackedInline):
         }
 
     def formfield_for_dbfield(self, db_field, **kwargs):
-        if db_field.name == 'src':
+        if db_field.name == 'src' or db_field.name == 'poster_src':
             kwargs.pop('request', None)
             kwargs['widget'] = forms.AdminImageWidget
             return db_field.formfield(**kwargs)

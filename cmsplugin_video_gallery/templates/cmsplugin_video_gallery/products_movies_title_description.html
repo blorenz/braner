@@ -3,9 +3,28 @@
 
 
 
-{% for image in images %}
-    <div class="product" data-order="{{ forloop.counter }}">
-        <img src="{% thumbnail image.src 240x240 crop %}" alt="{{ image.alt }}" title="{{ image.title }}"  rel="#cmspluginGalleryImage{{ image.pk }}" />
-    </div>
+{% for video in videos %}
+    <li class="movie {% cycle "first" "second" "third" %}" data-order="{{ forloop.counter }}">
+        <a href="{{ video }}">
+            <div class="img-wrapper">
+                <img src="{% thumbnail video.src 240x240 crop %}" alt="{{ video.alt }}" title="{{ video.title }}"
+                     data-mp4="{{ video.mp4_file.url }}"
+                     data-ogv="{{ video.ogv_file.url }}"
+                     data-webm="{{ video.webm_file.url }}"
+                     data-poster="{{ video.poster_src.url }}"
+                     data-video-height="{{ video.video_height }}"
+                     data-video-width="{{ video.video_width }}"
+                     data-video-duration="{{ video.video_duration }}"
+                        />
+                <i class="play-icon"></i>
+            </div>
+
+            <h3>{{ video.title }}</h3>
+            <p>{{ video.extended_content }}</p>
+            <p>{{ video.video_duration }}</p>
+        </a>
+    </li>
 {% endfor %}
+
+
 
