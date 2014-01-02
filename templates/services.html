@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load cms_tags sekizai_tags menu_tags %}
+
+{% block base_content %}
+
+    <div id="services-nav">
+        <ul>
+            {% show_menu 1 %}
+        </ul>
+    </div>
+
+
+
+    <ul id="services-hero">
+        {% placeholder hero_content %}
+    </ul>
+
+    <div id="services-extra">
+        {% placeholder services_extra_content %}
+    </div>
+
+
+
+{% endblock %}
