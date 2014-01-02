@@ -77,6 +77,7 @@ INSTALLED_APPS = (
 
     'reversion',
     'inline_ordering',
+    'gunicorn',
 
 
 )
