@@ -2,7 +2,17 @@
 {% load cms_tags sekizai_tags menu_tags %}
 
 {% block base_content %}
-
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/magnific-popup.css"/>
+    <style type="text/css">
+        .white-popup {
+            position: relative;
+            background: #FFF;
+            padding: 0px;
+            width: auto;
+            max-width: 640px;
+            margin: 20px auto;
+        }
+    </style>
     <div id="product-nav">
         <ul>
             {% show_menu 1 %}
@@ -17,19 +27,46 @@
     </ul>
 
 
-    <div id="video-player">
-        <video controls="controls" poster="http://google.me" width="640" height="360">
-            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" />
-            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" type="video/webm" />
-            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.ogv" type="video/ogg" />
-            <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360">
-                <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
-                <param name="allowFullScreen" value="true" />
-                <param name="wmode" value="transparent" />
-                <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fgoogle.me',{'url':'http%3A%2F%2Fclips.vorwaerts-gmbh.de%2Fbig_buck_bunny.mp4','autoPlay':false}]}" />
-                <img alt="Big Buck Bunny" src="http://google.me" width="640" height="360" title="No video playback capabilities, please download the video below" />
-            </object>
-        </video>
+    <div id="video-player" class="white-popup mfp-hide">
+
     </div>
 
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript">
+
+        $('.movie a').on('mfpOpen', function(e /*, params */) {
+
+            var $video_player = $("#video-player");
+            var $t = $(e.currentTarget);
+
+            $('video', $video_player).remove();
+
+            var $video = $('<video controls="controls" width="640" />');
+            var $mp4 = $('<source/>').attr('src', $t.attr('data-mp4'));
+            var $webm = $('<source/>').attr('src', $t.attr('data-webm'));
+            var $ogg = $('<source/>').attr('src', $t.attr('data-ogv'));
+            $video.append($mp4).append($webm).append($ogg);
+            $video_player.append($video);
+{#            <video controls="controls" poster="http://google.me" width="640" height="360">#}
+{#                    <source src="" type="video/mp4" />#}
+{#                    <source src="" type="video/webm" />#}
+{#                    <source src="" type="video/ogg" />#}
+{#                    <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" width="640" height="360">#}
+{#                    <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />#}
+{#                    <param name="allowFullScreen" value="true" />#}
+{#                    <param name="wmode" value="transparent" />#}
+{#                    <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fgoogle.me',{'url':'http%3A%2F%2Fclips.vorwaerts-gmbh.de%2Fbig_buck_bunny.mp4','autoPlay':false}]}" />#}
+{#                    <img alt="Big Buck Bunny" src="http://google.me" width="640" height="360" title="No video playback capabilities, please download the video below" />#}
+{#                    </object>#}
+{#                    </video>#}
+{##}
+
+            $video[0].play();
+        });
+
+        $('.movie a').magnificPopup({
+            type:'inline',
+            midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+        });
+    </script>
 {% endblock %}
