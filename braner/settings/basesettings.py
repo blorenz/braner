@@ -58,7 +58,7 @@ INSTALLED_APPS = (
 
     'tinymce',
     # 'cms.plugins.flash',
-    # 'cms.plugins.googlemap',
+    'braner_plugins.googlemap',
     'cms.plugins.link',
     # 'cms.plugins.snippet',
     'cms.plugins.text',
@@ -74,6 +74,9 @@ INSTALLED_APPS = (
     'cmsplugin_gallery',
     'cmsplugin_video_gallery',
     'cmsplugin_file_gallery',
+
+    'cmsplugin_contact',
+    'braner_plugins.cmsplugin_custom_contact',
 
     'reversion',
     'inline_ordering',
@@ -136,6 +139,7 @@ CMS_TEMPLATES = (
     ('products_articles.html', 'Products Articles Template'),
 
     ('services.html', 'Services Template'),
+    ('contact.html', 'Contact Template'),
 )
 
 

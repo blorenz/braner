@@ -1,0 +1,62 @@
+#contact-header {
+  hr {
+    clear: both;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  &>ul {
+    display: block;
+    width: 800px;
+    margin: 0 auto;
+    &>li {
+      display: block;
+      float: left;
+      width: 200px;
+
+      h3 {
+        color: #676d71; // text color
+        font-family: "Helvetica Neue";
+        font-size: 18px;
+        font-weight: bold;
+
+      }
+
+      p {
+        color: #676d71; // text color
+        font-family: "Helvetica Neue";
+        font-size: 14px;
+        font-weight: normal;
+      }
+
+      a {
+        color: #9f0029; // text color
+        font-family: "Helvetica Neue";
+        font-size: 14px;
+        text-decoration: underline;
+        font-weight: normal;
+      }
+    }
+    &:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
+  }
+}
+#contact {
+
+  margin: 0 auto;
+  width: 800px;
+
+  .infowindow {
+    color: #676d71; // text color
+    font-family: "Helvetica Neue";
+    font-size: 18px;
+
+    b {
+      font-weight: bold;
+    }
+  }
+}
