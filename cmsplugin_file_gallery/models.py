@@ -51,7 +51,8 @@ class DownloadableFile(Orderable):
     gallery = models.ForeignKey(FileGalleryPlugin, verbose_name=_("Gallery"))
     src = models.ImageField(_("Poster image file"), upload_to=get_media_path,
                             height_field='src_height',
-                            width_field='src_width')
+                            width_field='src_width',
+                            blank=True, null=True)
     src_height = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True)
     src_width = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True)
 
@@ -60,7 +61,7 @@ class DownloadableFile(Orderable):
     link = models.CharField(_("Link"), max_length=255, blank=True)
     extended_content = models.TextField(_("Extended Content"), blank=True)
 
-    downloadable_file = models.FileField(_("Downloadable file"), upload_to=get_media_path)
+    downloadable_file = models.FileField(_("Downloadable file"), upload_to=get_media_path, max_length=255)
 
     def __unicode__(self):
         return self.title or self.alt or str(self.pk)

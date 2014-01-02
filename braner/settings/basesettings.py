@@ -132,6 +132,7 @@ CMS_TEMPLATES = (
     ('products_features.html', 'Products Features Template'),
     ('products_installations.html', 'Products Installations Template'),
     ('products_movies.html', 'Products Movies Template'),
+    ('products_articles.html', 'Products Articles Template'),
 )
 
 

@@ -1061,6 +1061,92 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   bottom: 0px;
 }
 
+/* line 50, icons/*.png */
+.icons-sprite, #products-movies > li a .play-icon, #products-movies > li a:hover .play-icon,
+#products-movies > li a:hover .hover-bg {
+  background: url('../img/icons-sa72cb8a490.png') no-repeat;
+}
+
+/* line 5, ../scss/_movies.scss */
+#products-movies {
+  display: block;
+  width: 800px;
+  margin: 0 auto;
+}
+/* line 10, ../scss/_movies.scss */
+#products-movies > li {
+  float: left;
+  max-width: 240px;
+  margin-left: 34px;
+  margin-bottom: 40px;
+}
+/* line 16, ../scss/_movies.scss */
+#products-movies > li.first {
+  margin-left: 0px;
+}
+/* line 20, ../scss/_movies.scss */
+#products-movies > li a {
+  text-decoration: none;
+}
+/* line 23, ../scss/_movies.scss */
+#products-movies > li a .img-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+/* line 28, ../scss/_movies.scss */
+#products-movies > li a h3 {
+  color: #676d71;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0px;
+}
+/* line 36, ../scss/_movies.scss */
+#products-movies > li a p {
+  color: #676d71;
+  font-family: "Helvetica Neue";
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+/* line 47, ../scss/_movies.scss */
+#products-movies > li a .play-icon {
+  position: absolute;
+  width: 100%;
+  bottom: 6px;
+  left: 6px;
+  height: 36px;
+  line-height: 37px;
+  text-align: center;
+}
+/* line 57, ../scss/_movies.scss */
+#products-movies > li a .play-icon {
+  color: #fefefe;
+  font-family: "Helvetica Neue";
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  z-index: 6;
+  background-position: 0 0;
+  left: 115px;
+  top: 108px;
+}
+/* line 73, ../scss/_movies.scss */
+#products-movies > li a:hover .play-icon,
+#products-movies > li a:hover .hover-bg {
+  display: block;
+  background-position: 0 -36px;
+}
+/* line 78, ../scss/_movies.scss */
+#products-movies > li a:hover h3 {
+  color: #fff;
+  background-color: #000;
+}
+/* line 86, ../scss/_movies.scss */
+#products-movies > li img {
+  border: 1px solid #c6cbd0;
+  padding: 5px;
+}
+
 /* line 1, ../scss/_products_features.scss */
 #product-features {
   width: 800px;
@@ -1116,12 +1202,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   visibility: hidden;
 }
 
-/* line 18, ../scss/global.scss */
+/* line 19, ../scss/global.scss */
 body {
   width: 100%;
 }
 
-/* line 22, ../scss/global.scss */
+/* line 23, ../scss/global.scss */
 #wrapper {
   width: 960px;
   font-family: "Helvetica Neue";
@@ -1129,25 +1215,25 @@ body {
   margin: 0 auto;
 }
 
-/* line 35, ../scss/global.scss */
+/* line 36, ../scss/global.scss */
 #logo {
   display: block;
   margin: 36px 80px 36px;
 }
 
-/* line 42, ../scss/global.scss */
+/* line 43, ../scss/global.scss */
 #footer {
   width: 100%;
   height: 54px;
   background-color: #252525;
 }
-/* line 44, ../scss/global.scss */
+/* line 45, ../scss/global.scss */
 #footer #social {
   width: 800px;
   margin: 0 auto;
 }
 
-/* line 55, ../scss/global.scss */
+/* line 56, ../scss/global.scss */
 #homepage-content h3 {
   color: #505050;
   font-family: "Helvetica Neue";
@@ -1156,7 +1242,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 10px;
 }
-/* line 64, ../scss/global.scss */
+/* line 65, ../scss/global.scss */
 #homepage-content p {
   color: #191919;
   font-family: "Helvetica Neue";
@@ -1165,7 +1251,7 @@ body {
   line-height: 18px;
 }
 
-/* line 76, ../scss/global.scss */
+/* line 77, ../scss/global.scss */
 #logos h3 {
   color: #505050;
   font-family: "Helvetica Neue";
@@ -1175,14 +1261,14 @@ body {
   margin-bottom: 10px;
 }
 
-/* line 89, ../scss/global.scss */
+/* line 90, ../scss/global.scss */
 #logos,
 #homepage-content {
   width: 800px;
   margin: 0 auto;
 }
 
-/* line 94, ../scss/global.scss */
+/* line 95, ../scss/global.scss */
 hr {
   margin: 35px auto;
 }

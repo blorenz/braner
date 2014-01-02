@@ -32,7 +32,10 @@
 
             <h3>{{ video.title }}</h3>
             <p>{{ video.extended_content }}</p>
-            <p>{{ video.video_duration }}</p>
+
+            {% if video.video_duration %}
+            <p>Duration: {{ video.video_duration }}</p>
+            {% endif %}
         </a>
     </li>
 {% endfor %}

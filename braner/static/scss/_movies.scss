@@ -1,0 +1,92 @@
+@import "compass/utilities/sprites";
+@import "icons/*.png";
+
+
+ #products-movies {
+  display: block;
+  width: 800px;
+  margin: 0 auto;
+
+  &>li {
+    float: left;
+    max-width: 240px;
+    margin-left: 34px;
+    margin-bottom: 40px;
+
+    &.first {
+      margin-left: 0px;
+    }
+
+    a {
+      text-decoration: none;
+
+      .img-wrapper {
+        position: relative;
+        margin-bottom: 10px;
+      }
+
+      h3 {
+        color: #676d71; // text color
+        font-family: "Helvetica Neue";
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0px;
+      }
+
+      p {
+        color: #676d71; // text color
+        font-family: "Helvetica Neue";
+        font-size: 12px;
+        margin-bottom: 20px;
+
+        //&:first-child {
+        //  margin-top: 0px;
+        //}
+      }
+
+      .play-icon {
+        position: absolute;
+        width: 100%;
+        bottom: 6px;
+        left: 6px;
+        height: 36px;
+        line-height: 37px;
+        text-align: center;
+      }
+
+      .play-icon {
+        color: #fefefe; // text color
+        font-family: "Helvetica Neue";
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        z-index: 6;
+        @include icons-sprite(play-icon);
+        left: 115px;
+        top: 108px;
+        //background: image-url('magnifying-glass.png') no-repeat 10px 10px;
+      }
+
+
+      &:hover {
+        .play-icon,
+        .hover-bg {
+          display: block;
+          @include icons-sprite(play-icon-over);
+        }
+
+        h3 {
+          color: #fff; // text color
+          background-color: #000;
+        }
+      }
+    }
+
+
+    img {
+      border: 1px solid #c6cbd0;
+      padding: 5px;
+    }
+
+  }
+ }
