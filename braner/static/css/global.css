@@ -1442,7 +1442,7 @@ body {
 
 /* line 29, ../scss/global.scss */
 #wrapper {
-  width: 960px;
+  width: 100%;
   font-family: "Helvetica Neue";
   font-size: 12px;
   margin: 0 auto;
