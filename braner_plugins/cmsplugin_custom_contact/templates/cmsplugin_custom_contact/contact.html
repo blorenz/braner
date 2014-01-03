@@ -1,33 +1,57 @@
 {% load i18n %}
+{% load widget_tweaks %}
 
+    <h3>Send us a message</h3>
 {% if form %}
 	<form action="." method="post">
+		<p{% if form.name.errors %} class="error"{% endif %}>
+{#			<label class="contact_field">{{ contact.name_label }}</label>#}
+            {% render_field form.name placeholder=contact.name_label %}
+{#			{% if form.name.errors %}#}
+{#				{% for error in form.name.errors %}#}
+{#					<span class="error_msg">{{ error }}</span>#}
+{#				{% endfor %}#}
+{#			{% endif %}#}
+		</p>
 		<p{% if form.email.errors %} class="error"{% endif %}>
-			<label class="contact_field">{{ contact.email_label }}</label>
-				{{ form.email }}
-			{% if form.email.errors %}
-				{% for error in form.email.errors %}
-					<span class="error_msg">{{ error }}</span>
-				{% endfor %}
-			{% endif %}
+{#			<label class="contact_field">{{ contact.email_label }}</label>#}
+            {% render_field form.email placeholder=contact.email_label %}
+{#			{% if form.email.errors %}#}
+{#				{% for error in form.email.errors %}#}
+{#					<span class="error_msg">{{ error }}</span>#}
+{#				{% endfor %}#}
+{#			{% endif %}#}
 		</p>
-		<p{% if form.subject.errors %} class="error"{% endif %}>
-			<label class="contact_field">{{ contact.subject_label }}</label>
-				{{ form.subject }}
-			{% if form.subject.errors %}
-				{% for error in form.subject.errors %}
-					<span class="error_msg">{{ error }}</span>
-				{% endfor %}
-			{% endif %}
-		</p>
+
+        <p{% if form.company.errors %} class="error"{% endif %}>
+{#            <label class="contact_field">{{ contact.company_label }}</label>#}
+            {% render_field form.company placeholder=contact.company_label %}
+{#            {% if form.company.errors %}#}
+{#                {% for error in form.company.errors %}#}
+{#                    <span class="error_msg">{{ error }}</span>#}
+{#                {% endfor %}#}
+{#            {% endif %}#}
+        </p>
+
+        <p{% if form.phone.errors %} class="error"{% endif %}>
+{#            <label class="contact_field">{{ contact.phone_label }}</label>#}
+            {% render_field form.phone placeholder=contact.phone_label %}
+
+{#            {% if form.phone.errors %}#}
+{#                {% for error in form.phone.errors %}#}
+{#                    <span class="error_msg">{{ error }}</span>#}
+{#                {% endfor %}#}
+{#            {% endif %}#}
+        </p>
 		<p{% if form.content.errors %} class="error"{% endif %}>
-			<label class="contact_field">{{ contact.content_label }}</label>
-				{{ form.content }}
-			{% if form.content.errors %}
-				{% for error in form.content.errors %}
-					<span class="error_msg">{{ error }}</span>
-				{% endfor %}
-			{% endif %}
+{#			<label class="contact_field">{{ contact.content_label }}</label>#}
+            {% render_field form.content placeholder=contact.content_label %}
+
+{#            {% if form.content.errors %}#}
+{#				{% for error in form.content.errors %}#}
+{#					<span class="error_msg">{{ error }}</span>#}
+{#				{% endfor %}#}
+{#			{% endif %}#}
 		</p>
 		{% if form.recaptcha_challenge_field %}
 			<div{% if form.recaptcha_response_field.errors %} class="error"{% endif %}>
@@ -64,9 +88,6 @@
 			</div>
 		{% endif %}
 		
-		{% if form.accept_terms %}
-			{{ form.accept_terms }}
-		{% endif %}
 		<p>
 			<input type="submit"{% if contact.submit %} value="{{ contact.submit }}"{% endif %} />
 		</p>

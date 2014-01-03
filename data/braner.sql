@@ -644,6 +644,53 @@ ALTER SEQUENCE cms_title_id_seq OWNED BY cms_title.id;
 
 
 --
+-- Name: cmsplugin_contact; Type: TABLE; Schema: public; Owner: mlorenz; Tablespace: 
+--
+
+CREATE TABLE cmsplugin_contact (
+    cmsplugin_ptr_id integer NOT NULL,
+    site_email character varying(75) NOT NULL,
+    email_label character varying(100) NOT NULL,
+    subject_label character varying(200) NOT NULL,
+    content_label character varying(100) NOT NULL,
+    thanks text NOT NULL,
+    submit character varying(30) NOT NULL,
+    spam_protection_method smallint NOT NULL,
+    akismet_api_key character varying(255) NOT NULL,
+    recaptcha_public_key character varying(255) NOT NULL,
+    recaptcha_private_key character varying(255) NOT NULL,
+    recaptcha_theme character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.cmsplugin_contact OWNER TO mlorenz;
+
+--
+-- Name: cmsplugin_customcontact; Type: TABLE; Schema: public; Owner: mlorenz; Tablespace: 
+--
+
+CREATE TABLE cmsplugin_customcontact (
+    cmsplugin_ptr_id integer NOT NULL,
+    site_email character varying(75) NOT NULL,
+    email_label character varying(100) NOT NULL,
+    subject_label character varying(200) NOT NULL,
+    content_label character varying(100) NOT NULL,
+    thanks text NOT NULL,
+    submit character varying(30) NOT NULL,
+    spam_protection_method smallint NOT NULL,
+    akismet_api_key character varying(255) NOT NULL,
+    recaptcha_public_key character varying(255) NOT NULL,
+    recaptcha_private_key character varying(255) NOT NULL,
+    recaptcha_theme character varying(20) NOT NULL,
+    phone_label character varying(20) NOT NULL,
+    name_label character varying(20) NOT NULL,
+    company_label character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.cmsplugin_customcontact OWNER TO mlorenz;
+
+--
 -- Name: cmsplugin_file_gallery_downloadablefile; Type: TABLE; Schema: public; Owner: mlorenz; Tablespace: 
 --
 
@@ -651,14 +698,14 @@ CREATE TABLE cmsplugin_file_gallery_downloadablefile (
     id integer NOT NULL,
     inline_ordering_position integer,
     gallery_id integer NOT NULL,
-    src character varying(100) NOT NULL,
+    src character varying(100),
     src_height smallint,
     src_width smallint,
     title character varying(255) NOT NULL,
     alt text NOT NULL,
     link character varying(255) NOT NULL,
     extended_content text NOT NULL,
-    downloadable_file character varying(100) NOT NULL,
+    downloadable_file character varying(255) NOT NULL,
     CONSTRAINT cmsplugin_file_gallery_downloadablefile_src_height_check CHECK ((src_height >= 0)),
     CONSTRAINT cmsplugin_file_gallery_downloadablefile_src_width_check CHECK ((src_width >= 0))
 );
@@ -907,6 +954,31 @@ CREATE TABLE cmsplugin_galleryplugin (
 
 
 ALTER TABLE public.cmsplugin_galleryplugin OWNER TO mlorenz;
+
+--
+-- Name: cmsplugin_googlemap; Type: TABLE; Schema: public; Owner: mlorenz; Tablespace: 
+--
+
+CREATE TABLE cmsplugin_googlemap (
+    cmsplugin_ptr_id integer NOT NULL,
+    title character varying(100),
+    address character varying(150) NOT NULL,
+    zipcode character varying(30) NOT NULL,
+    city character varying(100) NOT NULL,
+    state character varying(100) NOT NULL,
+    content character varying(255) NOT NULL,
+    zoom smallint NOT NULL,
+    lat numeric(10,6),
+    lng numeric(10,6),
+    route_planer_title character varying(150),
+    route_planer boolean NOT NULL,
+    width character varying(6) NOT NULL,
+    height character varying(6) NOT NULL,
+    CONSTRAINT cmsplugin_googlemap_zoom_check CHECK ((zoom >= 0))
+);
+
+
+ALTER TABLE public.cmsplugin_googlemap OWNER TO mlorenz;
 
 --
 -- Name: cmsplugin_link; Type: TABLE; Schema: public; Owner: mlorenz; Tablespace: 
@@ -1959,6 +2031,15 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 127	Can add downloadable file	42	add_downloadablefile
 128	Can change downloadable file	42	change_downloadablefile
 129	Can delete downloadable file	42	delete_downloadablefile
+130	Can add google map	43	add_googlemap
+131	Can change google map	43	change_googlemap
+132	Can delete google map	43	delete_googlemap
+133	Can add contact	44	add_contact
+134	Can change contact	44	change_contact
+135	Can delete contact	44	delete_contact
+136	Can add custom contact	45	add_customcontact
+137	Can change custom contact	45	change_customcontact
+138	Can delete custom contact	45	delete_customcontact
 \.
 
 
@@ -1966,7 +2047,7 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('auth_permission_id_seq', 129, true);
+SELECT pg_catalog.setval('auth_permission_id_seq', 138, true);
 
 
 --
@@ -1974,7 +2055,7 @@ SELECT pg_catalog.setval('auth_permission_id_seq', 129, true);
 --
 
 COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$10000$5najxJrXLip0$CVQjPk21UkltVs7SRNAl9sTEaqG93WX6rEPx6ei4cVM=	2013-12-26 13:03:37.329828-05	t	brandon			blorenz@gmail.com	t	t	2013-12-26 13:02:52.172605-05
+1	pbkdf2_sha256$10000$5najxJrXLip0$CVQjPk21UkltVs7SRNAl9sTEaqG93WX6rEPx6ei4cVM=	2014-01-02 14:04:40.7819-05	t	brandon			blorenz@gmail.com	t	t	2013-12-26 13:02:52.172605-05
 \.
 
 
@@ -2023,14 +2104,18 @@ COPY cms_cmsplugin (id, placeholder_id, parent_id, "position", language, plugin_
 1	1	\N	0	en	CMSGalleryPlugin	2013-12-27 13:10:32.343669-05	2013-12-27 13:10:32.344827-05	0	1	2	1
 2	1	\N	1	en	CMSGalleryPlugin	2013-12-27 15:12:15.437273-05	2013-12-27 15:12:15.439075-05	0	1	2	2
 3	1	\N	2	en	CMSGalleryPlugin	2013-12-27 15:15:03.483238-05	2013-12-27 15:15:03.484324-05	0	1	2	3
+256	109	\N	1	en	GoogleMapPlugin	2014-01-02 13:34:46.121147-05	2014-01-02 15:37:33.865575-05	0	1	2	115
 41	29	\N	7	en	CMSGalleryPlugin	2013-12-28 14:42:46.312211-05	2013-12-28 14:52:13.585377-05	0	1	2	24
 4	30	\N	0	en	TextPlugin	2013-12-27 15:17:02.850731-05	2013-12-28 09:46:56.200803-05	0	1	2	4
+257	109	\N	2	en	GoogleMapPlugin	2014-01-02 13:35:09.679689-05	2014-01-02 15:37:33.875423-05	0	1	2	116
+255	109	\N	0	en	GoogleMapPlugin	2014-01-02 13:34:39.904896-05	2014-01-02 15:37:33.851396-05	0	1	2	114
 226	95	\N	0	en	CMSVideoGalleryPlugin	2013-12-30 22:17:52.710725-05	2013-12-30 22:17:52.712597-05	0	1	2	91
 227	95	\N	1	en	CMSVideoGalleryPlugin	2014-01-01 18:50:42.248077-05	2014-01-01 18:50:42.251371-05	0	1	2	92
 17	29	\N	0	en	CMSGalleryPlugin	2013-12-28 13:58:58.405686-05	2013-12-28 14:17:30.317557-05	0	1	2	9
 19	29	\N	1	en	CMSGalleryPlugin	2013-12-28 14:23:42.52221-05	2013-12-28 14:23:42.52329-05	0	1	2	10
 20	29	\N	2	en	CMSGalleryPlugin	2013-12-28 14:26:45.812528-05	2013-12-28 14:26:45.813671-05	0	1	2	11
 207	31	\N	8	en	CMSGalleryPlugin	2013-12-28 15:04:09.18295-05	2013-12-30 15:50:47.701499-05	0	1	2	72
+236	102	\N	1	en	CMSFileGalleryPlugin	2014-01-02 12:57:13.87984-05	2014-01-02 13:02:15.64351-05	0	1	2	101
 208	32	\N	0	en	TextPlugin	2013-12-27 15:17:02.850731-05	2013-12-30 15:50:47.757727-05	0	1	2	73
 21	29	\N	3	en	CMSGalleryPlugin	2013-12-28 14:33:42.292011-05	2013-12-28 14:35:02.744426-05	0	1	2	12
 209	89	\N	0	en	CMSFileGalleryPlugin	2013-12-30 21:14:23.844371-05	2013-12-30 21:14:23.847021-05	0	1	2	74
@@ -2078,6 +2163,28 @@ COPY cms_cmsplugin (id, placeholder_id, parent_id, "position", language, plugin_
 230	96	\N	0	en	CMSVideoGalleryPlugin	2014-01-01 19:22:18.526493-05	2014-01-01 19:22:18.527453-05	0	1	2	95
 231	96	\N	1	en	CMSVideoGalleryPlugin	2014-01-01 19:22:18.528993-05	2014-01-01 19:22:18.529825-05	0	1	2	96
 232	96	\N	2	en	CMSVideoGalleryPlugin	2014-01-01 19:15:53.961578-05	2014-01-01 19:22:18.534677-05	0	1	2	97
+233	101	\N	0	en	CMSFileGalleryPlugin	2014-01-02 12:54:38.612191-05	2014-01-02 12:54:38.614844-05	0	1	2	98
+234	101	\N	1	en	CMSFileGalleryPlugin	2014-01-02 12:57:13.87984-05	2014-01-02 13:02:08.759837-05	0	1	2	99
+235	102	\N	0	en	CMSFileGalleryPlugin	2014-01-02 13:02:15.636871-05	2014-01-02 13:02:15.638012-05	0	1	2	100
+248	107	\N	0	en	FilerImagePlugin	2014-01-02 13:24:06.048283-05	2014-01-02 13:27:06.60662-05	0	1	2	110
+245	107	\N	1	en	TextPlugin	2014-01-02 13:23:35.979289-05	2014-01-02 13:27:06.613861-05	0	1	2	107
+237	105	\N	0	en	CMSGalleryPlugin	2014-01-02 13:09:42.332347-05	2014-01-02 13:23:31.385246-05	0	1	2	102
+252	106	\N	0	en	CMSGalleryPlugin	2014-01-02 13:09:42.332347-05	2014-01-02 13:27:09.762405-05	0	1	2	111
+254	108	\N	0	en	FilerImagePlugin	2014-01-02 13:24:06.048283-05	2014-01-02 13:27:09.787252-05	0	1	2	113
+253	108	\N	1	en	TextPlugin	2014-01-02 13:23:35.979289-05	2014-01-02 13:27:09.796602-05	0	1	2	112
+335	109	\N	5	en	GoogleMapPlugin	2014-01-02 20:16:56.89804-05	2014-01-02 20:16:56.902655-05	0	1	2	148
+272	109	\N	3	en	GoogleMapPlugin	2014-01-02 14:30:33.07398-05	2014-01-02 20:17:09.768014-05	0	1	2	127
+267	109	\N	4	en	GoogleMapPlugin	2014-01-02 14:05:37.788919-05	2014-01-02 15:37:33.89617-05	0	1	2	122
+320	111	\N	1	en	CustomContactPlugin	2014-01-02 19:45:29.564943-05	2014-01-02 20:38:27.623783-05	0	1	2	140
+360	110	\N	0	en	GoogleMapPlugin	2014-01-02 20:38:32.060874-05	2014-01-02 20:38:32.067023-05	0	1	2	149
+361	110	\N	1	en	GoogleMapPlugin	2014-01-02 20:38:32.077927-05	2014-01-02 20:38:32.082831-05	0	1	2	150
+362	110	\N	2	en	GoogleMapPlugin	2014-01-02 20:38:32.090612-05	2014-01-02 20:38:32.094825-05	0	1	2	151
+278	111	\N	0	en	CustomContactPlugin	2014-01-02 15:09:42.418201-05	2014-01-02 19:28:47.195539-05	0	1	2	133
+363	110	\N	4	en	GoogleMapPlugin	2014-01-02 20:38:32.102872-05	2014-01-02 20:38:32.107221-05	0	1	2	152
+364	110	\N	3	en	GoogleMapPlugin	2014-01-02 14:30:33.07398-05	2014-01-02 20:38:32.13044-05	0	1	2	153
+365	110	\N	5	en	GoogleMapPlugin	2014-01-02 20:38:32.156099-05	2014-01-02 20:38:32.160326-05	0	1	2	154
+366	112	\N	0	en	CustomContactPlugin	2014-01-02 20:38:32.222824-05	2014-01-02 20:38:32.227221-05	0	1	2	155
+367	112	\N	1	en	CustomContactPlugin	2014-01-02 19:45:29.564943-05	2014-01-02 20:38:32.254607-05	0	1	2	156
 \.
 
 
@@ -2085,7 +2192,7 @@ COPY cms_cmsplugin (id, placeholder_id, parent_id, "position", language, plugin_
 -- Name: cms_cmsplugin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('cms_cmsplugin_id_seq', 232, true);
+SELECT pg_catalog.setval('cms_cmsplugin_id_seq', 367, true);
 
 
 --
@@ -2124,8 +2231,6 @@ SELECT pg_catalog.setval('cms_globalpagepermission_sites_id_seq', 1, false);
 
 COPY cms_page (id, created_by, changed_by, parent_id, creation_date, changed_date, publication_date, publication_end_date, in_navigation, soft_root, reverse_id, navigation_extenders, published, template, site_id, login_required, limit_visibility_in_menu, level, lft, rght, tree_id, publisher_is_draft, publisher_public_id, publisher_state) FROM stdin;
 3	brandon	brandon	\N	2013-12-26 13:07:54.919059-05	2013-12-30 15:50:47.76749-05	2013-12-26 13:14:24.682839-05	\N	t	f	\N		t	home.html	1	f	\N	0	1	2	2	t	4	0
-10	brandon	brandon	\N	2013-12-27 12:51:01.723573-05	2013-12-27 13:00:38.945523-05	2013-12-27 12:50:56.76082-05	\N	t	f	\N		t	home.html	1	f	\N	0	1	2	13	f	8	0
-8	brandon	brandon	\N	2013-12-27 12:50:44.988937-05	2013-12-27 13:00:38.981348-05	2013-12-27 12:50:56.76082-05	\N	t	f	\N		t	home.html	1	f	\N	0	1	2	6	t	10	0
 28	brandon	brandon	6	2013-12-29 20:08:56.437704-05	2013-12-29 21:18:09.306154-05	2013-12-29 20:08:51.478361-05	\N	t	f	\N		t	products.html	1	f	\N	1	2	13	10	f	27	0
 24	brandon	brandon	28	2013-12-29 20:05:31.025323-05	2013-12-30 21:40:31.93885-05	2013-12-29 20:05:26.069291-05	\N	t	f	\N		t	products_installations.html	1	f	\N	2	9	10	10	f	21	0
 5	brandon	brandon	\N	2013-12-27 12:39:00.539367-05	2013-12-29 20:01:37.74882-05	2013-12-27 12:44:20.565796-05	\N	t	f	\N		t	products.html	1	f	\N	0	1	14	3	t	6	0
@@ -2134,19 +2239,21 @@ COPY cms_page (id, created_by, changed_by, parent_id, creation_date, changed_dat
 7	brandon	brandon	\N	2013-12-27 12:50:28.873483-05	2013-12-27 13:00:40.479598-05	2013-12-27 12:50:56.136089-05	\N	t	f	\N		t	home.html	1	f	\N	0	1	6	4	t	9	0
 25	brandon	brandon	28	2013-12-29 20:05:31.572109-05	2014-01-01 19:22:18.468854-05	2013-12-29 20:05:26.616801-05	\N	t	f	\N		t	products_movies.html	1	f	\N	2	7	8	10	f	20	0
 20	brandon	brandon	27	2013-12-29 20:04:51.228548-05	2014-01-01 19:22:18.551594-05	2013-12-29 20:05:26.616801-05	\N	t	f	\N		t	products_movies.html	1	f	\N	2	7	8	3	t	25	0
-12	brandon	brandon	9	2013-12-27 12:53:24.289658-05	2013-12-27 13:03:22.069816-05	2013-12-27 12:53:19.323881-05	\N	t	f	\N		t	home.html	1	f	\N	1	2	3	11	f	11	0
-11	brandon	brandon	7	2013-12-27 12:53:17.06012-05	2013-12-27 13:03:22.103037-05	2013-12-27 12:53:19.323881-05	\N	t	f	\N		t	home.html	1	f	\N	1	2	3	4	t	12	0
+10	brandon	brandon	\N	2013-12-27 12:51:01.723573-05	2014-01-02 20:38:31.674238-05	2013-12-27 12:50:56.76082-05	\N	t	f	\N		t	contact.html	1	f	\N	0	1	2	13	f	8	0
+8	brandon	brandon	\N	2013-12-27 12:50:44.988937-05	2014-01-02 20:38:32.329046-05	2013-12-27 12:50:56.76082-05	\N	t	f	\N		t	contact.html	1	f	\N	0	1	2	6	t	10	0
+23	brandon	brandon	28	2013-12-29 20:05:30.388915-05	2014-01-02 13:02:15.592916-05	2013-12-29 20:05:25.431466-05	\N	t	f	\N		t	products_articles.html	1	f	\N	2	11	12	10	f	22	0
 9	brandon	brandon	\N	2013-12-27 12:51:01.102054-05	2013-12-27 13:00:40.442902-05	2013-12-27 12:50:56.136089-05	\N	t	f	\N		t	home.html	1	f	\N	0	1	6	11	f	7	0
+22	brandon	brandon	27	2013-12-29 20:05:24.721094-05	2014-01-02 13:02:15.658432-05	2013-12-29 20:05:25.431466-05	\N	t	f	\N		t	products_articles.html	1	f	\N	2	11	12	3	t	23	0
 16	brandon	brandon	9	2013-12-27 13:03:30.120624-05	2013-12-27 13:04:39.55916-05	2013-12-27 13:03:25.153813-05	\N	t	f	\N		t	home.html	1	f	\N	1	4	5	11	f	15	0
 15	brandon	brandon	7	2013-12-27 13:02:47.846711-05	2013-12-27 13:04:39.592209-05	2013-12-27 13:03:25.153813-05	\N	t	f	\N		t	home.html	1	f	\N	1	4	5	4	t	16	0
 18	brandon	brandon	28	2013-12-29 20:02:26.221773-05	2013-12-29 21:29:34.073868-05	2013-12-29 20:02:21.261716-05	\N	t	f	\N		t	products.html	1	f	\N	2	3	4	10	f	17	0
 17	brandon	brandon	27	2013-12-29 20:02:16.238878-05	2013-12-29 21:29:34.177483-05	2013-12-29 20:02:21.261716-05	\N	t	f	\N		t	products.html	1	f	\N	2	3	4	3	t	18	0
+12	brandon	brandon	9	2013-12-27 12:53:24.289658-05	2014-01-02 13:27:09.69703-05	2013-12-27 12:53:19.323881-05	\N	t	f	\N		t	services.html	1	f	\N	1	2	3	11	f	11	0
+11	brandon	brandon	7	2013-12-27 12:53:17.06012-05	2014-01-02 13:27:09.808742-05	2013-12-27 12:53:19.323881-05	\N	t	f	\N		t	services.html	1	f	\N	1	2	3	4	t	12	0
 26	brandon	brandon	28	2013-12-29 20:05:32.238117-05	2013-12-29 22:00:21.181308-05	2013-12-29 20:05:27.29045-05	\N	t	f	\N		t	products_features.html	1	f	\N	2	5	6	10	f	19	0
 19	brandon	brandon	27	2013-12-29 20:04:40.249181-05	2013-12-29 22:00:21.252292-05	2013-12-29 20:05:27.29045-05	\N	t	f	\N		t	products_features.html	1	f	\N	2	5	6	3	t	26	0
 4	brandon	brandon	\N	2013-12-26 13:15:25.205629-05	2013-12-30 15:50:47.562704-05	2013-12-26 13:14:24.682839-05	\N	t	f	\N		t	home.html	1	f	\N	0	1	2	9	f	3	0
 6	brandon	brandon	\N	2013-12-27 12:44:25.53382-05	2013-12-29 20:01:37.708584-05	2013-12-27 12:44:20.565796-05	\N	t	f	\N		t	products.html	1	f	\N	0	1	14	10	f	5	0
-23	brandon	brandon	28	2013-12-29 20:05:30.388915-05	2013-12-29 20:09:35.132093-05	2013-12-29 20:05:25.431466-05	\N	t	f	\N		t	products.html	1	f	\N	2	11	12	10	f	22	0
-22	brandon	brandon	27	2013-12-29 20:05:24.721094-05	2013-12-29 20:09:35.20016-05	2013-12-29 20:05:25.431466-05	\N	t	f	\N		t	products.html	1	f	\N	2	11	12	3	t	23	0
 \.
 
 
@@ -2256,6 +2363,20 @@ COPY cms_page_placeholders (id, page_id, placeholder_id) FROM stdin;
 96	25	96
 97	25	97
 98	25	98
+99	22	99
+100	22	100
+101	22	101
+102	23	102
+103	23	103
+104	23	104
+105	11	105
+106	12	106
+107	11	107
+108	12	108
+109	8	109
+110	10	110
+111	8	111
+112	10	112
 \.
 
 
@@ -2263,7 +2384,7 @@ COPY cms_page_placeholders (id, page_id, placeholder_id) FROM stdin;
 -- Name: cms_page_placeholders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('cms_page_placeholders_id_seq', 98, true);
+SELECT pg_catalog.setval('cms_page_placeholders_id_seq', 112, true);
 
 
 --
@@ -2278,7 +2399,7 @@ COPY cms_pagemoderatorstate (id, page_id, user_id, created, action, message) FRO
 -- Name: cms_pagemoderatorstate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('cms_pagemoderatorstate_id_seq', 46, true);
+SELECT pg_catalog.setval('cms_pagemoderatorstate_id_seq', 83, true);
 
 
 --
@@ -2413,6 +2534,20 @@ COPY cms_placeholder (id, slot, default_width) FROM stdin;
 96	products_movies_content	\N
 97	hero_content	\N
 98	products_content	\N
+99	hero_content	\N
+100	products_content	\N
+101	products_articles_content	\N
+102	products_articles_content	\N
+103	hero_content	\N
+104	products_content	\N
+105	hero_content	\N
+106	hero_content	\N
+107	services_extra_content	\N
+108	services_extra_content	\N
+109	contact_map_content	\N
+110	contact_map_content	\N
+111	contact_form_content	\N
+112	contact_form_content	\N
 \.
 
 
@@ -2420,7 +2555,7 @@ COPY cms_placeholder (id, slot, default_width) FROM stdin;
 -- Name: cms_placeholder_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('cms_placeholder_id_seq', 98, true);
+SELECT pg_catalog.setval('cms_placeholder_id_seq', 112, true);
 
 
 --
@@ -2430,7 +2565,6 @@ SELECT pg_catalog.setval('cms_placeholder_id_seq', 98, true);
 COPY cms_title (id, language, title, menu_title, slug, path, has_url_overwrite, application_urls, redirect, meta_description, meta_keywords, page_title, page_id, creation_date) FROM stdin;
 13	en	In-House Machine Repair		in-house-machine-repair	support-services/in-house-machine-repair	f						15	2013-12-27 13:02:47.862553-05
 14	en	In-House Machine Repair		in-house-machine-repair	support-services/in-house-machine-repair	f						16	2013-12-27 13:02:47.862553-05
-23	en	Articles	\N	articles	products/slitting-lines/articles	f	\N	\N	\N	\N	\N	23	2013-12-29 20:05:24.739243-05
 15	es	Casa		casa		f	\N	\N				3	2013-12-28 12:34:15.150056-05
 1	en	Home		home		f						3	2013-12-26 13:07:54.937819-05
 28	en	Slitting Lines		slitting-lines	products/slitting-lines	f						28	2013-12-29 20:08:20.53632-05
@@ -2442,14 +2576,15 @@ COPY cms_title (id, language, title, menu_title, slug, path, has_url_overwrite, 
 24	en	Installations	\N	installations	products/slitting-lines/installations	f	\N	\N	\N	\N	\N	24	2013-12-29 20:05:13.926321-05
 6	en	Contact Us	\N	contact-us	contact-us	f	\N	\N	\N	\N	\N	8	2013-12-27 12:50:45.003941-05
 25	en	Movies	\N	movies	products/slitting-lines/movies	f	\N	\N	\N	\N	\N	25	2013-12-29 20:04:51.247213-05
+23	en	Articles	\N	articles	products/slitting-lines/articles	f	\N	\N	\N	\N	\N	23	2013-12-29 20:05:24.739243-05
+10	en	Field Service and Repair		field-service-repair	support-services/field-service-repair	f						12	2013-12-27 12:53:17.076676-05
 3	en	Products		products	products	f						5	2013-12-27 12:39:00.558525-05
 4	en	Products		products	products	f						6	2013-12-27 12:39:00.558525-05
-8	en	Contact Us	\N	contact-us	contact-us	f	\N	\N	\N	\N	\N	10	2013-12-27 12:50:45.003941-05
 7	en	Support Services	\N	support-services	support-services	f	\N	\N	\N	\N	\N	9	2013-12-27 12:50:28.888531-05
 9	en	Field Service and Repair		field-service-repair	support-services/field-service-repair	f						11	2013-12-27 12:53:17.076676-05
-10	en	Field Service and Repair		field-service-repair	support-services/field-service-repair	f						12	2013-12-27 12:53:17.076676-05
 27	en	Slitting Lines		slitting-lines	products/slitting-lines	f						27	2013-12-29 20:08:20.53632-05
 17	en	Overview	\N	overview	products/slitting-lines/overview	f	\N	\N	\N	\N	\N	17	2013-12-29 20:02:16.261311-05
+8	en	Contact Us	\N	contact-us	contact-us	f	\N	\N	\N	\N	\N	10	2013-12-27 12:50:45.003941-05
 19	en	Features	\N	features	products/slitting-lines/features	f	\N	\N	\N	\N	\N	19	2013-12-29 20:04:40.267709-05
 20	en	Movies	\N	movies	products/slitting-lines/movies	f	\N	\N	\N	\N	\N	20	2013-12-29 20:04:51.247213-05
 21	en	Installations	\N	installations	products/slitting-lines/installations	f	\N	\N	\N	\N	\N	21	2013-12-29 20:05:13.926321-05
@@ -2465,12 +2600,32 @@ SELECT pg_catalog.setval('cms_title_id_seq', 28, true);
 
 
 --
+-- Data for Name: cmsplugin_contact; Type: TABLE DATA; Schema: public; Owner: mlorenz
+--
+
+COPY cmsplugin_contact (cmsplugin_ptr_id, site_email, email_label, subject_label, content_label, thanks, submit, spam_protection_method, akismet_api_key, recaptcha_public_key, recaptcha_private_key, recaptcha_theme) FROM stdin;
+\.
+
+
+--
+-- Data for Name: cmsplugin_customcontact; Type: TABLE DATA; Schema: public; Owner: mlorenz
+--
+
+COPY cmsplugin_customcontact (cmsplugin_ptr_id, site_email, email_label, subject_label, content_label, thanks, submit, spam_protection_method, akismet_api_key, recaptcha_public_key, recaptcha_private_key, recaptcha_theme, phone_label, name_label, company_label) FROM stdin;
+320	blorenz@gmail.com	YOUR EMAIL	Subject	A BRIEF MESSAGE		 	0				clean	YOUR PHONE	YOUR NAME	YOUR COMPANY
+367	blorenz@gmail.com	YOUR EMAIL	Subject	A BRIEF MESSAGE		 	0				clean	YOUR PHONE	YOUR NAME	YOUR COMPANY
+\.
+
+
+--
 -- Data for Name: cmsplugin_file_gallery_downloadablefile; Type: TABLE DATA; Schema: public; Owner: mlorenz
 --
 
 COPY cmsplugin_file_gallery_downloadablefile (id, inline_ordering_position, gallery_id, src, src_height, src_width, title, alt, link, extended_content, downloadable_file) FROM stdin;
 4	1	217	cms_page_media/21/Berlin_1.JPG	600	600	Berlin Hammond			Berlin	cms_page_media/21/Berlin Hammond_1.pdf
 5	2	225	cms_page_media/21/Berlin_1.JPG	600	600	Berlin Hammond			Berlin	cms_page_media/21/Berlin Hammond_1.pdf
+6	3	234		\N	\N	Tight Coils			Subtitle is a longer version of a title with more infomation\r\nAuthor: Lorem Ipsum\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dictum, libero ut vehicula blandit, ipsum nisi faucibus nunc, quis consequat tortor erat a justo. Vestibulum ac magna sed purus consequat condimentum. Etiam ultrices pretium nisi accumsan consequat. Nunc blandit blandit nibh et lacinia. Fusce fermentum congue auctor. Integer varius justo eget eros pulvinar dictum.\r\n	cms_page_media/22/Tight Coils with Minimum Pit Depth - H&H Strip Tensioner - Modern Metals Roberts - 2007-01_2.pdf
+7	4	236		\N	\N	Tight Coils			Subtitle is a longer version of a title with more infomation\r\nAuthor: Lorem Ipsum\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dictum, libero ut vehicula blandit, ipsum nisi faucibus nunc, quis consequat tortor erat a justo. Vestibulum ac magna sed purus consequat condimentum. Etiam ultrices pretium nisi accumsan consequat. Nunc blandit blandit nibh et lacinia. Fusce fermentum congue auctor. Integer varius justo eget eros pulvinar dictum.\r\n	cms_page_media/22/Tight Coils with Minimum Pit Depth - H&H Strip Tensioner - Modern Metals Roberts - 2007-01_2.pdf
 \.
 
 
@@ -2478,7 +2633,7 @@ COPY cmsplugin_file_gallery_downloadablefile (id, inline_ordering_position, gall
 -- Name: cmsplugin_file_gallery_downloadablefile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('cmsplugin_file_gallery_downloadablefile_id_seq', 5, true);
+SELECT pg_catalog.setval('cmsplugin_file_gallery_downloadablefile_id_seq', 7, true);
 
 
 --
@@ -2488,6 +2643,8 @@ SELECT pg_catalog.setval('cmsplugin_file_gallery_downloadablefile_id_seq', 5, tr
 COPY cmsplugin_filegalleryplugin (cmsplugin_ptr_id, title, template) FROM stdin;
 217	Slitting Lines Installations	cmsplugin_file_gallery/installations_image_title_description.html
 225	Slitting Lines Installations	cmsplugin_file_gallery/installations_image_title_description.html
+234	Slitting Lines Articles	cmsplugin_file_gallery/gallery.html
+236	Slitting Lines Articles	cmsplugin_file_gallery/gallery.html
 \.
 
 
@@ -2527,6 +2684,8 @@ COPY cmsplugin_filerfolder (cmsplugin_ptr_id, title, view_option, folder_id) FRO
 --
 
 COPY cmsplugin_filerimage (cmsplugin_ptr_id, caption_text, image_id, image_url, alt_text, use_original_image, thumbnail_option_id, use_autoscale, width, height, crop, upscale, alignment, free_link, page_link_id, file_link_id, original_link, description, target_blank) FROM stdin;
+248	fdsaf	4		sdafdsafds	t	\N	f	\N	\N	t	t	right		\N	\N	f		f
+254	fdsaf	4		sdafdsafds	t	\N	f	\N	\N	t	t	right		\N	\N	f		f
 \.
 
 
@@ -2552,6 +2711,7 @@ COPY cmsplugin_filervideo (cmsplugin_ptr_id, movie_id, movie_url, image_id, widt
 
 COPY cmsplugin_gallery_image (id, inline_ordering_position, gallery_id, src, src_height, src_width, title, alt, link, extended_content) FROM stdin;
 38	15	192	cms_page_media/17/IMG_0157 600px.jpg	600	600	Heavy Gauge			45-ton x .625” (16.0mm) gauge coils in widths to 84” (2133mm) is the capacity of this Turret Head™ Slitter that generates 35,000 tons/month of slit coil to satisfy the appetite of heavy-wall OCTG welded tube mills.
+52	1	237	cms_page_media/11/06-Turret-Head Slitters.png	397	595	Professional Service			Customer Support Services are high among the many Braner/Loopco strengths.  Our technical service personnel are all industry veterans that possess experience and know-how acquired from hundreds of new Coil Processing System installation, start-up, and training assignments, plus countless numbers of successful on-site problem-solving and restoration of older equipment. 
 11	3	66	cms_page_media/3/03 Cut to Length Lines.jpg	2736	3648	And this			
 27	7	186	cms_page_media/17/100_0455 600px.jpg	600	600	Thin Gauge			Sitting and rewinding a 20-ton coil into fifty narrow 0.007” (0.18mm) gauge tightly wound straight wall virtually burr-free slit coils requires both precision and finesse. This Turret Head™ Slitter achieves both.
 29	9	186	cms_page_media/17/100_1860 600px.jpg	600	600	Exposed Automotive			Coils destined for exposed automotive applications is a high-quality and surface sensitive product. Surface inspection is required to assure that the product quality meets stringent quality standards. This “double-loop” Turret Head™ Slitter is dedicated to processing 30-ton x 72” (1828mm) wide exposed automotive coil.
@@ -2573,6 +2733,7 @@ COPY cmsplugin_gallery_image (id, inline_ordering_position, gallery_id, src, src
 49	26	207	cms_page_media/3/02 Slit Coil Packaging Lines_2.jpg	1420	1800	something there			
 50	27	207	cms_page_media/3/01 Slitting Lines_2.jpg	2304	3072	something here			
 51	28	207	cms_page_media/3/03 Cut to Length Lines.jpg	2736	3648	And this			
+60	29	252	cms_page_media/11/06-Turret-Head Slitters.png	397	595	Professional Service			Customer Support Services are high among the many Braner/Loopco strengths.  Our technical service personnel are all industry veterans that possess experience and know-how acquired from hundreds of new Coil Processing System installation, start-up, and training assignments, plus countless numbers of successful on-site problem-solving and restoration of older equipment. 
 \.
 
 
@@ -2580,7 +2741,7 @@ COPY cmsplugin_gallery_image (id, inline_ordering_position, gallery_id, src, src
 -- Name: cmsplugin_gallery_image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('cmsplugin_gallery_image_id_seq', 51, true);
+SELECT pg_catalog.setval('cmsplugin_gallery_image_id_seq', 60, true);
 
 
 --
@@ -2596,6 +2757,18 @@ COPY cmsplugin_galleryplugin (cmsplugin_ptr_id, title, slide_duration, template,
 195	Slitting Lines Features	0	cmsplugin_gallery/products_features.html	0
 66	homepage	3	cmsplugin_gallery/homepage_gallery.html	1
 207	homepage	3	cmsplugin_gallery/homepage_gallery.html	1
+237	Field Service Repair hero	0	cmsplugin_gallery/services_hero_image_title_description.html	0
+252	Field Service Repair hero	0	cmsplugin_gallery/services_hero_image_title_description.html	0
+\.
+
+
+--
+-- Data for Name: cmsplugin_googlemap; Type: TABLE DATA; Schema: public; Owner: mlorenz
+--
+
+COPY cmsplugin_googlemap (cmsplugin_ptr_id, title, address, zipcode, city, state, content, zoom, lat, lng, route_planer_title, route_planer, width, height) FROM stdin;
+272	Braner USA, Inc	9301 W. Bernice St.	60176	Schiller Park	IL		13	\N	\N	Get directions	t	100%	400px
+364	Braner USA, Inc	9301 W. Bernice St.	60176	Schiller Park	IL		13	\N	\N	Get directions	t	100%	400px
 \.
 
 
@@ -2614,6 +2787,8 @@ COPY cmsplugin_link (cmsplugin_ptr_id, name, url, page_link_id, mailto, target) 
 COPY cmsplugin_text (cmsplugin_ptr_id, body) FROM stdin;
 4	<h3>Welcome to Braner</h3>\n<p>Welcome to our web page, we appreciate your interest! Braner USA manufactures slitting lines, slit coil packaging lines, cut-to-length lines, multi-blanking lines and other flat rolled coil processing equipment. We also provide equipment upgrade feasibility studies, in-house machine repairs, field service and repair, installation service and OEM spare parts for Braner, Loopco, Stanat and Coiltech machines. We are committed to continuous improvement of our designs targeting increased operating efficiency for our customers.</p>
 208	<h3>Welcome to Braner</h3>\n<p>Welcome to our web page, we appreciate your interest! Braner USA manufactures slitting lines, slit coil packaging lines, cut-to-length lines, multi-blanking lines and other flat rolled coil processing equipment. We also provide equipment upgrade feasibility studies, in-house machine repairs, field service and repair, installation service and OEM spare parts for Braner, Loopco, Stanat and Coiltech machines. We are committed to continuous improvement of our designs targeting increased operating efficiency for our customers.</p>
+245	<p><span style="color: #676d71; font-family: 'Helvetica Neue'; font-size: 12px; line-height: 14.390625px;">Braner/Loopco also offers “Virtual-In-Plant” (VIP) technical support where customers are able to obtain instant “virtual-in-plant” support via Wi-Fi, saving time and money while addressing an operational issue.</span></p>
+253	<p><span style="color: #676d71; font-family: 'Helvetica Neue'; font-size: 12px; line-height: 14.390625px;">Braner/Loopco also offers “Virtual-In-Plant” (VIP) technical support where customers are able to obtain instant “virtual-in-plant” support via Wi-Fi, saving time and money while addressing an operational issue.</span></p>
 \.
 
 
@@ -2782,6 +2957,9 @@ COPY django_content_type (id, name, app_label, model) FROM stdin;
 40	video	cmsplugin_video_gallery	video
 41	file gallery plugin	cmsplugin_file_gallery	filegalleryplugin
 42	downloadable file	cmsplugin_file_gallery	downloadablefile
+43	google map	googlemap	googlemap
+44	contact	cmsplugin_contact	contact
+45	custom contact	cmsplugin_custom_contact	customcontact
 \.
 
 
@@ -2789,7 +2967,7 @@ COPY django_content_type (id, name, app_label, model) FROM stdin;
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('django_content_type_id_seq', 42, true);
+SELECT pg_catalog.setval('django_content_type_id_seq', 45, true);
 
 
 --
@@ -2797,7 +2975,7 @@ SELECT pg_catalog.setval('django_content_type_id_seq', 42, true);
 --
 
 COPY django_session (session_key, session_data, expire_date) FROM stdin;
-xc4lge94w0ksocak7thmdu8awrhueja5	MGU5MTkxNDQ2ZTRmNDRkM2FmNmNiNWM4NzNjMzhiYWEyM2NhMzA4YzqAAn1xAShVDmNtc19hZG1pbl9zaXRlSwFVCV9tZXNzYWdlc1RJKgAAW1siX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwidGVzdFwiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJ0ZXN0XCIgd2FzIHN1Y2Nlc3NmdWxseSB1bnB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwidGVzdFwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIlByb2R1Y3RzXCIgd2FzIHN1Y2Nlc3NmdWxseSB1bnB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiU3VwcG9ydCBTZXJ2aWNlc1wiIHdhcyBzdWNjZXNzZnVsbHkgdW5wdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkNvbnRhY3QgVXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHVucHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJGaWVsZCBTZXJ2aWNlIFJlcGFpclwiIHdhcyBzdWNjZXNzZnVsbHkgdW5wdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkZpZWxkIFNlcnZpY2UgUmVwYWlyXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkZpZWxkIFNlcnZpY2UgUmVwYWlyXCIgd2FzIHN1Y2Nlc3NmdWxseSB1bnB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiRmllbGQgU2VydmljZSBSZXBhaXJcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiRmllbGQgU2VydmljZSBSZXBhaXJcIiB3YXMgc3VjY2Vzc2Z1bGx5IHVucHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJGaWVsZCBTZXJ2aWNlIFJlcGFpclwiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJGaWVsZCBTZXJ2aWNlIFJlcGFpclwiIHdhcyBzdWNjZXNzZnVsbHkgdW5wdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcInRlc3RcIiB3YXMgc3VjY2Vzc2Z1bGx5IHVucHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJQcm9kdWN0c1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJTdXBwb3J0IFNlcnZpY2VzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIlN1cHBvcnQgU2VydmljZXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHVucHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJGaWVsZCBTZXJ2aWNlIFJlcGFpclwiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJDb250YWN0IFVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcInRlc3RcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiU3VwcG9ydCBTZXJ2aWNlc1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJ0ZXN0XCIgd2FzIGRlbGV0ZWQgc3VjY2Vzc2Z1bGx5LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSW4tSG91c2UgTWFjaGluZSBSZXBhaXJcIiB3YXMgYWRkZWQgc3VjY2Vzc2Z1bGx5LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiRmllbGQgU2VydmljZSBSZXBhaXJcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJGaWVsZCBTZXJ2aWNlIGFuZCBSZXBhaXJcIiB3YXMgc3VjY2Vzc2Z1bGx5IHVucHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJGaWVsZCBTZXJ2aWNlIGFuZCBSZXBhaXJcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSW4tSG91c2UgTWFjaGluZSBSZXBhaXJcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSG9tZVwiIHdhcyBzdWNjZXNzZnVsbHkgdW5wdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSW4tSG91c2UgTWFjaGluZSBSZXBhaXJcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJJbi1Ib3VzZSBNYWNoaW5lIFJlcGFpclwiIHdhcyBzdWNjZXNzZnVsbHkgdW5wdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkluLUhvdXNlIE1hY2hpbmUgUmVwYWlyXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgdGV4dCBcIldlbGNvbWUgdG8gQnJhbmVyV2VsY29tZSB0by4uLlwiIHdhcyBhZGRlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgdGV4dCBcIldlbGNvbWUgdG8gQnJhbmVyV2VsY29tZSB0by4uLlwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSB0ZXh0IFwiV2VsY29tZSB0byBCcmFuZXJcbldlbGNvbWUgdC4uLlwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSB0ZXh0IFwiV2VsY29tZSB0byBCcmFuZXJcbmhpIHRoZXJlXHUwMGEwLi4uXCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHRleHQgXCJXZWxjb21lIHRvIEJyYW5lclxuV2VsY29tZSB0Li4uXCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJIb21lXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJIb21lXCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSG9tZVwiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBpbWFnZSBcIjAxIFNsaXR0aW5nIExpbmVzLmpwZ1wiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgaW1hZ2UgXCIwMSBTbGl0dGluZyBMaW5lcy5qcGdcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGdhbGxlcnkgcGx1Z2luIFwiMSBpbWFnZShzKSBpbiBnYWxsZXJ5XCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBpbWFnZSBcIjAxIFNsaXR0aW5nIExpbmVzLmpwZ1wiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgaW1hZ2UgXCIwMSBTbGl0dGluZyBMaW5lcy5qcGdcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGltYWdlIFwiMDEgU2xpdHRpbmcgTGluZXMuanBnXCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBnYWxsZXJ5IHBsdWdpbiBcIjEgaW1hZ2UocykgaW4gZ2FsbGVyeVwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBmaWxlIFwiMDEgU2xpdHRpbmcgTGluZXMuanBnXCIgd2FzIGRlbGV0ZWQgc3VjY2Vzc2Z1bGx5LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBpbWFnZSBcIjAxIFNsaXR0aW5nIExpbmVzLmpwZ1wiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgaW1hZ2UgXCIwMSBTbGl0dGluZyBMaW5lcy5qcGdcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGdhbGxlcnkgcGx1Z2luIFwiMSBpbWFnZShzKSBpbiBnYWxsZXJ5XCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBnYWxsZXJ5IHBsdWdpbiBcIjEgaW1hZ2UocykgaW4gZ2FsbGVyeVwiIHdhcyBhZGRlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIyIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIxIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgYWRkZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJIb21lXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGdhbGxlcnkgcGx1Z2luIFwiMiBpbWFnZShzKSBpbiBnYWxsZXJ5XCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJIb21lXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGdhbGxlcnkgcGx1Z2luIFwiMiBpbWFnZShzKSBpbiBnYWxsZXJ5XCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSG9tZVwiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBnYWxsZXJ5IHBsdWdpbiBcIjIgaW1hZ2UocykgaW4gZ2FsbGVyeVwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSG9tZVwiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBnYWxsZXJ5IHBsdWdpbiBcIjAgaW1hZ2UocykgaW4gZ2FsbGVyeVwiIHdhcyBhZGRlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIzIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIzIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIzIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIzIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIzIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIzIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkhvbWVcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIlByb2R1Y3RzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJQcm9kdWN0c1wiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiUHJvZHVjdHNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIk92ZXJ2aWV3XCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIk92ZXJ2aWV3XCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkZlYXR1cmVzXCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIk1vdmllc1wiIHdhcyBhZGRlZCBzdWNjZXNzZnVsbHkuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJJbnN0YWxsYXRpb25zXCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkFydGljbGVzXCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkFydGljbGVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkluc3RhbGxhdGlvbnNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiTW92aWVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkZlYXR1cmVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIlNsaXR0aW5nIGxpbmVzXCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIlNsaXR0aW5nIGxpbmVzXCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiU2xpdHRpbmcgTGluZXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiT3ZlcnZpZXdcIiB3YXMgc3VjY2Vzc2Z1bGx5IHVucHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJPdmVydmlld1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJGZWF0dXJlc1wiIHdhcyBzdWNjZXNzZnVsbHkgdW5wdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkZlYXR1cmVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIk1vdmllc1wiIHdhcyBzdWNjZXNzZnVsbHkgdW5wdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIk1vdmllc1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJJbnN0YWxsYXRpb25zXCIgd2FzIHN1Y2Nlc3NmdWxseSB1bnB1Ymxpc2hlZCJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSW5zdGFsbGF0aW9uc1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJBcnRpY2xlc1wiIHdhcyBzdWNjZXNzZnVsbHkgdW5wdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkFydGljbGVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQiXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIzIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgYWRkZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJPdmVydmlld1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiU2xpdHRpbmcgTGluZXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCIzIGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIk92ZXJ2aWV3XCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGdhbGxlcnkgcGx1Z2luIFwiMSBpbWFnZShzKSBpbiBnYWxsZXJ5XCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiT3ZlcnZpZXdcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ2FsbGVyeSBwbHVnaW4gXCI0IGltYWdlKHMpIGluIGdhbGxlcnlcIiB3YXMgYWRkZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJGZWF0dXJlc1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBnYWxsZXJ5IHBsdWdpbiBcIjMgaW1hZ2UocykgaW4gZ2FsbGVyeVwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSG9tZVwiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBmaWxlIGdhbGxlcnkgcGx1Z2luIFwiMSBmaWxlKHMpIGluIGdhbGxlcnlcIiB3YXMgYWRkZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGZpbGUgZ2FsbGVyeSBwbHVnaW4gXCIxIGZpbGUocykgaW4gZ2FsbGVyeVwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiSW5zdGFsbGF0aW9uc1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSB2aWRlbyBnYWxsZXJ5IHBsdWdpbiBcIjEgdmlkZW8ocykgaW4gZ2FsbGVyeVwiIHdhcyBhZGRlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIk1vdmllc1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdXVUNX2F1dGhfdXNlcl9pZEsBVRRmaWxlcl9sYXN0X2ZvbGRlcl9pZFgBAAAAMVUSX2F1dGhfdXNlcl9iYWNrZW5kVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZFUIY21zX2VkaXSIdS4=	2014-01-15 19:22:18.73346-05
+phuklc2f8uh4my36wfaru3xzhg2m4jaa	OTU1NDY3YzU2ZmZmMGRhZDhjZThiMTJiZWUyN2JlYzhhYjkzZDZkZTqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZFUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRVCV9tZXNzYWdlc1TcDAAAW1siX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBnb29nbGUgbWFwIFwiICg5MzAxIFcuIEJlcm5pY2UgU3QuLCA2MDE3NiBTY2hpbGxlciBQYXJrKVwiIHdhcyBhZGRlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkNvbnRhY3QgVXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgZ29vZ2xlIG1hcCBcIiAoOTMwMSBXLiBCZXJuaWNlIFN0LiwgNjAxNzYgU2NoaWxsZXIgUGFyaylcIiB3YXMgYWRkZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGdvb2dsZSBtYXAgXCIgKDkzMDEgVy4gQmVybmljZSBTdC4sIDYwMTc2IFNjaGlsbGVyIFBhcmspXCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJDb250YWN0IFVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGdvb2dsZSBtYXAgXCIgKDkzMDEgVy4gQmVybmljZSBTdC4sIDYwMTc2IFNjaGlsbGVyIFBhcmspXCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGN1c3RvbSBjb250YWN0IFwiYmxvcmVuekBnbWFpbC5jb21cIiB3YXMgYWRkZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJDb250YWN0IFVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGN1c3RvbSBjb250YWN0IFwiYmxvcmVuekBnbWFpbC5jb21cIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkNvbnRhY3QgVXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgdGV4dCBcIkNhbGwgVXMgQW55dGltZVxuNjE0Lnh4eC54eHh4XCIgd2FzIGFkZGVkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSB0ZXh0IFwiQ2FsbCBVcyBBbnl0aW1lXG42MTQueHh4Lnh4eHhcIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgdGV4dCBcIkVtYWlsIHVzXG5ibG9yZW56QGdtYWlsLmNvbVwiIHdhcyBhZGRlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkNvbnRhY3QgVXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgdGV4dCBcIlxuXG5DYWxsIFVzIEFueXRpbWVcblxuXG42MTQueHh4Li4uXCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJDb250YWN0IFVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJDb250YWN0IFVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJDb250YWN0IFVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGN1c3RvbSBjb250YWN0IFwiYmxvcmVuekBnbWFpbC5jb21cIiB3YXMgYWRkZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGN1c3RvbSBjb250YWN0IFwiYmxvcmVuekBnbWFpbC5jb21cIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkNvbnRhY3QgVXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgY3VzdG9tIGNvbnRhY3QgXCJibG9yZW56QGdtYWlsLmNvbVwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiQ29udGFjdCBVc1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBnb29nbGUgbWFwIFwiQnJhbmVyIFVTQSwgSW5jICg5MzAxIFcuIEJlcm5pY2UgU3QuLCA2MDE3NiBTY2hpbGxlciBQYXJrKVwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBjdXN0b20gY29udGFjdCBcImJsb3JlbnpAZ21haWwuY29tXCIgd2FzIGNoYW5nZWQgc3VjY2Vzc2Z1bGx5LiBZb3UgbWF5IGVkaXQgaXQgYWdhaW4gYmVsb3cuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIHBhZ2UgXCJDb250YWN0IFVzXCIgd2FzIHN1Y2Nlc3NmdWxseSBwdWJsaXNoZWQuIl0sWyJfX2pzb25fbWVzc2FnZSIsMCwyMCwiVGhlIGN1c3RvbSBjb250YWN0IFwiYmxvcmVuekBnbWFpbC5jb21cIiB3YXMgY2hhbmdlZCBzdWNjZXNzZnVsbHkuIFlvdSBtYXkgZWRpdCBpdCBhZ2FpbiBiZWxvdy4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkNvbnRhY3QgVXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgcGFnZSBcIkNvbnRhY3QgVXNcIiB3YXMgc3VjY2Vzc2Z1bGx5IHB1Ymxpc2hlZC4iXSxbIl9fanNvbl9tZXNzYWdlIiwwLDIwLCJUaGUgY3VzdG9tIGNvbnRhY3QgXCJibG9yZW56QGdtYWlsLmNvbVwiIHdhcyBjaGFuZ2VkIHN1Y2Nlc3NmdWxseS4gWW91IG1heSBlZGl0IGl0IGFnYWluIGJlbG93LiJdLFsiX19qc29uX21lc3NhZ2UiLDAsMjAsIlRoZSBwYWdlIFwiQ29udGFjdCBVc1wiIHdhcyBzdWNjZXNzZnVsbHkgcHVibGlzaGVkLiJdXVUIY21zX2VkaXSIVQ1fYXV0aF91c2VyX2lkSwF1Lg==	2014-01-16 20:38:32.719317-05
 \.
 
 
@@ -2840,6 +3018,10 @@ COPY easy_thumbnails_source (id, storage_hash, name, modified) FROM stdin;
 16	f9bde26a1556cd667f742bd34ec7c55e	cms_page_media/19/04 Laser Aided Master Coil Centering.jpg	2013-12-29 22:00:00-05
 17	f9bde26a1556cd667f742bd34ec7c55e	cms_page_media/21/Berlin_1.JPG	2013-12-30 21:38:58-05
 18	f9bde26a1556cd667f742bd34ec7c55e	cms_page_media/20/poster.png	2014-01-01 19:16:46-05
+19	f9bde26a1556cd667f742bd34ec7c55e	cms_page_media/11/03 Wireless Remote Coil Car Operation.jpg	2014-01-02 13:11:44-05
+20	f9bde26a1556cd667f742bd34ec7c55e	cms_page_media/11/06-Turret-Head Slitters.png	2014-01-02 13:15:08-05
+21	f9bde26a1556cd667f742bd34ec7c55e	filer_public/2014/01/02/poster.png	2014-01-02 13:25:39-05
+22	f9bde26a1556cd667f742bd34ec7c55e	filer_public/2014/01/02/layer4.png	2014-01-02 13:25:44-05
 \.
 
 
@@ -2847,7 +3029,7 @@ COPY easy_thumbnails_source (id, storage_hash, name, modified) FROM stdin;
 -- Name: easy_thumbnails_source_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('easy_thumbnails_source_id_seq', 18, true);
+SELECT pg_catalog.setval('easy_thumbnails_source_id_seq', 22, true);
 
 
 --
@@ -2877,6 +3059,18 @@ COPY easy_thumbnails_thumbnail (id, storage_hash, name, modified, source_id) FRO
 20	d26becbf46ac48eda79c7a39a13a02dd	cms_page_media/19/04 Laser Aided Master Coil Centering.jpg.790x391_q85_crop.jpg	2013-12-29 22:00:02-05	16
 21	d26becbf46ac48eda79c7a39a13a02dd	cms_page_media/21/Berlin_1.JPG.240x240_q85_crop.jpg	2013-12-30 21:39:19-05	17
 22	d26becbf46ac48eda79c7a39a13a02dd	cms_page_media/20/poster.png.240x240_q85_crop.jpg	2014-01-01 19:16:48-05	18
+23	d26becbf46ac48eda79c7a39a13a02dd	cms_page_media/11/03 Wireless Remote Coil Car Operation.jpg.548x411_q85_crop.jpg	2014-01-02 13:11:45-05	19
+24	d26becbf46ac48eda79c7a39a13a02dd	cms_page_media/11/06-Turret-Head Slitters.png.548x411_q85_crop.png	2014-01-02 13:15:10-05	20
+25	d26becbf46ac48eda79c7a39a13a02dd	cms_page_media/11/06-Turret-Head Slitters.png.538x241_q85_crop.png	2014-01-02 13:16:54-05	20
+26	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2014/01/02/poster.png__16x16_q85_crop_upscale.jpg	2014-01-02 13:25:39-05	21
+27	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2014/01/02/poster.png__32x32_q85_crop_upscale.jpg	2014-01-02 13:25:39-05	21
+28	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2014/01/02/poster.png__48x48_q85_crop_upscale.jpg	2014-01-02 13:25:39-05	21
+29	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2014/01/02/poster.png__64x64_q85_crop_upscale.jpg	2014-01-02 13:25:39-05	21
+30	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2014/01/02/layer4.png__16x16_q85_crop_upscale.png	2014-01-02 13:25:44-05	22
+31	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2014/01/02/layer4.png__32x32_q85_crop_upscale.png	2014-01-02 13:25:44-05	22
+32	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2014/01/02/layer4.png__48x48_q85_crop_upscale.png	2014-01-02 13:25:44-05	22
+33	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2014/01/02/layer4.png__64x64_q85_crop_upscale.png	2014-01-02 13:25:44-05	22
+34	f9bde26a1556cd667f742bd34ec7c55e	filer_public_thumbnails/filer_public/2014/01/02/layer4.png__84x82_q85_crop_upscale.png	2014-01-02 13:26:28-05	22
 \.
 
 
@@ -2884,7 +3078,7 @@ COPY easy_thumbnails_thumbnail (id, storage_hash, name, modified, source_id) FRO
 -- Name: easy_thumbnails_thumbnail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('easy_thumbnails_thumbnail_id_seq', 22, true);
+SELECT pg_catalog.setval('easy_thumbnails_thumbnail_id_seq', 34, true);
 
 
 --
@@ -2915,7 +3109,7 @@ COPY filer_clipboarditem (id, file_id, clipboard_id) FROM stdin;
 -- Name: filer_clipboarditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('filer_clipboarditem_id_seq', 3, true);
+SELECT pg_catalog.setval('filer_clipboarditem_id_seq', 5, true);
 
 
 --
@@ -2924,6 +3118,8 @@ SELECT pg_catalog.setval('filer_clipboarditem_id_seq', 3, true);
 
 COPY filer_file (id, polymorphic_ctype_id, folder_id, file, _file_size, sha1, has_all_mandatory_data, original_filename, name, description, owner_id, uploaded_at, modified_at, is_public) FROM stdin;
 2	28	1	filer_public/2013/12/28/01_slitting_lines_1.jpg	928578	09aa51aca80511269f158d1ca6c4e886b58ffd25	f	01 Slitting Lines.jpg			1	2013-12-28 14:17:48.883744-05	2013-12-28 14:18:50.44675-05	t
+3	28	1	filer_public/2014/01/02/poster.png	84267	a915b6750c4bf4e9528bb6b364c9b98dc9e79a25	f	poster.png		\N	1	2014-01-02 13:25:39.732535-05	2014-01-02 13:25:52.063022-05	t
+4	28	1	filer_public/2014/01/02/layer4.png	9533	3625cc2b006d6fa848db83a0d3f20b194bd91403	f	layer4.png		\N	1	2014-01-02 13:25:44.30931-05	2014-01-02 13:25:52.070604-05	t
 \.
 
 
@@ -2931,7 +3127,7 @@ COPY filer_file (id, polymorphic_ctype_id, folder_id, file, _file_size, sha1, ha
 -- Name: filer_file_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('filer_file_id_seq', 2, true);
+SELECT pg_catalog.setval('filer_file_id_seq', 4, true);
 
 
 --
@@ -2971,6 +3167,8 @@ SELECT pg_catalog.setval('filer_folderpermission_id_seq', 1, false);
 
 COPY filer_image (file_ptr_id, _height, _width, date_taken, default_alt_text, default_caption, author, must_always_publish_author_credit, must_always_publish_copyright, subject_location) FROM stdin;
 2	2304	3072	2013-12-28 14:17:48.872306-05			\N	f	f	
+3	241	241	2014-01-02 13:25:39.727044-05	\N	\N	\N	f	f	\N
+4	82	84	2014-01-02 13:25:44.305467-05	\N	\N	\N	f	f	\N
 \.
 
 
@@ -2979,7 +3177,7 @@ COPY filer_image (file_ptr_id, _height, _width, date_taken, default_alt_text, de
 --
 
 COPY menus_cachekey (id, language, site, key) FROM stdin;
-92	en	1	menu_cache_menu_nodes_en_1_1_user
+152	en	1	menu_cache_menu_nodes_en_1_1_user
 \.
 
 
@@ -2987,7 +3185,7 @@ COPY menus_cachekey (id, language, site, key) FROM stdin;
 -- Name: menus_cachekey_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('menus_cachekey_id_seq', 92, true);
+SELECT pg_catalog.setval('menus_cachekey_id_seq', 152, true);
 
 
 --
@@ -3006,24 +3204,34 @@ COPY reversion_revision (id, manager_slug, date_created, user_id, comment) FROM 
 11	default	2013-12-27 12:58:39.87775-05	1	Changed published and in_navigation.
 12	default	2013-12-27 13:01:29.109704-05	1	Deleted page.
 13	default	2013-12-27 13:02:47.876893-05	1	Initial version.
-14	default	2013-12-27 13:03:04.829216-05	1	Changed title.
 15	default	2013-12-27 13:04:31.154777-05	1	Changed slug.
 116	default	2014-01-01 19:22:18.607932-05	1	Publish
 21	default	2013-12-27 15:18:09.555456-05	1	Publish
+121	default	2014-01-02 13:02:15.697748-05	1	Publish
 26	default	2013-12-28 09:46:59.75343-05	1	Publish
 28	default	2013-12-28 12:34:27.255909-05	1	Publish
+126	default	2014-01-02 13:12:07.341882-05	1	Publish
+128	default	2014-01-02 13:16:26.711758-05	1	Publish
+130	default	2014-01-02 13:16:58.130376-05	1	Publish
+131	default	2014-01-02 13:17:59.325734-05	1	Publish
 39	default	2013-12-28 14:34:00.039978-05	1	Publish
 41	default	2013-12-28 14:35:37.015951-05	1	Publish
+134	default	2014-01-02 13:20:35.519291-05	1	Publish
 47	default	2013-12-28 14:51:47.808104-05	1	Publish
+139	default	2014-01-02 13:23:46.795113-05	1	Publish
 49	default	2013-12-28 14:53:28.296933-05	1	Publish
 52	default	2013-12-28 15:18:08.911523-05	1	Publish
+142	default	2014-01-02 13:26:37.696661-05	1	Publish
 54	default	2013-12-28 15:18:44.382828-05	1	Publish
+144	default	2014-01-02 13:27:09.842553-05	1	Publish
 57	default	2013-12-28 15:24:28.23187-05	1	Publish
 59	default	2013-12-28 15:25:58.993041-05	1	Publish
 61	default	2013-12-28 15:30:02.023884-05	1	Publish
 63	default	2013-12-28 15:33:35.607148-05	1	Publish
 65	default	2013-12-28 16:19:16.657781-05	1	Publish
+149	default	2014-01-02 13:36:55.653233-05	1	Publish
 67	default	2013-12-28 17:23:44.888346-05	1	Publish
+151	default	2014-01-02 13:43:52.729105-05	1	Publish
 70	default	2013-12-29 14:20:05.433222-05	1	Publish
 71	default	2013-12-29 20:01:29.988792-05	1	Publish
 73	default	2013-12-29 20:01:37.777992-05	1	Publish
@@ -3033,13 +3241,27 @@ COPY reversion_revision (id, manager_slug, date_created, user_id, comment) FROM 
 77	default	2013-12-29 20:05:13.940987-05	1	Initial version.
 78	default	2013-12-29 20:05:24.753756-05	1	Initial version.
 79	default	2013-12-29 20:08:20.552736-05	1	Initial version.
+155	default	2014-01-02 14:06:38.034743-05	1	Publish
 83	default	2013-12-29 21:08:22.59494-05	1	Publish
 85	default	2013-12-29 21:18:09.392953-05	1	Publish
 87	default	2013-12-29 21:21:20.38705-05	1	Publish
+159	default	2014-01-02 14:34:39.123931-05	1	Publish
 90	default	2013-12-29 21:29:34.21066-05	1	Publish
 94	default	2013-12-29 22:00:21.287064-05	1	Publish
+163	default	2014-01-02 15:10:22.952093-05	1	Publish
 96	default	2013-12-30 15:50:47.829744-05	1	Publish
+165	default	2014-01-02 15:11:43.145954-05	1	Publish
+175	default	2014-01-02 15:29:16.467793-05	1	Publish
 110	default	2013-12-30 21:40:32.097592-05	1	Publish
+178	default	2014-01-02 15:31:02.93257-05	1	Publish
+180	default	2014-01-02 15:39:27.086736-05	1	Publish
+182	default	2014-01-02 19:28:54.855003-05	1	Publish
+186	default	2014-01-02 20:01:34.519954-05	1	Publish
+188	default	2014-01-02 20:13:24.680167-05	1	Publish
+192	default	2014-01-02 20:18:25.399892-05	1	Publish
+194	default	2014-01-02 20:19:15.984107-05	1	Publish
+195	default	2014-01-02 20:20:51.363861-05	1	Publish
+197	default	2014-01-02 20:38:32.63207-05	1	Publish
 \.
 
 
@@ -3047,7 +3269,7 @@ COPY reversion_revision (id, manager_slug, date_created, user_id, comment) FROM 
 -- Name: reversion_revision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('reversion_revision_id_seq', 116, true);
+SELECT pg_catalog.setval('reversion_revision_id_seq', 197, true);
 
 
 --
@@ -3107,10 +3329,6 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 50	13	26	26	8	json	[{"pk": 26, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
 51	13	13	13	16	json	[{"pk": 13, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "In-House Machine Repair", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T18:02:47.862Z", "page": 15, "path": "support-services/-house-machine-repair", "meta_description": null, "slug": "-house-machine-repair"}}]	In-House Machine Repair (-house-machine-repair, en)	1
 52	13	15	15	10	json	[{"pk": 15, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2013-12-27T18:02:47.846Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T18:02:47.846Z", "lft": 4, "publication_end_date": null, "soft_root": false, "template": "home.html", "published": false, "publication_date": null, "placeholders": [25, 26], "in_navigation": false, "rght": 5, "tree_id": 4}}]	In-House Machine Repair	0
-53	14	9	9	16	json	[{"pk": 9, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Field Service and Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T17:53:17.076Z", "page": 11, "path": "support-services/field-service-repair", "meta_description": "", "slug": "field-service-repair"}}]	Field Service and Repair (field-service-repair, en)	1
-54	14	18	18	8	json	[{"pk": 18, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
-55	14	11	11	10	json	[{"pk": 11, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2013-12-27T18:03:04.806Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:53:17.060Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "home.html", "published": true, "publication_date": "2013-12-27T17:53:19.323Z", "placeholders": [17, 18], "in_navigation": true, "rght": 3, "tree_id": 4}}]	Field Service Repair	1
-56	14	17	17	8	json	[{"pk": 17, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
 57	15	25	25	8	json	[{"pk": 25, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
 58	15	26	26	8	json	[{"pk": 26, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
 59	15	13	13	16	json	[{"pk": 13, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "In-House Machine Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T18:02:47.862Z", "page": 15, "path": "support-services/in-house-machine-repair", "meta_description": "", "slug": "in-house-machine-repair"}}]	In-House Machine Repair (in-house-machine-repair, en)	1
@@ -3331,6 +3549,7 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 662	54	19	19	9	json	[{"pk": 19, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-28T19:23:42.523Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-28T19:23:42.522Z", "lft": 1, "tree_id": 10, "position": 1, "placeholder": 29, "plugin_type": "CMSGalleryPlugin"}}]	19	1
 1056	77	21	21	10	json	[{"pk": 21, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2013-12-30T01:05:13.907Z", "limit_visibility_in_menu": null, "parent": 5, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-30T01:05:13.907Z", "lft": 8, "publication_end_date": null, "soft_root": false, "template": "products.html", "published": false, "publication_date": null, "placeholders": [49, 50, 51], "in_navigation": false, "rght": 9, "tree_id": 3}}]	Installations	0
 1057	77	21	21	16	json	[{"pk": 21, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Installations", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-30T01:05:13.926Z", "page": 21, "path": "products/installations", "meta_description": null, "slug": "installations"}}]	Installations (installations, en)	1
+1580	128	9	9	16	json	[{"pk": 9, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Field Service and Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T17:53:17.076Z", "page": 11, "path": "support-services/field-service-repair", "meta_description": "", "slug": "field-service-repair"}}]	Field Service and Repair (field-service-repair, en)	1
 1058	78	22	22	16	json	[{"pk": 22, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Articles", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-30T01:05:24.739Z", "page": 22, "path": "products/articles", "meta_description": null, "slug": "articles"}}]	Articles (articles, en)	1
 1059	78	52	52	8	json	[{"pk": 52, "model": "cms.placeholder", "fields": {"slot": "slideshow_content", "default_width": null}}]	slideshow_content	1
 1060	78	54	54	8	json	[{"pk": 54, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
@@ -3449,6 +3668,12 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 1132	87	186	186	9	json	[{"pk": 186, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-30T02:21:17.674Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-30T02:03:09.936Z", "lft": 1, "tree_id": 51, "position": 0, "placeholder": 73, "plugin_type": "CMSGalleryPlugin"}}]	186	1
 1163	90	186	186	9	json	[{"pk": 186, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-30T02:21:17.674Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-30T02:03:09.936Z", "lft": 1, "tree_id": 51, "position": 0, "placeholder": 73, "plugin_type": "CMSGalleryPlugin"}}]	186	1
 1164	90	191	191	35	json	[{"pk": 191, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 3.0, "fade_duration": 1.0, "template": "cmsplugin_gallery/products_hero_image_title_description.html", "title": "Product Hero"}}]	1 image(s) in gallery	1
+1581	128	11	11	10	json	[{"pk": 11, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:16:26.682Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:53:17.060Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "services.html", "published": true, "publication_date": "2013-12-27T17:53:19.323Z", "placeholders": [17, 18, 105], "in_navigation": true, "rght": 3, "tree_id": 4}}]	Field Service and Repair	1
+1582	128	237	237	35	json	[{"pk": 237, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 0.0, "fade_duration": 0.0, "template": "cmsplugin_gallery/products_hero_image_title_description.html", "title": "Field Service Repair hero"}}]	1 image(s) in gallery	1
+1583	128	237	237	9	json	[{"pk": 237, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:15:08.517Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:09:42.332Z", "lft": 1, "tree_id": 102, "position": 0, "placeholder": 105, "plugin_type": "CMSGalleryPlugin"}}]	237	1
+1584	128	17	17	8	json	[{"pk": 17, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1585	128	18	18	8	json	[{"pk": 18, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1586	128	105	105	8	json	[{"pk": 105, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
 951	67	66	66	9	json	[{"pk": 66, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-28T22:23:36.821Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-28T20:04:09.182Z", "lft": 1, "tree_id": 37, "position": 8, "placeholder": 29, "plugin_type": "CMSGalleryPlugin"}}]	66	1
 952	67	66	66	35	json	[{"pk": 66, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 3.0, "fade_duration": 1.0, "template": "cmsplugin_gallery/gallery.html", "title": "homepage"}}]	3 image(s) in gallery	1
 953	67	19	19	9	json	[{"pk": 19, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-28T19:23:42.523Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-28T19:23:42.522Z", "lft": 1, "tree_id": 10, "position": 1, "placeholder": 29, "plugin_type": "CMSGalleryPlugin"}}]	19	1
@@ -3457,6 +3682,14 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 1065	79	27	27	10	json	[{"pk": 27, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2013-12-30T01:08:20.517Z", "limit_visibility_in_menu": null, "parent": 5, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-30T01:08:20.517Z", "lft": 12, "publication_end_date": null, "soft_root": false, "template": "products.html", "published": false, "publication_date": null, "placeholders": [67, 68, 69], "in_navigation": false, "rght": 13, "tree_id": 3}}]	Slitting lines	0
 1066	79	68	68	8	json	[{"pk": 68, "model": "cms.placeholder", "fields": {"slot": "homepage_text_content", "default_width": null}}]	homepage_text_content	1
 1067	79	69	69	8	json	[{"pk": 69, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1704	142	107	107	8	json	[{"pk": 107, "model": "cms.placeholder", "fields": {"slot": "services_extra_content", "default_width": null}}]	services_extra_content	1
+1705	142	17	17	8	json	[{"pk": 17, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1706	142	9	9	16	json	[{"pk": 9, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Field Service and Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T17:53:17.076Z", "page": 11, "path": "support-services/field-service-repair", "meta_description": "", "slug": "field-service-repair"}}]	Field Service and Repair (field-service-repair, en)	1
+1707	142	11	11	10	json	[{"pk": 11, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:26:37.661Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:53:17.060Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "services.html", "published": true, "publication_date": "2013-12-27T17:53:19.323Z", "placeholders": [17, 18, 105, 107], "in_navigation": true, "rght": 3, "tree_id": 4}}]	Field Service and Repair	1
+1708	142	237	237	35	json	[{"pk": 237, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 0.0, "fade_duration": 0.0, "template": "cmsplugin_gallery/services_hero_image_title_description.html", "title": "Field Service Repair hero"}}]	1 image(s) in gallery	1
+1709	142	237	237	9	json	[{"pk": 237, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:23:31.385Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:09:42.332Z", "lft": 1, "tree_id": 102, "position": 0, "placeholder": 105, "plugin_type": "CMSGalleryPlugin"}}]	237	1
+1710	142	248	248	31	json	[{"pk": 248, "model": "cmsplugin_filer_image.filerimage", "fields": {"free_link": "", "description": "", "width": null, "thumbnail_option": null, "use_original_image": true, "image": 4, "caption_text": "fdsaf", "page_link": null, "crop": true, "height": null, "alt_text": "sdafdsafds", "target_blank": false, "image_url": "", "upscale": true, "use_autoscale": false, "file_link": null, "original_link": false, "alignment": "right"}}]	layer4.png	1
+1711	142	18	18	8	json	[{"pk": 18, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
 1107	85	67	67	8	json	[{"pk": 67, "model": "cms.placeholder", "fields": {"slot": "slideshow_content", "default_width": null}}]	slideshow_content	1
 1108	85	68	68	8	json	[{"pk": 68, "model": "cms.placeholder", "fields": {"slot": "homepage_text_content", "default_width": null}}]	homepage_text_content	1
 1109	85	69	69	8	json	[{"pk": 69, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
@@ -3465,6 +3698,22 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 1112	85	27	27	16	json	[{"pk": 27, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Slitting Lines", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-30T01:08:20.536Z", "page": 27, "path": "products/slitting-lines", "meta_description": "", "slug": "slitting-lines"}}]	Slitting Lines (slitting-lines, en)	1
 1113	85	27	27	10	json	[{"pk": 27, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2013-12-30T02:18:09.354Z", "limit_visibility_in_menu": null, "parent": 5, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-30T01:08:20.517Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "products.html", "published": true, "publication_date": "2013-12-30T01:08:51.478Z", "placeholders": [67, 68, 69, 77, 78], "in_navigation": true, "rght": 13, "tree_id": 3}}]	Slitting Lines	1
 1114	85	188	188	9	json	[{"pk": 188, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-30T02:18:01.814Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-30T02:18:01.813Z", "lft": 1, "tree_id": 53, "position": 0, "placeholder": 78, "plugin_type": "CMSGalleryPlugin"}}]	188	1
+1712	142	245	245	20	json	[{"pk": 245, "model": "text.text", "fields": {"body": "<p><span style=\\"color: #676d71; font-family: 'Helvetica Neue'; font-size: 12px; line-height: 14.390625px;\\">Braner/Loopco also offers \\u201cVirtual-In-Plant\\u201d (VIP) technical support where customers are able to obtain instant \\u201cvirtual-in-plant\\u201d support via Wi-Fi, saving time and money while addressing an operational issue.</span></p>"}}]	Braner/Loopco also offers “...	1
+1713	142	105	105	8	json	[{"pk": 105, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
+1594	130	9	9	16	json	[{"pk": 9, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Field Service and Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T17:53:17.076Z", "page": 11, "path": "support-services/field-service-repair", "meta_description": "", "slug": "field-service-repair"}}]	Field Service and Repair (field-service-repair, en)	1
+1595	130	11	11	10	json	[{"pk": 11, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:16:58.101Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:53:17.060Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "services.html", "published": true, "publication_date": "2013-12-27T17:53:19.323Z", "placeholders": [17, 18, 105], "in_navigation": true, "rght": 3, "tree_id": 4}}]	Field Service and Repair	1
+1596	130	237	237	35	json	[{"pk": 237, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 0.0, "fade_duration": 0.0, "template": "cmsplugin_gallery/services_hero_image_title_description.html", "title": "Field Service Repair hero"}}]	1 image(s) in gallery	1
+1597	130	237	237	9	json	[{"pk": 237, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:16:52.627Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:09:42.332Z", "lft": 1, "tree_id": 102, "position": 0, "placeholder": 105, "plugin_type": "CMSGalleryPlugin"}}]	237	1
+1598	130	17	17	8	json	[{"pk": 17, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1599	130	18	18	8	json	[{"pk": 18, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1600	130	105	105	8	json	[{"pk": 105, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
+1601	131	9	9	16	json	[{"pk": 9, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Field Service and Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T17:53:17.076Z", "page": 11, "path": "support-services/field-service-repair", "meta_description": "", "slug": "field-service-repair"}}]	Field Service and Repair (field-service-repair, en)	1
+1602	131	11	11	10	json	[{"pk": 11, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:17:59.300Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:53:17.060Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "services.html", "published": true, "publication_date": "2013-12-27T17:53:19.323Z", "placeholders": [17, 18, 105], "in_navigation": true, "rght": 3, "tree_id": 4}}]	Field Service and Repair	1
+1603	131	237	237	35	json	[{"pk": 237, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 0.0, "fade_duration": 0.0, "template": "cmsplugin_gallery/services_hero_image_title_description.html", "title": "Field Service Repair hero"}}]	1 image(s) in gallery	1
+1604	131	237	237	9	json	[{"pk": 237, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:16:52.627Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:09:42.332Z", "lft": 1, "tree_id": 102, "position": 0, "placeholder": 105, "plugin_type": "CMSGalleryPlugin"}}]	237	1
+1605	131	17	17	8	json	[{"pk": 17, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1606	131	18	18	8	json	[{"pk": 18, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1607	131	105	105	8	json	[{"pk": 105, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
 1154	90	37	37	8	json	[{"pk": 37, "model": "cms.placeholder", "fields": {"slot": "slideshow_content", "default_width": null}}]	slideshow_content	1
 1155	90	38	38	8	json	[{"pk": 38, "model": "cms.placeholder", "fields": {"slot": "homepage_text_content", "default_width": null}}]	homepage_text_content	1
 1156	90	17	17	16	json	[{"pk": 17, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Overview", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-30T01:02:16.261Z", "page": 17, "path": "products/slitting-lines/overview", "meta_description": null, "slug": "overview"}}]	Overview (overview, en)	1
@@ -3498,6 +3747,18 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 1019	70	19	19	9	json	[{"pk": 19, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-28T19:23:42.523Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-28T19:23:42.522Z", "lft": 1, "tree_id": 10, "position": 1, "placeholder": 29, "plugin_type": "CMSGalleryPlugin"}}]	19	1
 1090	83	37	37	8	json	[{"pk": 37, "model": "cms.placeholder", "fields": {"slot": "slideshow_content", "default_width": null}}]	slideshow_content	1
 1091	83	38	38	8	json	[{"pk": 38, "model": "cms.placeholder", "fields": {"slot": "homepage_text_content", "default_width": null}}]	homepage_text_content	1
+1714	142	248	248	9	json	[{"pk": 248, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:26:28.000Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:24:06.048Z", "lft": 1, "tree_id": 110, "position": 1, "placeholder": 107, "plugin_type": "FilerImagePlugin"}}]	248	1
+1715	142	245	245	9	json	[{"pk": 245, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:23:38.681Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:23:35.979Z", "lft": 1, "tree_id": 107, "position": 0, "placeholder": 107, "plugin_type": "TextPlugin"}}]	245	1
+2197	182	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.865Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2198	182	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.875Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2199	182	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2200	182	278	278	45	json	[{"pk": 278, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "Your message", "subject_label": "Subject", "email_label": "Email", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "submit": "Submit", "custom_label": "Custom Sender label", "thanks": "<p>asdfsdaf asdfadsf</p>", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": ""}}]	blorenz@gmail.com	1
+2201	182	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+2202	182	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-03T00:28:54.583Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109, 111], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2203	182	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.896Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+2204	182	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2205	182	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+2206	182	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
 1192	94	19	19	16	json	[{"pk": 19, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Features", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-30T01:04:40.267Z", "page": 19, "path": "products/slitting-lines/features", "meta_description": null, "slug": "features"}}]	Features (features, en)	1
 1193	94	194	194	35	json	[{"pk": 194, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 0.0, "fade_duration": 0.0, "template": "cmsplugin_gallery/products_features.html", "title": "Slitting Lines Features"}}]	4 image(s) in gallery	1
 1194	94	43	43	8	json	[{"pk": 43, "model": "cms.placeholder", "fields": {"slot": "slideshow_content", "default_width": null}}]	slideshow_content	1
@@ -3508,9 +3769,27 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 1199	94	82	82	8	json	[{"pk": 82, "model": "cms.placeholder", "fields": {"slot": "products_content", "default_width": null}}]	products_content	1
 1200	94	19	19	10	json	[{"pk": 19, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2013-12-30T03:00:21.252Z", "limit_visibility_in_menu": null, "parent": 27, "level": 2, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-30T01:04:40.249Z", "lft": 5, "publication_end_date": null, "soft_root": false, "template": "products_features.html", "published": true, "publication_date": "2013-12-30T01:05:27.290Z", "placeholders": [43, 44, 45, 81, 82, 83], "in_navigation": true, "rght": 6, "tree_id": 3}}]	Features	1
 1201	94	83	83	8	json	[{"pk": 83, "model": "cms.placeholder", "fields": {"slot": "features", "default_width": null}}]	features	1
+2207	182	111	111	8	json	[{"pk": 111, "model": "cms.placeholder", "fields": {"slot": "contact_form_content", "default_width": null}}]	contact_form_content	1
+2208	182	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.885Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2209	182	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T00:28:47.195Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 0, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	278	1
+2210	182	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.851Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2380	194	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.865Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2381	194	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.875Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2382	194	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2383	194	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+1728	144	107	107	8	json	[{"pk": 107, "model": "cms.placeholder", "fields": {"slot": "services_extra_content", "default_width": null}}]	services_extra_content	1
+1729	144	17	17	8	json	[{"pk": 17, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1730	144	9	9	16	json	[{"pk": 9, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Field Service and Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T17:53:17.076Z", "page": 11, "path": "support-services/field-service-repair", "meta_description": "", "slug": "field-service-repair"}}]	Field Service and Repair (field-service-repair, en)	1
 1224	96	1	1	9	json	[{"pk": 1, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-27T18:10:32.344Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-27T18:10:32.343Z", "lft": 1, "tree_id": 1, "position": 0, "placeholder": 1, "plugin_type": "CMSGalleryPlugin"}}]	1	1
 1225	96	2	2	9	json	[{"pk": 2, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-27T20:12:15.439Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-27T20:12:15.437Z", "lft": 1, "tree_id": 2, "position": 1, "placeholder": 1, "plugin_type": "CMSGalleryPlugin"}}]	2	1
 1226	96	3	3	10	json	[{"pk": 3, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2013-12-30T20:50:47.767Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-26T18:07:54.919Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "home.html", "published": true, "publication_date": "2013-12-26T18:14:24.682Z", "placeholders": [1, 2, 29, 30], "in_navigation": true, "rght": 2, "tree_id": 2}}]	Home	1
+1923	163	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+1924	163	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
+1925	163	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:00:02.115Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+1926	163	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:10:07.657Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 5, "placeholder": 109, "plugin_type": "CustomContactPlugin"}}]	278	1
+2384	194	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "Braner USA, Inc", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	Braner USA, Inc (9301 W. Bernice St., 60176 Schiller Park)	1
+2385	194	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-03T01:19:15.674Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109, 111], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2386	194	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.896Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
 1227	96	4	4	20	json	[{"pk": 4, "model": "text.text", "fields": {"body": "<h3>Welcome to Braner</h3>\\n<p>Welcome to our web page, we appreciate your interest! Braner USA manufactures slitting lines, slit coil packaging lines, cut-to-length lines, multi-blanking lines and other flat rolled coil processing equipment. We also provide equipment upgrade feasibility studies, in-house machine repairs, field service and repair, installation service and OEM spare parts for Braner, Loopco, Stanat and Coiltech machines. We are committed to continuous improvement of our designs targeting increased operating efficiency for our customers.</p>"}}]	Welcome to Braner\nWelcome t...	1
 1228	96	1	1	16	json	[{"pk": 1, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Home", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-26T18:07:54.937Z", "page": 3, "path": "", "meta_description": "", "slug": "home"}}]	Home (home, en)	1
 1229	96	2	2	8	json	[{"pk": 2, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
@@ -3530,6 +3809,31 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 1243	96	66	66	9	json	[{"pk": 66, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-30T20:50:44.786Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-28T20:04:09.182Z", "lft": 1, "tree_id": 37, "position": 8, "placeholder": 29, "plugin_type": "CMSGalleryPlugin"}}]	66	1
 1244	96	66	66	35	json	[{"pk": 66, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 3.0, "fade_duration": 1.0, "template": "cmsplugin_gallery/homepage_gallery.html", "title": "homepage"}}]	3 image(s) in gallery	1
 1245	96	19	19	9	json	[{"pk": 19, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-28T19:23:42.523Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-28T19:23:42.522Z", "lft": 1, "tree_id": 10, "position": 1, "placeholder": 29, "plugin_type": "CMSGalleryPlugin"}}]	19	1
+1731	144	11	11	10	json	[{"pk": 11, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:27:09.808Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:53:17.060Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "services.html", "published": true, "publication_date": "2013-12-27T17:53:19.323Z", "placeholders": [17, 18, 105, 107], "in_navigation": true, "rght": 3, "tree_id": 4}}]	Field Service and Repair	1
+1732	144	237	237	35	json	[{"pk": 237, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 0.0, "fade_duration": 0.0, "template": "cmsplugin_gallery/services_hero_image_title_description.html", "title": "Field Service Repair hero"}}]	1 image(s) in gallery	1
+1733	144	237	237	9	json	[{"pk": 237, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:23:31.385Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:09:42.332Z", "lft": 1, "tree_id": 102, "position": 0, "placeholder": 105, "plugin_type": "CMSGalleryPlugin"}}]	237	1
+1734	144	248	248	31	json	[{"pk": 248, "model": "cmsplugin_filer_image.filerimage", "fields": {"free_link": "", "description": "", "width": null, "thumbnail_option": null, "use_original_image": true, "image": 4, "caption_text": "fdsaf", "page_link": null, "crop": true, "height": null, "alt_text": "sdafdsafds", "target_blank": false, "image_url": "", "upscale": true, "use_autoscale": false, "file_link": null, "original_link": false, "alignment": "right"}}]	layer4.png	1
+1735	144	18	18	8	json	[{"pk": 18, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1736	144	245	245	20	json	[{"pk": 245, "model": "text.text", "fields": {"body": "<p><span style=\\"color: #676d71; font-family: 'Helvetica Neue'; font-size: 12px; line-height: 14.390625px;\\">Braner/Loopco also offers \\u201cVirtual-In-Plant\\u201d (VIP) technical support where customers are able to obtain instant \\u201cvirtual-in-plant\\u201d support via Wi-Fi, saving time and money while addressing an operational issue.</span></p>"}}]	Braner/Loopco also offers “...	1
+1737	144	105	105	8	json	[{"pk": 105, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
+1738	144	248	248	9	json	[{"pk": 248, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:27:06.606Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:24:06.048Z", "lft": 1, "tree_id": 110, "position": 0, "placeholder": 107, "plugin_type": "FilerImagePlugin"}}]	248	1
+1739	144	245	245	9	json	[{"pk": 245, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:27:06.613Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:23:35.979Z", "lft": 1, "tree_id": 107, "position": 1, "placeholder": 107, "plugin_type": "TextPlugin"}}]	245	1
+1868	159	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:46.122Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+1625	134	18	18	8	json	[{"pk": 18, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1626	134	9	9	16	json	[{"pk": 9, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Field Service and Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T17:53:17.076Z", "page": 11, "path": "support-services/field-service-repair", "meta_description": "", "slug": "field-service-repair"}}]	Field Service and Repair (field-service-repair, en)	1
+1627	134	11	11	10	json	[{"pk": 11, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:20:35.486Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:53:17.060Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "services.html", "published": true, "publication_date": "2013-12-27T17:53:19.323Z", "placeholders": [17, 18, 105], "in_navigation": true, "rght": 3, "tree_id": 4}}]	Field Service and Repair	1
+1628	134	237	237	9	json	[{"pk": 237, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:16:52.627Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:09:42.332Z", "lft": 1, "tree_id": 102, "position": 0, "placeholder": 105, "plugin_type": "CMSGalleryPlugin"}}]	237	1
+1629	134	242	242	20	json	[{"pk": 242, "model": "text.text", "fields": {"body": "<p>Braner/Loopco also offers \\u201cVirtual-In-Plant\\u201d (VIP) technical support where customers are able to obtain instant \\u201cvirtual-in-plant\\u201d support via Wi-Fi, saving time and money while addressing an operational issue.</p>"}}]	Braner/Loopco also offers “...	1
+1630	134	237	237	35	json	[{"pk": 237, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 0.0, "fade_duration": 0.0, "template": "cmsplugin_gallery/services_hero_image_title_description.html", "title": "Field Service Repair hero"}}]	1 image(s) in gallery	1
+1631	134	17	17	8	json	[{"pk": 17, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1869	159	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:35:09.681Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+1870	159	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1871	159	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+1872	159	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T19:34:39.065Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+1873	159	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T19:06:02.309Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+1874	159	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1875	159	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+1876	159	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T19:32:21.801Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
 1481	116	226	226	9	json	[{"pk": 226, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-31T03:17:52.712Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-31T03:17:52.710Z", "lft": 1, "tree_id": 91, "position": 0, "placeholder": 95, "plugin_type": "CMSVideoGalleryPlugin"}}]	226	1
 1482	116	227	227	9	json	[{"pk": 227, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-01T23:50:42.251Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-01T23:50:42.248Z", "lft": 1, "tree_id": 92, "position": 1, "placeholder": 95, "plugin_type": "CMSVideoGalleryPlugin"}}]	227	1
 1483	116	228	228	9	json	[{"pk": 228, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T00:16:46.768Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T00:15:53.961Z", "lft": 1, "tree_id": 93, "position": 2, "placeholder": 95, "plugin_type": "CMSVideoGalleryPlugin"}}]	228	1
@@ -3543,6 +3847,87 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 1491	116	90	90	8	json	[{"pk": 90, "model": "cms.placeholder", "fields": {"slot": "products_content", "default_width": null}}]	products_content	1
 1492	116	20	20	16	json	[{"pk": 20, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Movies", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-30T01:04:51.247Z", "page": 20, "path": "products/slitting-lines/movies", "meta_description": null, "slug": "movies"}}]	Movies (movies, en)	1
 1493	116	95	95	8	json	[{"pk": 95, "model": "cms.placeholder", "fields": {"slot": "products_movies_content", "default_width": null}}]	products_movies_content	1
+1949	165	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+1950	165	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
+1951	165	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:00:02.115Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+1952	165	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:11:29.233Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 5, "placeholder": 109, "plugin_type": "CustomContactPlugin"}}]	278	1
+1953	165	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:39.906Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+1632	134	242	242	9	json	[{"pk": 242, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:19:38.869Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:19:17.092Z", "lft": 1, "tree_id": 104, "position": 1, "placeholder": 105, "plugin_type": "TextPlugin"}}]	242	1
+1633	134	105	105	8	json	[{"pk": 105, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
+1826	155	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:46.122Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+1827	155	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:35:09.681Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+1828	155	267	267	43	json	[{"pk": 267, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zoom": 13, "zipcode": "60176", "content": "", "width": "100%", "route_planer_title": "Calculate your fastest way to here", "route_planer": false, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "344px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
+1829	155	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+1830	155	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T19:06:37.982Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+1831	155	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T19:06:02.309Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+1832	155	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1833	155	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+1834	155	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1835	155	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:39.906Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2387	194	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2388	194	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+1877	159	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Calculate your fastest way to here", "route_planer": false, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
+1878	159	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:39.906Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2389	194	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:17:09.768Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2390	194	335	335	9	json	[{"pk": 335, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:16:56.902Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T01:16:56.898Z", "lft": 1, "tree_id": 148, "position": 5, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	335	1
+2391	194	320	320	9	json	[{"pk": 320, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:19:10.465Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T00:45:29.564Z", "lft": 1, "tree_id": 140, "position": 1, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	320	1
+1769	149	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:46.122Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+1770	149	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:35:09.681Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+1771	149	258	258	43	json	[{"pk": 258, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "Braner USA, Inc", "zoom": 13, "zipcode": "60176", "content": "", "width": "100%", "route_planer_title": "Calculate your fastest way to here", "route_planer": false, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	Braner USA, Inc (9301 W. Bernice St., 60176 Schiller Park)	1
+1772	149	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+1773	149	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:36:55.607Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+1774	149	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1775	149	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1532	121	99	99	8	json	[{"pk": 99, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
+1533	121	100	100	8	json	[{"pk": 100, "model": "cms.placeholder", "fields": {"slot": "products_content", "default_width": null}}]	products_content	1
+1534	121	22	22	16	json	[{"pk": 22, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Articles", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-30T01:05:24.739Z", "page": 22, "path": "products/slitting-lines/articles", "meta_description": null, "slug": "articles"}}]	Articles (articles, en)	1
+1535	121	233	233	9	json	[{"pk": 233, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T17:54:38.614Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T17:54:38.612Z", "lft": 1, "tree_id": 98, "position": 0, "placeholder": 101, "plugin_type": "CMSFileGalleryPlugin"}}]	233	1
+1536	121	234	234	41	json	[{"pk": 234, "model": "cmsplugin_file_gallery.filegalleryplugin", "fields": {"template": "cmsplugin_file_gallery/gallery.html", "title": "Slitting Lines Articles"}}]	1 file(s) in gallery	1
+1537	121	52	52	8	json	[{"pk": 52, "model": "cms.placeholder", "fields": {"slot": "slideshow_content", "default_width": null}}]	slideshow_content	1
+1538	121	53	53	8	json	[{"pk": 53, "model": "cms.placeholder", "fields": {"slot": "homepage_text_content", "default_width": null}}]	homepage_text_content	1
+1539	121	22	22	10	json	[{"pk": 22, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:02:15.658Z", "limit_visibility_in_menu": null, "parent": 27, "level": 2, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-30T01:05:24.721Z", "lft": 11, "publication_end_date": null, "soft_root": false, "template": "products_articles.html", "published": true, "publication_date": "2013-12-30T01:05:25.431Z", "placeholders": [52, 53, 54, 99, 100, 101], "in_navigation": true, "rght": 12, "tree_id": 3}}]	Articles	1
+1540	121	54	54	8	json	[{"pk": 54, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1541	121	234	234	9	json	[{"pk": 234, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:02:08.759Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T17:57:13.879Z", "lft": 1, "tree_id": 99, "position": 1, "placeholder": 101, "plugin_type": "CMSFileGalleryPlugin"}}]	234	1
+1542	121	101	101	8	json	[{"pk": 101, "model": "cms.placeholder", "fields": {"slot": "products_articles_content", "default_width": null}}]	products_articles_content	1
+1776	149	258	258	9	json	[{"pk": 258, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:36:38.092Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:44.973Z", "lft": 1, "tree_id": 117, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	258	1
+1777	149	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+1778	149	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:39.906Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2096	175	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:35:09.681Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2097	175	291	291	20	json	[{"pk": 291, "model": "text.text", "fields": {"body": "<h3>Call Us Anytime</h3>\\n<p>614.xxx.xxxx</p>"}}]	Call Us Anytime\n614.xxx.xxxx	1
+2098	175	292	292	20	json	[{"pk": 292, "model": "text.text", "fields": {"body": "<h3>Email us</h3>\\n<p><a href=\\"mailto:blorenz@gmail.com\\">blorenz@gmail.com</a></p>"}}]	Email us\nblorenz@gmail.com	1
+2099	175	278	278	45	json	[{"pk": 278, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "Your message", "subject_label": "Subject", "email_label": "Email", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "submit": "Submit", "custom_label": "Custom Sender label", "thanks": "<p>asdfsdaf asdfadsf</p>", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": ""}}]	blorenz@gmail.com	1
+1789	151	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:46.122Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+1790	151	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:35:09.681Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+1671	139	107	107	8	json	[{"pk": 107, "model": "cms.placeholder", "fields": {"slot": "services_extra_content", "default_width": null}}]	services_extra_content	1
+1672	139	9	9	16	json	[{"pk": 9, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Field Service and Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T17:53:17.076Z", "page": 11, "path": "support-services/field-service-repair", "meta_description": "", "slug": "field-service-repair"}}]	Field Service and Repair (field-service-repair, en)	1
+1673	139	11	11	10	json	[{"pk": 11, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:23:46.757Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:53:17.060Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "services.html", "published": true, "publication_date": "2013-12-27T17:53:19.323Z", "placeholders": [17, 18, 105, 107], "in_navigation": true, "rght": 3, "tree_id": 4}}]	Field Service and Repair	1
+1674	139	237	237	35	json	[{"pk": 237, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 0.0, "fade_duration": 0.0, "template": "cmsplugin_gallery/services_hero_image_title_description.html", "title": "Field Service Repair hero"}}]	1 image(s) in gallery	1
+1675	139	237	237	9	json	[{"pk": 237, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:23:31.385Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:09:42.332Z", "lft": 1, "tree_id": 102, "position": 0, "placeholder": 105, "plugin_type": "CMSGalleryPlugin"}}]	237	1
+1676	139	17	17	8	json	[{"pk": 17, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1677	139	18	18	8	json	[{"pk": 18, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1678	139	245	245	20	json	[{"pk": 245, "model": "text.text", "fields": {"body": "<p><span style=\\"color: #676d71; font-family: 'Helvetica Neue'; font-size: 12px; line-height: 14.390625px;\\">Braner/Loopco also offers \\u201cVirtual-In-Plant\\u201d (VIP) technical support where customers are able to obtain instant \\u201cvirtual-in-plant\\u201d support via Wi-Fi, saving time and money while addressing an operational issue.</span></p>"}}]	Braner/Loopco also offers “...	1
+1679	139	105	105	8	json	[{"pk": 105, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
+1680	139	245	245	9	json	[{"pk": 245, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:23:38.681Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:23:35.979Z", "lft": 1, "tree_id": 107, "position": 0, "placeholder": 107, "plugin_type": "TextPlugin"}}]	245	1
+1566	126	9	9	16	json	[{"pk": 9, "model": "cms.title", "fields": {"menu_title": "", "redirect": "", "meta_keywords": "", "page_title": "", "language": "en", "title": "Field Service and Repair", "has_url_overwrite": false, "application_urls": "", "creation_date": "2013-12-27T17:53:17.076Z", "page": 11, "path": "support-services/field-service-repair", "meta_description": "", "slug": "field-service-repair"}}]	Field Service and Repair (field-service-repair, en)	1
+1567	126	11	11	10	json	[{"pk": 11, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:12:07.304Z", "limit_visibility_in_menu": null, "parent": 7, "level": 1, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:53:17.060Z", "lft": 2, "publication_end_date": null, "soft_root": false, "template": "services.html", "published": true, "publication_date": "2013-12-27T17:53:19.323Z", "placeholders": [17, 18, 105], "in_navigation": true, "rght": 3, "tree_id": 4}}]	Field Service and Repair	1
+1568	126	237	237	35	json	[{"pk": 237, "model": "cmsplugin_gallery.galleryplugin", "fields": {"slide_duration": 0.0, "fade_duration": 0.0, "template": "cmsplugin_gallery/products_hero_image_title_description.html", "title": "Field Service Repair hero"}}]	1 image(s) in gallery	1
+1569	126	237	237	9	json	[{"pk": 237, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:11:44.558Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:09:42.332Z", "lft": 1, "tree_id": 102, "position": 0, "placeholder": 105, "plugin_type": "CMSGalleryPlugin"}}]	237	1
+1570	126	17	17	8	json	[{"pk": 17, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1571	126	18	18	8	json	[{"pk": 18, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1572	126	105	105	8	json	[{"pk": 105, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
+1791	151	258	258	43	json	[{"pk": 258, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "Braner USA, Inc", "zoom": 13, "zipcode": "60176", "content": "", "width": "100%", "route_planer_title": "Calculate your fastest way to here", "route_planer": false, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "344px"}}]	Braner USA, Inc (9301 W. Bernice St., 60176 Schiller Park)	1
+1792	151	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+1793	151	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T18:43:52.681Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+1794	151	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1795	151	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1796	151	258	258	9	json	[{"pk": 258, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:43:43.845Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:44.973Z", "lft": 1, "tree_id": 117, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	258	1
+1797	151	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+1798	151	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:39.906Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2255	186	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.865Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2256	186	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.875Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2257	186	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2258	186	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+2259	186	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
 1409	110	51	51	8	json	[{"pk": 51, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
 1410	110	87	87	8	json	[{"pk": 87, "model": "cms.placeholder", "fields": {"slot": "hero_content", "default_width": null}}]	hero_content	1
 1411	110	50	50	8	json	[{"pk": 50, "model": "cms.placeholder", "fields": {"slot": "homepage_text_content", "default_width": null}}]	homepage_text_content	1
@@ -3560,6 +3945,141 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 1423	110	21	21	16	json	[{"pk": 21, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Installations", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-30T01:05:13.926Z", "page": 21, "path": "products/slitting-lines/installations", "meta_description": null, "slug": "installations"}}]	Installations (installations, en)	1
 1424	110	88	88	8	json	[{"pk": 88, "model": "cms.placeholder", "fields": {"slot": "products_content", "default_width": null}}]	products_content	1
 1425	110	213	213	9	json	[{"pk": 213, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2013-12-31T02:19:46.921Z", "parent": null, "language": "en", "level": 0, "creation_date": "2013-12-31T02:19:46.920Z", "lft": 1, "tree_id": 78, "position": 3, "placeholder": 87, "plugin_type": "CMSVideoGalleryPlugin"}}]	213	1
+2095	175	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:46.122Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2260	186	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-03T01:01:34.160Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109, 111], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2261	186	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.896Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+2262	186	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2263	186	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+2264	186	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.885Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2265	186	111	111	8	json	[{"pk": 111, "model": "cms.placeholder", "fields": {"slot": "contact_form_content", "default_width": null}}]	contact_form_content	1
+2266	186	320	320	9	json	[{"pk": 320, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T00:47:14.627Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T00:45:29.564Z", "lft": 1, "tree_id": 140, "position": 1, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	320	1
+2267	186	320	320	45	json	[{"pk": 320, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "Message", "subject_label": "Subject", "email_label": "Your email address", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "name_label": "name", "submit": "Submit", "phone_label": "Phone", "thanks": "", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": "", "company_label": "Company"}}]	blorenz@gmail.com	1
+2268	186	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T00:28:47.195Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 0, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	278	1
+2269	186	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.851Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2348	192	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.865Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2349	192	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.875Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2350	192	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2351	192	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+1915	163	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:46.122Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+1916	163	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:35:09.681Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+1917	163	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1918	163	278	278	45	json	[{"pk": 278, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "dsfsdf", "subject_label": "Subsdsfsd", "email_label": "blorenz@gmail.com", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "submit": "Submit", "custom_label": "Your custom value", "thanks": "<p>asdfsdaf asdfadsf</p>", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": ""}}]	blorenz@gmail.com	1
+1919	163	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+1920	163	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T20:10:22.897Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+1921	163	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T19:06:02.309Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+1922	163	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+1927	163	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:39.906Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+1941	165	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:46.122Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+1942	165	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:35:09.681Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+1943	165	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+1944	165	278	278	45	json	[{"pk": 278, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "Your message", "subject_label": "Subject", "email_label": "Email", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "submit": "Submit", "custom_label": "Custom Sender label", "thanks": "<p>asdfsdaf asdfadsf</p>", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": ""}}]	blorenz@gmail.com	1
+1945	165	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+1946	165	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T20:11:43.103Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+1947	165	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T19:06:02.309Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+1948	165	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2100	175	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+2101	175	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T20:29:16.103Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2102	175	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T19:06:02.309Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+2103	175	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2104	175	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+2105	175	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
+2106	175	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:06.698Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2107	175	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2108	175	291	291	9	json	[{"pk": 291, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:10.223Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:26:51.304Z", "lft": 1, "tree_id": 140, "position": 0, "placeholder": 109, "plugin_type": "TextPlugin"}}]	291	1
+2109	175	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:06.725Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 3, "placeholder": 109, "plugin_type": "CustomContactPlugin"}}]	278	1
+2110	175	292	292	9	json	[{"pk": 292, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:10.249Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:28:21.982Z", "lft": 1, "tree_id": 141, "position": 1, "placeholder": 109, "plugin_type": "TextPlugin"}}]	292	1
+2111	175	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T18:34:39.906Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2352	192	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "Braner USA, Inc", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	Braner USA, Inc (9301 W. Bernice St., 60176 Schiller Park)	1
+2353	192	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-03T01:18:25.098Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109, 111], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2354	192	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.896Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+2355	192	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2356	192	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+2357	192	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:17:09.768Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2358	192	335	335	9	json	[{"pk": 335, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:16:56.902Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T01:16:56.898Z", "lft": 1, "tree_id": 148, "position": 5, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	335	1
+2359	192	320	320	9	json	[{"pk": 320, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:17:51.214Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T00:45:29.564Z", "lft": 1, "tree_id": 140, "position": 1, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	320	1
+2285	188	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.865Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2286	188	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.875Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2287	188	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2288	188	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+2289	188	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
+2290	188	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-03T01:13:24.315Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109, 111], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2291	188	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.896Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+2292	188	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2293	188	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+2294	188	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.885Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2295	188	111	111	8	json	[{"pk": 111, "model": "cms.placeholder", "fields": {"slot": "contact_form_content", "default_width": null}}]	contact_form_content	1
+2296	188	320	320	9	json	[{"pk": 320, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:11:39.634Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T00:45:29.564Z", "lft": 1, "tree_id": 140, "position": 1, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	320	1
+2297	188	320	320	45	json	[{"pk": 320, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "Message", "subject_label": "Subject", "email_label": "Your email address", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "name_label": "name", "submit": "Submit", "phone_label": "Phone", "thanks": "", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": "", "company_label": "Company"}}]	blorenz@gmail.com	1
+2298	188	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T00:28:47.195Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 0, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	278	1
+2299	188	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.851Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2396	195	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.865Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2142	178	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:59.756Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2143	178	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:59.766Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2144	178	291	291	20	json	[{"pk": 291, "model": "text.text", "fields": {"body": "<ul>\\n<li>\\n<h3>Call Us Anytime</h3>\\n</li>\\n<ul>\\n<li>614.xxx.xxxx</li>\\n</ul>\\n<li>\\n<h3>Email us</h3>\\n</li>\\n<ul>\\n<li><a href=\\"mailto:blorenz@gmail.com\\">blorenz@gmail.com</a></li>\\n</ul>\\n</ul>"}}]	\n\nCall Us Anytime\n\n\n614.xxx...	1
+2397	195	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.875Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2398	195	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2399	195	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+2428	197	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.865Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2145	178	278	278	45	json	[{"pk": 278, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "Your message", "subject_label": "Subject", "email_label": "Email", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "submit": "Submit", "custom_label": "Custom Sender label", "thanks": "<p>asdfsdaf asdfadsf</p>", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": ""}}]	blorenz@gmail.com	1
+2146	178	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+2147	178	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T20:31:02.633Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2148	178	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:59.786Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 5, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+2149	178	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2150	178	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+2151	178	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
+2152	178	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:59.776Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2153	178	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2154	178	291	291	9	json	[{"pk": 291, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:30:54.424Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:26:51.304Z", "lft": 1, "tree_id": 140, "position": 0, "placeholder": 109, "plugin_type": "TextPlugin"}}]	291	1
+2155	178	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:59.797Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 6, "placeholder": 109, "plugin_type": "CustomContactPlugin"}}]	278	1
+2156	178	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:29:59.742Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2360	192	320	320	45	json	[{"pk": 320, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "A BRIEF MESSAGE", "subject_label": "Subject", "email_label": "Your email address", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "name_label": "YOUR NAME", "submit": "Submit", "phone_label": "YOUR PHONE", "thanks": "", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": "", "company_label": "YOUR COMPANY"}}]	blorenz@gmail.com	1
+2170	180	256	256	9	json	[{"pk": 256, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.865Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:46.121Z", "lft": 1, "tree_id": 115, "position": 1, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	256	1
+2171	180	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.875Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2172	180	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2173	180	278	278	45	json	[{"pk": 278, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "Your message", "subject_label": "Subject", "email_label": "Email", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "submit": "Submit", "custom_label": "Custom Sender label", "thanks": "<p>asdfsdaf asdfadsf</p>", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": ""}}]	blorenz@gmail.com	1
+2174	180	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+2175	180	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-02T20:39:26.819Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2176	180	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.896Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+2177	180	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2178	180	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+2179	180	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	 (9301 W. Bernice St., 60176 Schiller Park)	1
+2180	180	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.885Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2181	180	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.907Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 5, "placeholder": 109, "plugin_type": "CustomContactPlugin"}}]	278	1
+2182	180	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.851Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2361	192	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T00:28:47.195Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 0, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	278	1
+2362	192	111	111	8	json	[{"pk": 111, "model": "cms.placeholder", "fields": {"slot": "contact_form_content", "default_width": null}}]	contact_form_content	1
+2363	192	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.851Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2400	195	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "Braner USA, Inc", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	Braner USA, Inc (9301 W. Bernice St., 60176 Schiller Park)	1
+2429	197	257	257	9	json	[{"pk": 257, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.875Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:35:09.679Z", "lft": 1, "tree_id": 116, "position": 2, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	257	1
+2430	197	11	11	8	json	[{"pk": 11, "model": "cms.placeholder", "fields": {"slot": "home_content", "default_width": null}}]	home_content	1
+2431	197	6	6	16	json	[{"pk": 6, "model": "cms.title", "fields": {"menu_title": null, "redirect": null, "meta_keywords": null, "page_title": null, "language": "en", "title": "Contact Us", "has_url_overwrite": false, "application_urls": null, "creation_date": "2013-12-27T17:50:45.003Z", "page": 8, "path": "contact-us", "meta_description": null, "slug": "contact-us"}}]	Contact Us (contact-us, en)	1
+2432	197	272	272	43	json	[{"pk": 272, "model": "googlemap.googlemap", "fields": {"city": "Schiller Park", "title": "Braner USA, Inc", "zipcode": "60176", "zoom": 13, "content": "", "width": "100%", "state": "IL", "route_planer_title": "Get directions", "route_planer": true, "address": "9301 W. Bernice St.", "lat": null, "lng": null, "height": "400px"}}]	Braner USA, Inc (9301 W. Bernice St., 60176 Schiller Park)	1
+2392	194	320	320	45	json	[{"pk": 320, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "A BRIEF MESSAGE", "subject_label": "Subject", "email_label": "YOUR EMAIL", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "name_label": "YOUR NAME", "submit": "Submit", "phone_label": "YOUR PHONE", "thanks": "", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": "", "company_label": "YOUR COMPANY"}}]	blorenz@gmail.com	1
+2393	194	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T00:28:47.195Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 0, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	278	1
+2394	194	111	111	8	json	[{"pk": 111, "model": "cms.placeholder", "fields": {"slot": "contact_form_content", "default_width": null}}]	contact_form_content	1
+2395	194	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.851Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2401	195	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-03T01:20:51.094Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109, 111], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2402	195	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.896Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+2403	195	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2404	195	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+2405	195	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:17:09.768Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2406	195	335	335	9	json	[{"pk": 335, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:16:56.902Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T01:16:56.898Z", "lft": 1, "tree_id": 148, "position": 5, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	335	1
+2407	195	320	320	9	json	[{"pk": 320, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:19:10.465Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T00:45:29.564Z", "lft": 1, "tree_id": 140, "position": 1, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	320	1
+2408	195	320	320	45	json	[{"pk": 320, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "A BRIEF MESSAGE", "subject_label": "Subject", "email_label": "YOUR EMAIL", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "name_label": "YOUR NAME", "submit": "Submit", "phone_label": "YOUR PHONE", "thanks": "", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": "", "company_label": "YOUR COMPANY"}}]	blorenz@gmail.com	1
+2409	195	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T00:28:47.195Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 0, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	278	1
+2410	195	111	111	8	json	[{"pk": 111, "model": "cms.placeholder", "fields": {"slot": "contact_form_content", "default_width": null}}]	contact_form_content	1
+2411	195	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.851Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
+2433	197	8	8	10	json	[{"pk": 8, "model": "cms.page", "fields": {"login_required": false, "changed_date": "2014-01-03T01:38:32.329Z", "limit_visibility_in_menu": null, "parent": null, "level": 0, "reverse_id": null, "changed_by": "brandon", "navigation_extenders": "", "site": 1, "created_by": "brandon", "creation_date": "2013-12-27T17:50:44.988Z", "lft": 1, "publication_end_date": null, "soft_root": false, "template": "contact.html", "published": true, "publication_date": "2013-12-27T17:50:56.760Z", "placeholders": [11, 12, 109, 111], "in_navigation": true, "rght": 2, "tree_id": 6}}]	Contact Us	1
+2434	197	267	267	9	json	[{"pk": 267, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.896Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:05:37.788Z", "lft": 1, "tree_id": 122, "position": 4, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	267	1
+2435	197	12	12	8	json	[{"pk": 12, "model": "cms.placeholder", "fields": {"slot": "base_content", "default_width": null}}]	base_content	1
+2436	197	109	109	8	json	[{"pk": 109, "model": "cms.placeholder", "fields": {"slot": "contact_map_content", "default_width": null}}]	contact_map_content	1
+2437	197	272	272	9	json	[{"pk": 272, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:17:09.768Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T19:30:33.073Z", "lft": 1, "tree_id": 127, "position": 3, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	272	1
+2438	197	335	335	9	json	[{"pk": 335, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:16:56.902Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T01:16:56.898Z", "lft": 1, "tree_id": 148, "position": 5, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	335	1
+2439	197	320	320	9	json	[{"pk": 320, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T01:38:27.623Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-03T00:45:29.564Z", "lft": 1, "tree_id": 140, "position": 1, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	320	1
+2440	197	320	320	45	json	[{"pk": 320, "model": "cmsplugin_custom_contact.customcontact", "fields": {"content_label": "A BRIEF MESSAGE", "subject_label": "Subject", "email_label": "YOUR EMAIL", "recaptcha_theme": "clean", "site_email": "blorenz@gmail.com", "spam_protection_method": 0, "name_label": "YOUR NAME", "submit": " ", "phone_label": "YOUR PHONE", "thanks": "", "akismet_api_key": "", "recaptcha_public_key": "", "recaptcha_private_key": "", "company_label": "YOUR COMPANY"}}]	blorenz@gmail.com	1
+2441	197	278	278	9	json	[{"pk": 278, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-03T00:28:47.195Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T20:09:42.418Z", "lft": 1, "tree_id": 133, "position": 0, "placeholder": 111, "plugin_type": "CustomContactPlugin"}}]	278	1
+2442	197	111	111	8	json	[{"pk": 111, "model": "cms.placeholder", "fields": {"slot": "contact_form_content", "default_width": null}}]	contact_form_content	1
+2443	197	255	255	9	json	[{"pk": 255, "model": "cms.cmsplugin", "fields": {"rght": 2, "changed_date": "2014-01-02T20:37:33.851Z", "parent": null, "language": "en", "level": 0, "creation_date": "2014-01-02T18:34:39.904Z", "lft": 1, "tree_id": 114, "position": 0, "placeholder": 109, "plugin_type": "GoogleMapPlugin"}}]	255	1
 \.
 
 
@@ -3567,7 +4087,7 @@ COPY reversion_version (id, revision_id, object_id, object_id_int, content_type_
 -- Name: reversion_version_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('reversion_version_id_seq', 1493, true);
+SELECT pg_catalog.setval('reversion_version_id_seq', 2443, true);
 
 
 --
@@ -3652,6 +4172,9 @@ COPY south_migrationhistory (id, app_name, migration, applied) FROM stdin;
 75	easy_thumbnails	0015_auto__del_unique_thumbnail_name_storage_hash__add_unique_thumbnail_sou	2013-12-28 15:23:51.972509-05
 76	cmsplugin_video_gallery	0001_initial	2013-12-31 09:28:00.294163-05
 77	cmsplugin_file_gallery	0001_initial	2013-12-31 09:39:18.540664-05
+78	cmsplugin_file_gallery	0002_auto__chg_field_downloadablefile_src	2014-01-02 12:56:29.062552-05
+79	cmsplugin_file_gallery	0003_auto__chg_field_downloadablefile_downloadable_file	2014-01-02 13:02:00.647641-05
+80	googlemap	0001_initial	2014-01-02 14:27:47.143512-05
 \.
 
 
@@ -3659,7 +4182,7 @@ COPY south_migrationhistory (id, app_name, migration, applied) FROM stdin;
 -- Name: south_migrationhistory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: mlorenz
 --
 
-SELECT pg_catalog.setval('south_migrationhistory_id_seq', 77, true);
+SELECT pg_catalog.setval('south_migrationhistory_id_seq', 92, true);
 
 
 --
@@ -3879,6 +4402,22 @@ ALTER TABLE ONLY cms_title
 
 
 --
+-- Name: cmsplugin_contact_pkey; Type: CONSTRAINT; Schema: public; Owner: mlorenz; Tablespace: 
+--
+
+ALTER TABLE ONLY cmsplugin_contact
+    ADD CONSTRAINT cmsplugin_contact_pkey PRIMARY KEY (cmsplugin_ptr_id);
+
+
+--
+-- Name: cmsplugin_customcontact_pkey; Type: CONSTRAINT; Schema: public; Owner: mlorenz; Tablespace: 
+--
+
+ALTER TABLE ONLY cmsplugin_customcontact
+    ADD CONSTRAINT cmsplugin_customcontact_pkey PRIMARY KEY (cmsplugin_ptr_id);
+
+
+--
 -- Name: cmsplugin_file_gallery_downloadablefile_pkey; Type: CONSTRAINT; Schema: public; Owner: mlorenz; Tablespace: 
 --
 
@@ -3956,6 +4495,14 @@ ALTER TABLE ONLY cmsplugin_gallery_image
 
 ALTER TABLE ONLY cmsplugin_galleryplugin
     ADD CONSTRAINT cmsplugin_galleryplugin_pkey PRIMARY KEY (cmsplugin_ptr_id);
+
+
+--
+-- Name: cmsplugin_googlemap_pkey; Type: CONSTRAINT; Schema: public; Owner: mlorenz; Tablespace: 
+--
+
+ALTER TABLE ONLY cmsplugin_googlemap
+    ADD CONSTRAINT cmsplugin_googlemap_pkey PRIMARY KEY (cmsplugin_ptr_id);
 
 
 --
@@ -5073,6 +5620,22 @@ ALTER TABLE ONLY cms_title
 
 
 --
+-- Name: cmsplugin_contact_cmsplugin_ptr_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mlorenz
+--
+
+ALTER TABLE ONLY cmsplugin_contact
+    ADD CONSTRAINT cmsplugin_contact_cmsplugin_ptr_id_fkey FOREIGN KEY (cmsplugin_ptr_id) REFERENCES cms_cmsplugin(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: cmsplugin_customcontact_cmsplugin_ptr_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mlorenz
+--
+
+ALTER TABLE ONLY cmsplugin_customcontact
+    ADD CONSTRAINT cmsplugin_customcontact_cmsplugin_ptr_id_fkey FOREIGN KEY (cmsplugin_ptr_id) REFERENCES cms_cmsplugin(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: cmsplugin_file_gallery_downloadablefile_gallery_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mlorenz
 --
 
@@ -5214,6 +5777,14 @@ ALTER TABLE ONLY cmsplugin_gallery_image
 
 ALTER TABLE ONLY cmsplugin_galleryplugin
     ADD CONSTRAINT cmsplugin_galleryplugin_cmsplugin_ptr_id_fkey FOREIGN KEY (cmsplugin_ptr_id) REFERENCES cms_cmsplugin(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: cmsplugin_googlemap_cmsplugin_ptr_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: mlorenz
+--
+
+ALTER TABLE ONLY cmsplugin_googlemap
+    ADD CONSTRAINT cmsplugin_googlemap_cmsplugin_ptr_id_fkey FOREIGN KEY (cmsplugin_ptr_id) REFERENCES cms_cmsplugin(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --

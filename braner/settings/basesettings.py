@@ -82,6 +82,8 @@ INSTALLED_APPS = (
     'inline_ordering',
     'gunicorn',
 
+    'widget_tweaks',
+
 
 )
 
@@ -212,3 +214,5 @@ LOGGING = {
             },
         }
 }
+
+AUTH_USER_MODEL = 'auth.User'

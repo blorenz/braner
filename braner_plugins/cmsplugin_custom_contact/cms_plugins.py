@@ -19,8 +19,8 @@ class CustomContactPlugin(ContactPlugin):
     
     fieldsets = (
         (None, {
-                'fields': ('site_email', 'email_label', 'custom_label',
-                           'subject_label', 'content_label', 'thanks',
+                'fields': ('site_email', 'email_label', 'phone_label', 'name_label',
+                           'company_label', 'content_label', 'thanks',
                            'submit'),
         }),
         (_('Spam Protection'), {
