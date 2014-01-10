@@ -12,6 +12,7 @@
 @import "slideshow";
 @import "movies";
 @import "products_features";
+@import "products_articles";
 @import "services";
 @import "contact";
 @import "compass/css3/opacity";
@@ -28,7 +29,7 @@ body {
 
 #wrapper {
 
-  width: 100%;
+  width: 960px;
 
   font-family: "Helvetica Neue";
   font-size: 12px;

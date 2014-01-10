@@ -30,6 +30,8 @@ class FileGalleryPlugin(CMSPlugin):
             new_img.link = f.link
             new_img.extended_content = f.extended_content
             new_img.downloadable_file = f.downloadable_file
+            new_img.author = f.author
+            new_img.subtitle = f.subtitle
             new_img.save()
 
     template = models.CharField(max_length=255,
@@ -60,6 +62,8 @@ class DownloadableFile(Orderable):
     alt = models.TextField(_("Alt text"), blank=True)
     link = models.CharField(_("Link"), max_length=255, blank=True)
     extended_content = models.TextField(_("Extended Content"), blank=True)
+    author = models.CharField(_("Author"), max_length=255, blank=True)
+    subtitle = models.CharField(_("Subtitle"), max_length=255, blank=True)
 
     downloadable_file = models.FileField(_("Downloadable file"), upload_to=get_media_path, max_length=255)
 

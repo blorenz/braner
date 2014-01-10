@@ -15,7 +15,7 @@ class FileInline(OrderableStackedInline):
         ),
         ('Advanced',
          {
-             'fields': ('inline_ordering_position', 'title','extended_content','alt','link',),
+             'fields': ( 'title','extended_content','subtitle', 'author', 'alt','inline_ordering_position',),
              'classes': ('collapse',),
              }
         )
