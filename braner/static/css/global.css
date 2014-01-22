@@ -67,9 +67,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 514, logos/*.png */
+/* line 274, logos/*-color.png */
 .logos-sprite, #logos .acero-prime, #logos .acero-prime:hover, #logos .cargill, #logos .cargill:hover, #logos .coilplus, #logos .coilplus:hover, #logos .feralloy, #logos .feralloy:hover, #logos .fortacero, #logos .fortacero:hover, #logos .independencetube, #logos .independencetube:hover, #logos .jemison-demsey, #logos .jemison-demsey:hover, #logos .kenwal, #logos .kenwal:hover, #logos .kloeckner, #logos .kloeckner:hover, #logos .lapham-hickey, #logos .lapham-hickey:hover, #logos .majestic-steel-usa, #logos .majestic-steel-usa:hover, #logos .marino, #logos .marino:hover, #logos .metal-coaters, #logos .metal-coaters:hover, #logos .metals-usa, #logos .metals-usa:hover, #logos .mill-steel, #logos .mill-steel:hover, #logos .misa, #logos .misa:hover, #logos .monarch, #logos .monarch:hover, #logos .olympic-steel, #logos .olympic-steel:hover, #logos .oneal, #logos .oneal:hover, #logos .prolamsa, #logos .prolamsa:hover, #logos .reliance, #logos .reliance:hover, #logos .russel-metals, #logos .russel-metals:hover, #logos .ryerson, #logos .ryerson:hover, #logos .samuel, #logos .samuel:hover, #logos .steel-summit, #logos .steel-summit:hover, #logos .steel-technologies, #logos .steel-technologies:hover, #logos .steel-warehouse, #logos .steel-warehouse:hover, #logos .thyssenkrupp, #logos .thyssenkrupp:hover, #logos .villacero, #logos .villacero:hover, #logos .worthington-industries, #logos .worthington-industries:hover {
-  background: url('../img/logos-s623196e3fb.png') no-repeat;
+  background: url('../img/logos-sf64b7d7253.png') no-repeat;
 }
 
 /* line 7, ../scss/_logos.scss */
@@ -110,7 +110,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 38, ../scss/_logos.scss */
 #logos .acero-prime {
-  background-position: 0 -4187px;
+  background-position: 0 -1817px;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
@@ -121,7 +121,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 51, ../scss/_logos.scss */
 #logos .cargill {
-  background-position: 0 -2765px;
+  background-position: 0 -316px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
@@ -132,7 +132,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 64, ../scss/_logos.scss */
 #logos .coilplus {
-  background-position: 0 -2449px;
+  background-position: 0 -79px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
@@ -143,7 +143,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 76, ../scss/_logos.scss */
 #logos .feralloy {
-  background-position: 0 -2686px;
+  background-position: 0 -395px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
@@ -154,7 +154,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 88, ../scss/_logos.scss */
 #logos .fortacero {
-  background-position: 0 -3318px;
+  background-position: 0 -1106px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
@@ -165,7 +165,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 102, ../scss/_logos.scss */
 #logos .independencetube {
-  background-position: 0 -4266px;
+  background-position: 0 -1501px;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
@@ -176,7 +176,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 115, ../scss/_logos.scss */
 #logos .jemison-demsey {
-  background-position: 0 -3634px;
+  background-position: 0 -1264px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
@@ -194,11 +194,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 135, ../scss/_logos.scss */
 #logos .kenwal:hover {
-  background-position: 0 -2212px;
+  background-position: 0 -2133px;
 }
 /* line 140, ../scss/_logos.scss */
 #logos .kloeckner {
-  background-position: 0 -3950px;
+  background-position: 0 -1343px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
@@ -209,7 +209,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 152, ../scss/_logos.scss */
 #logos .lapham-hickey {
-  background-position: 0 -3160px;
+  background-position: 0 -632px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
@@ -220,7 +220,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 166, ../scss/_logos.scss */
 #logos .majestic-steel-usa {
-  background-position: 0 -3239px;
+  background-position: 0 -790px;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
@@ -231,7 +231,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 179, ../scss/_logos.scss */
 #logos .marino {
-  background-position: 0 -3476px;
+  background-position: 0 -1027px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
@@ -242,7 +242,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 192, ../scss/_logos.scss */
 #logos .metal-coaters {
-  background-position: 0 -4424px;
+  background-position: 0 -2054px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
@@ -253,7 +253,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 204, ../scss/_logos.scss */
 #logos .metals-usa {
-  background-position: 0 -4029px;
+  background-position: 0 -1896px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
@@ -264,7 +264,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 216, ../scss/_logos.scss */
 #logos .mill-steel {
-  background-position: 0 -4582px;
+  background-position: 0 -1975px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
@@ -275,7 +275,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 230, ../scss/_logos.scss */
 #logos .misa {
-  background-position: 0 -2528px;
+  background-position: 0 0;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
@@ -286,7 +286,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 243, ../scss/_logos.scss */
 #logos .monarch {
-  background-position: 0 -2923px;
+  background-position: 0 -711px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
@@ -297,7 +297,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 256, ../scss/_logos.scss */
 #logos .olympic-steel {
-  background-position: 0 -3397px;
+  background-position: 0 -869px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
@@ -308,7 +308,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 268, ../scss/_logos.scss */
 #logos .oneal {
-  background-position: 0 -3081px;
+  background-position: 0 -474px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
@@ -319,7 +319,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 280, ../scss/_logos.scss */
 #logos .prolamsa {
-  background-position: 0 -2844px;
+  background-position: 0 -237px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
@@ -330,7 +330,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 294, ../scss/_logos.scss */
 #logos .reliance {
-  background-position: 0 -4345px;
+  background-position: 0 -1659px;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
@@ -341,7 +341,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 307, ../scss/_logos.scss */
 #logos .russel-metals {
-  background-position: 0 -3555px;
+  background-position: 0 -1185px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
@@ -352,7 +352,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 320, ../scss/_logos.scss */
 #logos .ryerson {
-  background-position: 0 -4108px;
+  background-position: 0 -1580px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
@@ -363,18 +363,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 332, ../scss/_logos.scss */
 #logos .samuel {
-  background-position: 0 -4503px;
+  background-position: 0 -2291px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
 }
 /* line 339, ../scss/_logos.scss */
 #logos .samuel:hover {
-  background-position: 0 -2370px;
+  background-position: 0 -2291px;
 }
 /* line 344, ../scss/_logos.scss */
 #logos .steel-summit {
-  background-position: 0 -2607px;
+  background-position: 0 -158px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
@@ -385,18 +385,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 358, ../scss/_logos.scss */
 #logos .steel-technologies {
-  background-position: 0 -4661px;
+  background-position: 0 -2212px;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
 }
 /* line 365, ../scss/_logos.scss */
 #logos .steel-technologies:hover {
-  background-position: 0 -2291px;
+  background-position: 0 -2212px;
 }
 /* line 371, ../scss/_logos.scss */
 #logos .steel-warehouse {
-  background-position: 0 -3713px;
+  background-position: 0 -1738px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
@@ -407,7 +407,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 384, ../scss/_logos.scss */
 #logos .thyssenkrupp {
-  background-position: 0 -3002px;
+  background-position: 0 -553px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
@@ -418,7 +418,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 396, ../scss/_logos.scss */
 #logos .villacero {
-  background-position: 0 -3792px;
+  background-position: 0 -948px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
@@ -429,7 +429,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 408, ../scss/_logos.scss */
 #logos .worthington-industries {
-  background-position: 0 -3871px;
+  background-position: 0 -1422px;
   width: 160.0px;
   height: 78.68852px;
   display: block;

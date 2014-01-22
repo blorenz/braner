@@ -1,5 +1,5 @@
 @import "compass/utilities/sprites";
-@import "logos/*.png";
+@import "logos/*-color.png";
 //@include all-logos-sprites;
 
 $SIZE_MODIFIER: .87431694;
@@ -37,7 +37,7 @@ $SIZE_MODIFIER: .87431694;
 
   .acero-prime    {
 
-    @include logos-sprite(acero-prime);
+    @include logos-sprite(acero-prime-color);
 
     width: 156px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -50,7 +50,7 @@ $SIZE_MODIFIER: .87431694;
 
   .cargill    {
 
-    @include logos-sprite(cargill);
+    @include logos-sprite(cargill-color);
 
     width: 192px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -63,7 +63,7 @@ $SIZE_MODIFIER: .87431694;
 
   .coilplus    {
 
-    @include logos-sprite(coilplus);
+    @include logos-sprite(coilplus-color);
 
     width: 190px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -75,7 +75,7 @@ $SIZE_MODIFIER: .87431694;
 
   .feralloy    {
 
-    @include logos-sprite(feralloy);
+    @include logos-sprite(feralloy-color);
 
     width: 194px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -87,7 +87,7 @@ $SIZE_MODIFIER: .87431694;
 
   .fortacero    {
 
-    @include logos-sprite(fortacero);
+    @include logos-sprite(fortacero-color);
 
     width: 183px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -101,7 +101,7 @@ $SIZE_MODIFIER: .87431694;
 
   .independencetube    {
 
-    @include logos-sprite(independencetube);
+    @include logos-sprite(independencetube-color);
 
     width: 156px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -114,7 +114,7 @@ $SIZE_MODIFIER: .87431694;
 
   .jemison-demsey    {
 
-    @include logos-sprite(jemison-demsey);
+    @include logos-sprite(jemison-demsey-color);
 
     width: 192px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -127,7 +127,7 @@ $SIZE_MODIFIER: .87431694;
 
   .kenwal    {
 
-    @include logos-sprite(kenwal);
+    @include logos-sprite(kenwal-color);
 
     width: 190px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -139,7 +139,7 @@ $SIZE_MODIFIER: .87431694;
 
   .kloeckner    {
 
-    @include logos-sprite(kloeckner);
+    @include logos-sprite(kloeckner-color);
 
     width: 194px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -151,7 +151,7 @@ $SIZE_MODIFIER: .87431694;
 
   .lapham-hickey    {
 
-    @include logos-sprite(lapham-hickey);
+    @include logos-sprite(lapham-hickey-color);
 
     width: 183px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -165,7 +165,7 @@ $SIZE_MODIFIER: .87431694;
 
   .majestic-steel-usa    {
 
-    @include logos-sprite(majestic-steel-usa);
+    @include logos-sprite(majestic-steel-usa-color);
 
     width: 156px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -178,7 +178,7 @@ $SIZE_MODIFIER: .87431694;
 
   .marino    {
 
-    @include logos-sprite(marino-ware);
+    @include logos-sprite(marino-color);
 
     width: 192px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -191,7 +191,7 @@ $SIZE_MODIFIER: .87431694;
 
   .metal-coaters    {
 
-    @include logos-sprite(metal-coaters);
+    @include logos-sprite(metal-coaters-color);
 
     width: 190px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -203,7 +203,7 @@ $SIZE_MODIFIER: .87431694;
 
   .metals-usa    {
 
-    @include logos-sprite(metals-usa);
+    @include logos-sprite(metals-usa-color);
 
     width: 194px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -215,7 +215,7 @@ $SIZE_MODIFIER: .87431694;
 
   .mill-steel    {
 
-    @include logos-sprite(mill-steel);
+    @include logos-sprite(mill-steel-color);
 
     width: 183px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -229,7 +229,7 @@ $SIZE_MODIFIER: .87431694;
 
   .misa    {
 
-    @include logos-sprite(misa);
+    @include logos-sprite(misa-color);
 
     width: 156px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -242,7 +242,7 @@ $SIZE_MODIFIER: .87431694;
 
   .monarch    {
 
-    @include logos-sprite(monarch);
+    @include logos-sprite(monarch-color);
 
     width: 192px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -255,7 +255,7 @@ $SIZE_MODIFIER: .87431694;
 
   .olympic-steel    {
 
-    @include logos-sprite(olympic-steel);
+    @include logos-sprite(olympic-steel-color);
 
     width: 190px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -267,7 +267,7 @@ $SIZE_MODIFIER: .87431694;
 
   .oneal    {
 
-    @include logos-sprite(oneal);
+    @include logos-sprite(oneal-color);
 
     width: 194px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -279,7 +279,7 @@ $SIZE_MODIFIER: .87431694;
 
   .prolamsa    {
 
-    @include logos-sprite(prolamsa);
+    @include logos-sprite(prolamsa-color);
 
     width: 183px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -293,7 +293,7 @@ $SIZE_MODIFIER: .87431694;
 
   .reliance    {
 
-    @include logos-sprite(reliance);
+    @include logos-sprite(reliance-color);
 
     width: 156px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -306,7 +306,7 @@ $SIZE_MODIFIER: .87431694;
 
   .russel-metals    {
 
-    @include logos-sprite(russel-metals);
+    @include logos-sprite(russel-metals-color);
 
     width: 192px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -319,7 +319,7 @@ $SIZE_MODIFIER: .87431694;
 
   .ryerson    {
 
-    @include logos-sprite(ryerson);
+    @include logos-sprite(ryerson-color);
 
     width: 190px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -331,7 +331,7 @@ $SIZE_MODIFIER: .87431694;
 
   .samuel    {
 
-    @include logos-sprite(samuel);
+    @include logos-sprite(samuel-color);
 
     width: 194px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -343,7 +343,7 @@ $SIZE_MODIFIER: .87431694;
 
   .steel-summit    {
 
-    @include logos-sprite(steel-summit);
+    @include logos-sprite(steel-summit-color);
 
     width: 183px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -357,7 +357,7 @@ $SIZE_MODIFIER: .87431694;
 
   .steel-technologies    {
 
-    @include logos-sprite(steel-technologies);
+    @include logos-sprite(steel-technologies-color);
 
     width: 156px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -370,7 +370,7 @@ $SIZE_MODIFIER: .87431694;
 
   .steel-warehouse    {
 
-    @include logos-sprite(steel-warehouse);
+    @include logos-sprite(steel-warehouse-color);
 
     width: 192px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -383,7 +383,7 @@ $SIZE_MODIFIER: .87431694;
 
   .thyssenkrupp    {
 
-    @include logos-sprite(thyssenkrupp);
+    @include logos-sprite(thyssenkrupp-color);
 
     width: 190px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -395,7 +395,7 @@ $SIZE_MODIFIER: .87431694;
 
   .villacero    {
 
-    @include logos-sprite(villacero);
+    @include logos-sprite(villacero-color);
 
     width: 194px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
@@ -407,7 +407,7 @@ $SIZE_MODIFIER: .87431694;
 
   .worthington-industries    {
 
-    @include logos-sprite(worthington-industries);
+    @include logos-sprite(worthington-industries-color);
 
     width: 183px * $SIZE_MODIFIER;
     height: 90px * $SIZE_MODIFIER;
