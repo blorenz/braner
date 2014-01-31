@@ -63,16 +63,16 @@ class Video(Orderable):
                             width_field='src_width')
     src_height = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True)
     src_width = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True)
-    title = models.CharField(_("Title"), max_length=255, blank=True)
-    alt = models.TextField(_("Alt text"), blank=True)
-    link = models.CharField(_("Link"), max_length=255, blank=True)
-    extended_content = models.TextField(_("Extended Content"), blank=True)
+    title = models.CharField(_("Title"), max_length=255, blank=True, null=True)
+    alt = models.TextField(_("Alt text"), blank=True, null=True)
+    link = models.CharField(_("Link"), max_length=255, blank=True, null=True)
+    extended_content = models.TextField(_("Extended Content"), blank=True, null=True)
 
     poster_src = models.ImageField(_("Poster image file"), upload_to=get_media_path,
                             height_field='src_height',
                             width_field='src_width', blank=True, null=True)
-    poster_src_height = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True)
-    poster_src_width = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True)
+    poster_src_height = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True, blank=True)
+    poster_src_width = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True, blank=True)
 
     mp4_file = models.FileField(_("MP4 video file"), upload_to=get_media_path, null=True, blank=True)
     ogv_file = models.FileField(_("Ogg video file"), upload_to=get_media_path, null=True, blank=True)
