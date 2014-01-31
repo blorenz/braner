@@ -742,6 +742,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 0 auto;
 }
 /* line 11, ../scss/_productnav.scss */
+#product-nav > ul > li.sibling {
+  display: none;
+}
+/* line 15, ../scss/_productnav.scss */
 #product-nav > ul > li > a {
   text-decoration: none;
   color: #505050;
@@ -749,15 +753,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 20px;
   font-weight: bold;
 }
-/* line 19, ../scss/_productnav.scss */
+/* line 23, ../scss/_productnav.scss */
 #product-nav > ul > li > ul {
   float: right;
 }
-/* line 22, ../scss/_productnav.scss */
+/* line 26, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li {
   float: left;
 }
-/* line 25, ../scss/_productnav.scss */
+/* line 29, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li a {
   color: #676d71;
   font-family: "Arial";
@@ -767,7 +771,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 3px 5px;
   margin-left: 5px;
 }
-/* line 34, ../scss/_productnav.scss */
+/* line 38, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li a:hover {
   color: #fff;
   font-family: "Arial";
@@ -775,7 +779,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   background-color: #000000;
 }
-/* line 45, ../scss/_productnav.scss */
+/* line 49, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li.selected a {
   color: #fff;
   font-family: "Arial";
@@ -783,7 +787,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   background-color: #000000;
 }
-/* line 60, ../scss/_productnav.scss */
+/* line 64, ../scss/_productnav.scss */
 #product-nav hr {
   margin: 5px auto 25px;
 }
@@ -1221,6 +1225,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 0 auto;
 }
 /* line 11, ../scss/_productnav.scss */
+#product-nav > ul > li.sibling {
+  display: none;
+}
+/* line 15, ../scss/_productnav.scss */
 #product-nav > ul > li > a {
   text-decoration: none;
   color: #505050;
@@ -1228,15 +1236,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 20px;
   font-weight: bold;
 }
-/* line 19, ../scss/_productnav.scss */
+/* line 23, ../scss/_productnav.scss */
 #product-nav > ul > li > ul {
   float: right;
 }
-/* line 22, ../scss/_productnav.scss */
+/* line 26, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li {
   float: left;
 }
-/* line 25, ../scss/_productnav.scss */
+/* line 29, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li a {
   color: #676d71;
   font-family: "Arial";
@@ -1246,7 +1254,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 3px 5px;
   margin-left: 5px;
 }
-/* line 34, ../scss/_productnav.scss */
+/* line 38, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li a:hover {
   color: #fff;
   font-family: "Arial";
@@ -1254,7 +1262,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   background-color: #000000;
 }
-/* line 45, ../scss/_productnav.scss */
+/* line 49, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li.selected a {
   color: #fff;
   font-family: "Arial";
@@ -1262,7 +1270,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   background-color: #000000;
 }
-/* line 60, ../scss/_productnav.scss */
+/* line 64, ../scss/_productnav.scss */
 #product-nav hr {
   margin: 5px auto 25px;
 }

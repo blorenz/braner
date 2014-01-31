@@ -8,6 +8,10 @@
       width: 800px;
       margin: 0 auto;
 
+      &.sibling {
+        display: none;
+      }
+
       & > a { // Product Title
         text-decoration: none;
         color: #505050; // text color
