@@ -56,5 +56,10 @@
 </div>
 
 {% render_block "js" %}
+<script type="text/javascript">
+    $('#main-nav > ul > li:nth-child(2)').on('click', function(e) {
+        e.preventDefault();
+    })
+</script>
 </body>
 </html>
