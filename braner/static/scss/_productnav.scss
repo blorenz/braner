@@ -11,7 +11,7 @@
 
       &.selected,
       &.ancestor {
-        display: none;
+        display: block;
       }
 
       & > a { // Product Title

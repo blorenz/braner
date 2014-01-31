@@ -744,7 +744,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 13, ../scss/_productnav.scss */
 #product-nav > ul > li.selected, #product-nav > ul > li.ancestor {
-  display: none;
+  display: block;
 }
 /* line 17, ../scss/_productnav.scss */
 #product-nav > ul > li > a {
@@ -1228,7 +1228,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 13, ../scss/_productnav.scss */
 #product-nav > ul > li.selected, #product-nav > ul > li.ancestor {
-  display: none;
+  display: block;
 }
 /* line 17, ../scss/_productnav.scss */
 #product-nav > ul > li > a {
