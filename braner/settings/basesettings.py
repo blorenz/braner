@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'menus',
     'south',
     'sekizai',
+    'cms_redirects',
 
     'tinymce',
     # 'cms.plugins.flash',
@@ -108,6 +109,7 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.language.LanguageCookieMiddleware',
+    'cms_redirects.middleware.RedirectFallbackMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -133,7 +135,7 @@ TEMPLATE_DIRS = (
 )
 CMS_TEMPLATES = (
     ('home.html', 'Home Page Template'),
-    ('products.html', 'Products Template'),
+    ('products_overview.html', 'Products Template'),
 
     ('products_features.html', 'Products Features Template'),
     ('products_installations.html', 'Products Installations Template'),
@@ -176,6 +178,7 @@ USE_TZ = True
 
 CMS_MENU_TITLE_OVERWRITE = True
 CMS_SEO_FIELDS = True
+CMS_REDIRECTS = True
 
 
 THUMBNAIL_PROCESSORS = (
@@ -216,3 +219,19 @@ LOGGING = {
 }
 
 AUTH_USER_MODEL = 'auth.User'
+
+# TINYMCE_JS_URL = '//tinymce.cachefly.net/4.0/tinymce.min.js'
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "fullscreen,table,spellchecker,paste,searchreplace,fullpage",
+    'toolbar': "fullscreen",
+    'theme': "advanced",
+    'theme_advanced_buttons3_add' : "fullpage",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+    'relative_urls': False,
+    'content_css' : "/static/css/tinymce.css",
+
+    }
+
+TINYMCE_SPELLCHECKER = True
+TINYMCE_COMPRESSOR = True

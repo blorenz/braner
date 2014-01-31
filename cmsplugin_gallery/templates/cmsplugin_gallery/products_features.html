@@ -38,7 +38,7 @@
 <ul id="features">
 {% for image in images %}
     <li class="feature">
-        <a href="#cmspluginGalleryImage{{ image.pk }}"><h3>{{ image.title }} <span>{{ image.extended_content }}</span></h3></a>
+        <a href="#cmspluginGalleryImage{{ image.pk }}"><h3>{{ image.title }} <span>{{ image.extended_content|safe }}</span></h3></a>
     </li>
 {% endfor %}
 </ul>

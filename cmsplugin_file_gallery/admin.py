@@ -6,7 +6,7 @@ import models
 class FileInline(OrderableStackedInline):
 
     model = models.DownloadableFile
-
+    form = forms.DownloadableFileForm
     fieldsets = (
         (None,
          {
