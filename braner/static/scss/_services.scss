@@ -3,7 +3,7 @@
   display: block;
   margin: 0 auto;
   li {
-    display: none;
+    //display: none;
 
     &.selected {
       display: block;
@@ -17,6 +17,24 @@
       font-size: 20px;
       font-weight: bold;
 
+    }
+  }
+}
+
+#services-nav {
+  width: 100%;
+  &>ul {
+    display: block;
+
+    &>li {
+      width: 800px;
+      margin: 0 auto;
+
+      text-decoration: none;
+      color: #505050; // text color
+      font-family: "Arial";
+      font-size: 20px;
+      font-weight: bold;
     }
   }
 }

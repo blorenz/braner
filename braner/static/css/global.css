@@ -1331,10 +1331,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
   margin: 0 auto;
 }
-/* line 5, ../scss/_services.scss */
-#services-nav li {
-  display: none;
-}
 /* line 8, ../scss/_services.scss */
 #services-nav li.selected {
   display: block;
@@ -1350,12 +1346,31 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 24, ../scss/_services.scss */
+#services-nav {
+  width: 100%;
+}
+/* line 26, ../scss/_services.scss */
+#services-nav > ul {
+  display: block;
+}
+/* line 29, ../scss/_services.scss */
+#services-nav > ul > li {
+  width: 800px;
+  margin: 0 auto;
+  text-decoration: none;
+  color: #505050;
+  font-family: "Arial";
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* line 42, ../scss/_services.scss */
 #services-hero {
   display: block;
   width: 800px;
   margin: 0 auto;
 }
-/* line 29, ../scss/_services.scss */
+/* line 47, ../scss/_services.scss */
 #services-hero p {
   color: #676d71;
   font-family: "Arial";
@@ -1363,18 +1378,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   line-height: 1.2em;
   margin-left: 570px;
 }
-/* line 38, ../scss/_services.scss */
+/* line 56, ../scss/_services.scss */
 #services-hero li {
   width: 100%;
 }
-/* line 41, ../scss/_services.scss */
+/* line 59, ../scss/_services.scss */
 #services-hero li img {
   border: 1px solid #c6cbd0;
   padding: 5px;
   max-width: 548px;
   float: left;
 }
-/* line 48, ../scss/_services.scss */
+/* line 66, ../scss/_services.scss */
 #services-hero li h3 {
   color: #505050;
   font-family: "Arial";
@@ -1382,7 +1397,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   margin: 0px 0px 20px 570px;
 }
-/* line 56, ../scss/_services.scss */
+/* line 74, ../scss/_services.scss */
 #services-hero li p {
   color: #676d71;
   font-family: "Arial";
@@ -1390,7 +1405,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   line-height: 1.2em;
   margin-left: 570px;
 }
-/* line 65, ../scss/_services.scss */
+/* line 83, ../scss/_services.scss */
 #services-hero li:after {
   content: ".";
   display: block;
@@ -1399,7 +1414,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   visibility: hidden;
 }
 
-/* line 76, ../scss/_services.scss */
+/* line 94, ../scss/_services.scss */
 #services-extra {
   display: block;
   width: 800px;
@@ -1627,26 +1642,4 @@ body {
 /* line 102, ../scss/global.scss */
 hr {
   margin: 35px auto;
-}
-
-/* line 107, ../scss/global.scss */
-#services-nav {
-  width: 100%;
-}
-/* line 109, ../scss/global.scss */
-#services-nav > ul {
-  display: block;
-}
-/* line 112, ../scss/global.scss */
-#services-nav > ul > li {
-  width: 800px;
-  margin: 0 auto;
-}
-/* line 116, ../scss/global.scss */
-#services-nav > ul > li > a {
-  text-decoration: none;
-  color: #505050;
-  font-family: "Arial";
-  font-size: 20px;
-  font-weight: bold;
 }
