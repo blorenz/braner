@@ -7,8 +7,10 @@
     &>li {
       width: 800px;
       margin: 0 auto;
+      display: none;
 
-      &.sibling {
+      &.selected,
+      &.ancestor {
         display: none;
       }
 

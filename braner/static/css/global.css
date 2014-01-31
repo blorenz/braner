@@ -740,12 +740,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 #product-nav > ul > li {
   width: 800px;
   margin: 0 auto;
-}
-/* line 11, ../scss/_productnav.scss */
-#product-nav > ul > li.sibling {
   display: none;
 }
-/* line 15, ../scss/_productnav.scss */
+/* line 13, ../scss/_productnav.scss */
+#product-nav > ul > li.selected, #product-nav > ul > li.ancestor {
+  display: none;
+}
+/* line 17, ../scss/_productnav.scss */
 #product-nav > ul > li > a {
   text-decoration: none;
   color: #505050;
@@ -753,15 +754,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 20px;
   font-weight: bold;
 }
-/* line 23, ../scss/_productnav.scss */
+/* line 25, ../scss/_productnav.scss */
 #product-nav > ul > li > ul {
   float: right;
 }
-/* line 26, ../scss/_productnav.scss */
+/* line 28, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li {
   float: left;
 }
-/* line 29, ../scss/_productnav.scss */
+/* line 31, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li a {
   color: #676d71;
   font-family: "Arial";
@@ -771,7 +772,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 3px 5px;
   margin-left: 5px;
 }
-/* line 38, ../scss/_productnav.scss */
+/* line 40, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li a:hover {
   color: #fff;
   font-family: "Arial";
@@ -779,7 +780,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   background-color: #000000;
 }
-/* line 49, ../scss/_productnav.scss */
+/* line 51, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li.selected a {
   color: #fff;
   font-family: "Arial";
@@ -787,7 +788,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   background-color: #000000;
 }
-/* line 64, ../scss/_productnav.scss */
+/* line 66, ../scss/_productnav.scss */
 #product-nav hr {
   margin: 5px auto 25px;
 }
@@ -1223,12 +1224,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 #product-nav > ul > li {
   width: 800px;
   margin: 0 auto;
-}
-/* line 11, ../scss/_productnav.scss */
-#product-nav > ul > li.sibling {
   display: none;
 }
-/* line 15, ../scss/_productnav.scss */
+/* line 13, ../scss/_productnav.scss */
+#product-nav > ul > li.selected, #product-nav > ul > li.ancestor {
+  display: none;
+}
+/* line 17, ../scss/_productnav.scss */
 #product-nav > ul > li > a {
   text-decoration: none;
   color: #505050;
@@ -1236,15 +1238,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 20px;
   font-weight: bold;
 }
-/* line 23, ../scss/_productnav.scss */
+/* line 25, ../scss/_productnav.scss */
 #product-nav > ul > li > ul {
   float: right;
 }
-/* line 26, ../scss/_productnav.scss */
+/* line 28, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li {
   float: left;
 }
-/* line 29, ../scss/_productnav.scss */
+/* line 31, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li a {
   color: #676d71;
   font-family: "Arial";
@@ -1254,7 +1256,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: 3px 5px;
   margin-left: 5px;
 }
-/* line 38, ../scss/_productnav.scss */
+/* line 40, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li a:hover {
   color: #fff;
   font-family: "Arial";
@@ -1262,7 +1264,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   background-color: #000000;
 }
-/* line 49, ../scss/_productnav.scss */
+/* line 51, ../scss/_productnav.scss */
 #product-nav > ul > li > ul li.selected a {
   color: #fff;
   font-family: "Arial";
@@ -1270,7 +1272,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   background-color: #000000;
 }
-/* line 64, ../scss/_productnav.scss */
+/* line 66, ../scss/_productnav.scss */
 #product-nav hr {
   margin: 5px auto 25px;
 }
