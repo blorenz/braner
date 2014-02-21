@@ -31,7 +31,7 @@
             </div>
 
             <h3>{{ video.title }}</h3>
-            <p>{{ video.extended_content }}</p>
+            <p>{{ video.extended_content|safe }}</p>
             <p>Duration: {{ video.video_duration }}</p>
         </a>
     </li>
