@@ -6,6 +6,7 @@ import models
 class VideoInline(OrderableStackedInline):
 
     model = models.Video
+    form = forms.VideoForm
 
     fieldsets = (
         (None,
