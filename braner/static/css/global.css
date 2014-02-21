@@ -1644,3 +1644,8 @@ body {
 hr {
   margin: 35px auto;
 }
+
+/* line 107, ../scss/global.scss */
+strong, b {
+  font-weight: bold;
+}

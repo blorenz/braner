@@ -6,7 +6,7 @@ import models
 class ImageInline(OrderableStackedInline):
 
     model = models.Image
-    # form = forms.ImageForm
+    form = forms.ImageForm
 
     fieldsets = (
         (None,

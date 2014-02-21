@@ -222,7 +222,7 @@ AUTH_USER_MODEL = 'auth.User'
 
 # TINYMCE_JS_URL = '//tinymce.cachefly.net/4.0/tinymce.min.js'
 TINYMCE_DEFAULT_CONFIG = {
-    'plugins': "fullscreen,table,spellchecker,paste,searchreplace,fullpage",
+    'plugins': "fullscreen,table,spellchecker,paste,searchreplace",
     'toolbar': "fullscreen",
     'theme': "advanced",
     'theme_advanced_buttons3_add' : "fullpage",
