@@ -854,19 +854,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 #products > li.first,
 #products-installations > li.first {
   margin-left: 0px;
+  clear: both;
 }
-/* line 66, ../scss/_products.scss */
+/* line 67, ../scss/_products.scss */
 #products > li a,
 #products-installations > li a {
   text-decoration: none;
 }
-/* line 69, ../scss/_products.scss */
+/* line 70, ../scss/_products.scss */
 #products > li a .img-wrapper,
 #products-installations > li a .img-wrapper {
   position: relative;
   margin-bottom: 10px;
 }
-/* line 74, ../scss/_products.scss */
+/* line 75, ../scss/_products.scss */
 #products > li a span.title,
 #products-installations > li a span.title {
   padding: 0px 3px;
@@ -876,7 +877,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 14px;
   font-weight: normal;
 }
-/* line 81, ../scss/_products.scss */
+/* line 82, ../scss/_products.scss */
 #products > li a span.title.bold,
 #products-installations > li a span.title.bold {
   padding-top: 0px;
@@ -884,7 +885,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 18px;
   font-weight: bold;
 }
-/* line 90, ../scss/_products.scss */
+/* line 91, ../scss/_products.scss */
 #products > li a .hover-title,
 #products > li a .hover-bg,
 #products-installations > li a .hover-title,
@@ -898,7 +899,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   line-height: 37px;
   text-align: center;
 }
-/* line 101, ../scss/_products.scss */
+/* line 102, ../scss/_products.scss */
 #products > li a .hover-title,
 #products-installations > li a .hover-title {
   color: #fefefe;
@@ -909,7 +910,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   z-index: 6;
   background: url('../img/magnifying-glass.png?1388457759') no-repeat 10px 10px;
 }
-/* line 111, ../scss/_products.scss */
+/* line 112, ../scss/_products.scss */
 #products > li a .hover-bg,
 #products-installations > li a .hover-bg {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
@@ -917,26 +918,26 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background-color: #252525;
   z-index: 5;
 }
-/* line 121, ../scss/_products.scss */
+/* line 122, ../scss/_products.scss */
 #products > li a:hover .hover-title,
 #products > li a:hover .hover-bg,
 #products-installations > li a:hover .hover-title,
 #products-installations > li a:hover .hover-bg {
   display: block;
 }
-/* line 125, ../scss/_products.scss */
+/* line 126, ../scss/_products.scss */
 #products > li a:hover span,
 #products-installations > li a:hover span {
   color: #fff;
   background-color: #000;
 }
-/* line 133, ../scss/_products.scss */
+/* line 134, ../scss/_products.scss */
 #products > li img,
 #products-installations > li img {
   border: 1px solid #c6cbd0;
   padding: 5px;
 }
-/* line 138, ../scss/_products.scss */
+/* line 139, ../scss/_products.scss */
 #products > li h3,
 #products-installations > li h3 {
   color: #505050;
@@ -945,7 +946,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   margin: 15px 0px 10px;
 }
-/* line 146, ../scss/_products.scss */
+/* line 147, ../scss/_products.scss */
 #products > li p,
 #products-installations > li p {
   color: #676d71;
