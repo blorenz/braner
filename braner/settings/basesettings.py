@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'gunicorn',
 
     'widget_tweaks',
+    'cmsplugin_vimeo',
 
 
 )

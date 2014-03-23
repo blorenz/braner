@@ -2,25 +2,15 @@
 {% load braner_utils %}
 
 
-
 {% for video in videos %}
     <li class="movie {% cycle "first" "second" "third" %}" data-order="{{ forloop.counter }}">
         <a href="#video-player"
-                {%  if video.mp4_file %}
-           data-mp4="{{ video.mp4_file.url }}"
-                {% endif %}
-                {%  if video.ogv_file %}
-           data-ogv="{{ video.ogv_file.url }}"
-                {% endif %}
-                {%  if video.webm_file %}
-           data-webm="{{ video.webm_file.url }}"
-                {% endif %}
-
-                {%  if video.poster_src %}
-           data-poster="{{ video.poster_src.url }}"
-                {% endif %}
-           data-video-height="{{ video.video_height }}"
-           data-video-width="{{ video.video_width }}"
+           data-video-id="{{ video.video_id }}"
+           data-width="{{ video.width }}"
+           data-height="{{ video.height }}"
+           data-autoplay="{{ video.autoplay|yesno:"1,0" }}"
+           data-loop="{{ video.loop|yesno:"1,0" }}"
+           data-border="{{ video.border|yesno:"1,0" }}"
            data-video-duration="{{ video.video_duration }}"
                 >
             <div class="img-wrapper">

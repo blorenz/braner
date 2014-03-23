@@ -4,6 +4,7 @@ from cms.models import CMSPlugin
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from inline_ordering.models import Orderable
+from cmsplugin_video_gallery import settings
 
 import utils
 
@@ -24,20 +25,27 @@ class VideoGalleryPlugin(CMSPlugin):
             new_img.src_height = video.src_height
             new_img.src_width = video.src_width
 
-            new_img.poster_src = video.poster_src
-            new_img.poster_src_height = video.poster_src_height
-            new_img.poster_src_width = video.poster_src_width
+            # new_img.poster_src = video.poster_src
+            # new_img.poster_src_height = video.poster_src_height
+            # new_img.poster_src_width = video.poster_src_width
 
             new_img.title = video.title
             new_img.alt = video.alt
             new_img.link = video.link
             new_img.extended_content = video.extended_content
 
-            new_img.mp4_file = video.mp4_file
-            new_img.ogv_file = video.ogv_file
-            new_img.webm_file = video.webm_file
-            new_img.video_width = video.video_width
-            new_img.video_height = video.video_height
+            # new_img.mp4_file = video.mp4_file
+            # new_img.ogv_file = video.ogv_file
+            # new_img.webm_file = video.webm_file
+            # new_img.video_width = video.video_width
+            # new_img.video_height = video.video_height
+
+            new_img.video_id = video.video_id
+            new_img.autoplay = video.autoplay
+            new_img.width = video.width
+            new_img.height = video.height
+            new_img.border = video.border
+            new_img.loop = video.loop
             new_img.video_duration = video.video_duration
             new_img.save()
 
@@ -68,19 +76,36 @@ class Video(Orderable):
     link = models.CharField(_("Link"), max_length=255, blank=True, null=True)
     extended_content = models.TextField(_("Extended Content"), blank=True, null=True)
 
-    poster_src = models.ImageField(_("Poster image file"), upload_to=get_media_path,
-                            height_field='src_height',
-                            width_field='src_width', blank=True, null=True)
-    poster_src_height = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True, blank=True)
-    poster_src_width = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True, blank=True)
+    # poster_src = models.ImageField(_("Poster image file"), upload_to=get_media_path,
+    #                         height_field='src_height',
+    #                         width_field='src_width', blank=True, null=True)
+    # poster_src_height = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True, blank=True)
+    # poster_src_width = models.PositiveSmallIntegerField(_("Poster image height"), editable=False, null=True, blank=True)
 
-    mp4_file = models.FileField(_("MP4 video file"), upload_to=get_media_path, null=True, blank=True)
-    ogv_file = models.FileField(_("Ogg video file"), upload_to=get_media_path, null=True, blank=True)
-    webm_file = models.FileField(_("WebM video file"), upload_to=get_media_path, null=True, blank=True)
+    # mp4_file = models.FileField(_("MP4 video file"), upload_to=get_media_path, null=True, blank=True)
+    # ogv_file = models.FileField(_("Ogg video file"), upload_to=get_media_path, null=True, blank=True)
+    # webm_file = models.FileField(_("WebM video file"), upload_to=get_media_path, null=True, blank=True)
 
-    video_width = models.PositiveSmallIntegerField(_("Video width"), null=True, blank=True)
-    video_height = models.PositiveSmallIntegerField(_("Video height"), null=True, blank=True)
+    # video_width = models.PositiveSmallIntegerField(_("Video width"), null=True, blank=True)
+    # video_height = models.PositiveSmallIntegerField(_("Video height"), null=True, blank=True)
     video_duration = models.CharField(max_length=20, null=True, blank=True)
+
+    video_id = models.CharField(_('video id'), max_length=60)
+
+    autoplay = models.BooleanField(
+        _('autoplay'),
+        default=settings.CMS_VIMEO_DEFAULT_AUTOPLAY
+    )
+
+    width = models.IntegerField(_('width'),
+                                default=settings.CMS_VIMEO_DEFAULT_WIDTH)
+    height = models.IntegerField(_('height'),
+                                 default=settings.CMS_VIMEO_DEFAULT_HEIGHT)
+    border = models.BooleanField(_('border'),
+                                 default=settings.CMS_VIMEO_DEFAULT_BORDER)
+
+    loop = models.BooleanField(_('loop'),
+                               default=settings.CMS_VIMEO_DEFAULT_LOOP)
 
     def __unicode__(self):
         return self.title or self.alt or str(self.pk)

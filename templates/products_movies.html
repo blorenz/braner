@@ -31,6 +31,8 @@
 
     </div>
 
+
+
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.magnific-popup.min.js"></script>
     <script type="text/javascript">
 
@@ -41,12 +43,23 @@
 
             $('video', $video_player).remove();
 
-            var $video = $('<video controls="controls" width="640" />');
-            var $mp4 = $('<source/>').attr('src', $t.attr('data-mp4'));
-            var $webm = $('<source/>').attr('src', $t.attr('data-webm'));
-            var $ogg = $('<source/>').attr('src', $t.attr('data-ogv'));
-            $video.append($mp4).append($webm).append($ogg);
-            $video_player.append($video);
+{#            var $video = $('<video controls="controls" width="640" />');#}
+{#            var $mp4 = $('<source/>').attr('src', $t.attr('data-mp4'));#}
+{#            var $webm = $('<source/>').attr('src', $t.attr('data-webm'));#}
+{#            var $ogg = $('<source/>').attr('src', $t.attr('data-ogv'));#}
+{#            $video.append($mp4).append($webm).append($ogg);#}
+
+
+
+            var template = $('#video-template').html();
+            var compiled = _.template(template);
+            $video_player.append(compiled({
+                    width: $t.attr('data-width'),
+                    height: $t.attr('data-height'),
+                    video_id: $t.attr('data-video-id'),
+                    autoplay: $t.attr('data-autoplay'),
+                    loop: $t.attr('data-loop')
+            }));
 {#            <video controls="controls" poster="http://google.me" width="640" height="360">#}
 {#                    <source src="" type="video/mp4" />#}
 {#                    <source src="" type="video/webm" />#}
@@ -61,12 +74,30 @@
 {#                    </video>#}
 {##}
 
-            $video[0].play();
+{#            $video[0].play();#}
+        });
+
+        $('.movie a').on('mfpClose', function(e /*, params */) {
+            $("#video-player .vimeo").remove();
         });
 
         $('.movie a').magnificPopup({
             type:'inline',
             midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
         });
+    </script>
+
+    <script type="x-template/underscore" id="video-template">
+{#        <div class='vimeo' style='width: <%= width %>px; height: <%= height %>px;'>#}
+        <div class='vimeo' style='width: <%= width %>px; height: <%= height %>px;'>
+            <iframe src="http://player.vimeo.com/video/<%= video_id %>?autoplay=<%= autoplay %>&loop=<%= loop %>"
+                    width="<%= width %>"
+                    height="<%= height %>"
+                    frameborder="0"
+                    webkitAllowFullScreen
+                    mozallowfullscreen
+                    allowFullScreen>
+            </iframe>
+        </div>
     </script>
 {% endblock %}
