@@ -39,17 +39,17 @@ class Migration(SchemaMigration):
 
         # Adding field 'Video.autoplay'
         db.add_column(u'cmsplugin_video_gallery_video', 'autoplay',
-                      self.gf('django.db.models.fields.BooleanField')(default=False),
+                      self.gf('django.db.models.fields.BooleanField')(default=True),
                       keep_default=False)
 
         # Adding field 'Video.width'
         db.add_column(u'cmsplugin_video_gallery_video', 'width',
-                      self.gf('django.db.models.fields.IntegerField')(default=425),
+                      self.gf('django.db.models.fields.IntegerField')(default=640),
                       keep_default=False)
 
         # Adding field 'Video.height'
         db.add_column(u'cmsplugin_video_gallery_video', 'height',
-                      self.gf('django.db.models.fields.IntegerField')(default=344),
+                      self.gf('django.db.models.fields.IntegerField')(default=420),
                       keep_default=False)
 
         # Adding field 'Video.border'
