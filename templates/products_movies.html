@@ -38,10 +38,7 @@
 
         $('.movie a').on('mfpOpen', function(e /*, params */) {
 
-            var $video_player = $("#video-player");
-            var $t = $(e.currentTarget);
 
-            $('video', $video_player).remove();
 
 {#            var $video = $('<video controls="controls" width="640" />');#}
 {#            var $mp4 = $('<source/>').attr('src', $t.attr('data-mp4'));#}
@@ -51,15 +48,6 @@
 
 
 
-            var template = $('#video-template').html();
-            var compiled = _.template(template);
-            $video_player.append(compiled({
-                    width: $t.attr('data-width'),
-                    height: $t.attr('data-height'),
-                    video_id: $t.attr('data-video-id'),
-                    autoplay: $t.attr('data-autoplay'),
-                    loop: $t.attr('data-loop')
-            }));
 {#            <video controls="controls" poster="http://google.me" width="640" height="360">#}
 {#                    <source src="" type="video/mp4" />#}
 {#                    <source src="" type="video/webm" />#}
@@ -83,7 +71,29 @@
 
         $('.movie a').magnificPopup({
             type:'inline',
-            midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+            midClick: true, // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+
+            callbacks: {
+                open: function (e) {
+                    var $video_player = $("#video-player");
+                    var $t = $(this.currItem.el);
+
+                    $('video', $video_player).remove();
+
+
+                    var template = $('#video-template').html();
+                    var compiled = _.template(template);
+                    $video_player.append(compiled({
+                        width: $t.attr('data-width'),
+                        height: $t.attr('data-height'),
+                        video_id: $t.attr('data-video-id'),
+                        autoplay: $t.attr('data-autoplay'),
+                        loop: $t.attr('data-loop')
+                    }));
+                    // Will fire when this exact popup is opened
+                    // this - is Magnific Popup object
+                }
+            }
         });
     </script>
 
