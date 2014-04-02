@@ -2,7 +2,7 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* line 17, ../../../../../.rvm/gems/ruby-1.9.3-p484/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../Users/mlorenz/.rvm/gems/ruby-1.9.3-p484/gems/compass-core-1.0.0.alpha.19/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,52 +24,53 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../.rvm/gems/ruby-1.9.3-p484/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../Users/mlorenz/.rvm/gems/ruby-1.9.3-p484/gems/compass-core-1.0.0.alpha.19/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../.rvm/gems/ruby-1.9.3-p484/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../Users/mlorenz/.rvm/gems/ruby-1.9.3-p484/gems/compass-core-1.0.0.alpha.19/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../.rvm/gems/ruby-1.9.3-p484/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../Users/mlorenz/.rvm/gems/ruby-1.9.3-p484/gems/compass-core-1.0.0.alpha.19/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../.rvm/gems/ruby-1.9.3-p484/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../Users/mlorenz/.rvm/gems/ruby-1.9.3-p484/gems/compass-core-1.0.0.alpha.19/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../.rvm/gems/ruby-1.9.3-p484/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../Users/mlorenz/.rvm/gems/ruby-1.9.3-p484/gems/compass-core-1.0.0.alpha.19/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../.rvm/gems/ruby-1.9.3-p484/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../Users/mlorenz/.rvm/gems/ruby-1.9.3-p484/gems/compass-core-1.0.0.alpha.19/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../.rvm/gems/ruby-1.9.3-p484/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../Users/mlorenz/.rvm/gems/ruby-1.9.3-p484/gems/compass-core-1.0.0.alpha.19/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../.rvm/gems/ruby-1.9.3-p484/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+/* line 116, ../../../../../../../Users/mlorenz/.rvm/gems/ruby-1.9.3-p484/gems/compass-core-1.0.0.alpha.19/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
 
-/* line 274, logos/*-color.png */
+/* line 280, logos/*-color.png */
 .logos-sprite, #logos .acero-prime, #logos .acero-prime:hover, #logos .cargill, #logos .cargill:hover, #logos .coilplus, #logos .coilplus:hover, #logos .feralloy, #logos .feralloy:hover, #logos .fortacero, #logos .fortacero:hover, #logos .independencetube, #logos .independencetube:hover, #logos .jemison-demsey, #logos .jemison-demsey:hover, #logos .kenwal, #logos .kenwal:hover, #logos .kloeckner, #logos .kloeckner:hover, #logos .lapham-hickey, #logos .lapham-hickey:hover, #logos .majestic-steel-usa, #logos .majestic-steel-usa:hover, #logos .marino, #logos .marino:hover, #logos .metal-coaters, #logos .metal-coaters:hover, #logos .metals-usa, #logos .metals-usa:hover, #logos .mill-steel, #logos .mill-steel:hover, #logos .misa, #logos .misa:hover, #logos .monarch, #logos .monarch:hover, #logos .olympic-steel, #logos .olympic-steel:hover, #logos .oneal, #logos .oneal:hover, #logos .prolamsa, #logos .prolamsa:hover, #logos .reliance, #logos .reliance:hover, #logos .russel-metals, #logos .russel-metals:hover, #logos .ryerson, #logos .ryerson:hover, #logos .samuel, #logos .samuel:hover, #logos .steel-summit, #logos .steel-summit:hover, #logos .steel-technologies, #logos .steel-technologies:hover, #logos .steel-warehouse, #logos .steel-warehouse:hover, #logos .thyssenkrupp, #logos .thyssenkrupp:hover, #logos .villacero, #logos .villacero:hover, #logos .worthington-industries, #logos .worthington-industries:hover {
-  background: url('../img/logos-sf64b7d7253.png') no-repeat;
+  background-image: url('../img/logos-sfbf47f25a0.png');
+  background-repeat: no-repeat;
 }
 
 /* line 7, ../scss/_logos.scss */
@@ -111,113 +112,113 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 39, ../scss/_logos.scss */
 #logos .acero-prime {
-  background-position: 0 -1817px;
+  background-position: 0 0;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
 }
 /* line 46, ../scss/_logos.scss */
 #logos .acero-prime:hover {
-  background-position: 0 -1817px;
+  background-position: 0 0;
 }
 /* line 52, ../scss/_logos.scss */
 #logos .cargill {
-  background-position: 0 -316px;
+  background-position: 0 -79px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
 }
 /* line 59, ../scss/_logos.scss */
 #logos .cargill:hover {
-  background-position: 0 -316px;
+  background-position: 0 -79px;
 }
 /* line 65, ../scss/_logos.scss */
 #logos .coilplus {
-  background-position: 0 -79px;
+  background-position: 0 -158px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
 }
 /* line 72, ../scss/_logos.scss */
 #logos .coilplus:hover {
-  background-position: 0 -79px;
+  background-position: 0 -158px;
 }
 /* line 77, ../scss/_logos.scss */
 #logos .feralloy {
-  background-position: 0 -395px;
+  background-position: 0 -237px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
 }
 /* line 84, ../scss/_logos.scss */
 #logos .feralloy:hover {
-  background-position: 0 -395px;
+  background-position: 0 -237px;
 }
 /* line 89, ../scss/_logos.scss */
 #logos .fortacero {
-  background-position: 0 -1106px;
+  background-position: 0 -316px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
 }
 /* line 96, ../scss/_logos.scss */
 #logos .fortacero:hover {
-  background-position: 0 -1106px;
+  background-position: 0 -316px;
 }
 /* line 103, ../scss/_logos.scss */
 #logos .independencetube {
-  background-position: 0 -1501px;
+  background-position: 0 -395px;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
 }
 /* line 110, ../scss/_logos.scss */
 #logos .independencetube:hover {
-  background-position: 0 -1501px;
+  background-position: 0 -395px;
 }
 /* line 116, ../scss/_logos.scss */
 #logos .jemison-demsey {
-  background-position: 0 -1264px;
+  background-position: 0 -474px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
 }
 /* line 123, ../scss/_logos.scss */
 #logos .jemison-demsey:hover {
-  background-position: 0 -1264px;
+  background-position: 0 -474px;
 }
 /* line 129, ../scss/_logos.scss */
 #logos .kenwal {
-  background-position: 0 -2133px;
+  background-position: 0 -553px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
 }
 /* line 136, ../scss/_logos.scss */
 #logos .kenwal:hover {
-  background-position: 0 -2133px;
+  background-position: 0 -553px;
 }
 /* line 141, ../scss/_logos.scss */
 #logos .kloeckner {
-  background-position: 0 -1343px;
+  background-position: 0 -632px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
 }
 /* line 148, ../scss/_logos.scss */
 #logos .kloeckner:hover {
-  background-position: 0 -1343px;
+  background-position: 0 -632px;
 }
 /* line 153, ../scss/_logos.scss */
 #logos .lapham-hickey {
-  background-position: 0 -632px;
+  background-position: 0 -711px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
 }
 /* line 160, ../scss/_logos.scss */
 #logos .lapham-hickey:hover {
-  background-position: 0 -632px;
+  background-position: 0 -711px;
 }
 /* line 167, ../scss/_logos.scss */
 #logos .majestic-steel-usa {
@@ -232,212 +233,212 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 180, ../scss/_logos.scss */
 #logos .marino {
-  background-position: 0 -1027px;
+  background-position: 0 -869px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
 }
 /* line 187, ../scss/_logos.scss */
 #logos .marino:hover {
-  background-position: 0 -1027px;
+  background-position: 0 -869px;
 }
 /* line 193, ../scss/_logos.scss */
 #logos .metal-coaters {
-  background-position: 0 -2054px;
+  background-position: 0 -948px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
 }
 /* line 200, ../scss/_logos.scss */
 #logos .metal-coaters:hover {
-  background-position: 0 -2054px;
+  background-position: 0 -948px;
 }
 /* line 205, ../scss/_logos.scss */
 #logos .metals-usa {
-  background-position: 0 -1896px;
+  background-position: 0 -1027px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
 }
 /* line 212, ../scss/_logos.scss */
 #logos .metals-usa:hover {
-  background-position: 0 -1896px;
+  background-position: 0 -1027px;
 }
 /* line 217, ../scss/_logos.scss */
 #logos .mill-steel {
-  background-position: 0 -1975px;
+  background-position: 0 -1106px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
 }
 /* line 224, ../scss/_logos.scss */
 #logos .mill-steel:hover {
-  background-position: 0 -1975px;
+  background-position: 0 -1106px;
 }
 /* line 231, ../scss/_logos.scss */
 #logos .misa {
-  background-position: 0 0;
+  background-position: 0 -1185px;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
 }
 /* line 238, ../scss/_logos.scss */
 #logos .misa:hover {
-  background-position: 0 0;
+  background-position: 0 -1185px;
 }
 /* line 244, ../scss/_logos.scss */
 #logos .monarch {
-  background-position: 0 -711px;
+  background-position: 0 -1264px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
 }
 /* line 251, ../scss/_logos.scss */
 #logos .monarch:hover {
-  background-position: 0 -711px;
+  background-position: 0 -1264px;
 }
 /* line 257, ../scss/_logos.scss */
 #logos .olympic-steel {
-  background-position: 0 -869px;
+  background-position: 0 -1343px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
 }
 /* line 264, ../scss/_logos.scss */
 #logos .olympic-steel:hover {
-  background-position: 0 -869px;
+  background-position: 0 -1343px;
 }
 /* line 269, ../scss/_logos.scss */
 #logos .oneal {
-  background-position: 0 -474px;
+  background-position: 0 -1422px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
 }
 /* line 276, ../scss/_logos.scss */
 #logos .oneal:hover {
-  background-position: 0 -474px;
+  background-position: 0 -1422px;
 }
 /* line 281, ../scss/_logos.scss */
 #logos .prolamsa {
-  background-position: 0 -237px;
+  background-position: 0 -1501px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
 }
 /* line 288, ../scss/_logos.scss */
 #logos .prolamsa:hover {
-  background-position: 0 -237px;
+  background-position: 0 -1501px;
 }
 /* line 295, ../scss/_logos.scss */
 #logos .reliance {
-  background-position: 0 -1659px;
+  background-position: 0 -1580px;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
 }
 /* line 302, ../scss/_logos.scss */
 #logos .reliance:hover {
-  background-position: 0 -1659px;
+  background-position: 0 -1580px;
 }
 /* line 308, ../scss/_logos.scss */
 #logos .russel-metals {
-  background-position: 0 -1185px;
+  background-position: 0 -1659px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
 }
 /* line 315, ../scss/_logos.scss */
 #logos .russel-metals:hover {
-  background-position: 0 -1185px;
+  background-position: 0 -1659px;
 }
 /* line 321, ../scss/_logos.scss */
 #logos .ryerson {
-  background-position: 0 -1580px;
+  background-position: 0 -1738px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
 }
 /* line 328, ../scss/_logos.scss */
 #logos .ryerson:hover {
-  background-position: 0 -1580px;
+  background-position: 0 -1738px;
 }
 /* line 333, ../scss/_logos.scss */
 #logos .samuel {
-  background-position: 0 -2291px;
+  background-position: 0 -1817px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
 }
 /* line 340, ../scss/_logos.scss */
 #logos .samuel:hover {
-  background-position: 0 -2291px;
+  background-position: 0 -1817px;
 }
 /* line 345, ../scss/_logos.scss */
 #logos .steel-summit {
-  background-position: 0 -158px;
+  background-position: 0 -1896px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
 }
 /* line 352, ../scss/_logos.scss */
 #logos .steel-summit:hover {
-  background-position: 0 -158px;
+  background-position: 0 -1896px;
 }
 /* line 359, ../scss/_logos.scss */
 #logos .steel-technologies {
-  background-position: 0 -2212px;
+  background-position: 0 -1975px;
   width: 136.39344px;
   height: 78.68852px;
   display: block;
 }
 /* line 366, ../scss/_logos.scss */
 #logos .steel-technologies:hover {
-  background-position: 0 -2212px;
+  background-position: 0 -1975px;
 }
 /* line 372, ../scss/_logos.scss */
 #logos .steel-warehouse {
-  background-position: 0 -1738px;
+  background-position: 0 -2054px;
   width: 167.86885px;
   height: 78.68852px;
   display: block;
 }
 /* line 379, ../scss/_logos.scss */
 #logos .steel-warehouse:hover {
-  background-position: 0 -1738px;
+  background-position: 0 -2054px;
 }
 /* line 385, ../scss/_logos.scss */
 #logos .thyssenkrupp {
-  background-position: 0 -553px;
+  background-position: 0 -2133px;
   width: 166.12022px;
   height: 78.68852px;
   display: block;
 }
 /* line 392, ../scss/_logos.scss */
 #logos .thyssenkrupp:hover {
-  background-position: 0 -553px;
+  background-position: 0 -2133px;
 }
 /* line 397, ../scss/_logos.scss */
 #logos .villacero {
-  background-position: 0 -948px;
+  background-position: 0 -2212px;
   width: 169.61749px;
   height: 78.68852px;
   display: block;
 }
 /* line 404, ../scss/_logos.scss */
 #logos .villacero:hover {
-  background-position: 0 -948px;
+  background-position: 0 -2212px;
 }
 /* line 409, ../scss/_logos.scss */
 #logos .worthington-industries {
-  background-position: 0 -1422px;
+  background-position: 0 -2291px;
   width: 160.0px;
   height: 78.68852px;
   display: block;
 }
 /* line 416, ../scss/_logos.scss */
 #logos .worthington-industries:hover {
-  background-position: 0 -1422px;
+  background-position: 0 -2291px;
 }
 
 /* line 1, ../scss/_mainnav.scss */
@@ -654,9 +655,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background: url('../img/arrow.png?1388253933') no-repeat 2px 5px;
 }
 
-/* line 130, social/*.png */
+/* line 136, social/*.png */
 .social-sprite, #social a.gplus, #social a.gplus:hover, #social a.facebook, #social a.facebook:hover, #social a.linkedin, #social a.linkedin:hover, #social a.twitter, #social a.twitter:hover, #social a.vimeo, #social a.vimeo:hover, #social a.youtube, #social a.youtube:hover {
-  background: url('../img/social-sd875ee5009.png') no-repeat;
+  background-image: url('../img/social-sa1452104a3.png');
+  background-repeat: no-repeat;
 }
 
 /* line 5, ../scss/_social.scss */
@@ -681,51 +683,51 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 /* line 22, ../scss/_social.scss */
 #social a.gplus {
-  background-position: 0 -58px;
+  background-position: 0 -86px;
 }
 /* line 24, ../scss/_social.scss */
 #social a.gplus:hover {
-  background-position: 0 -86px;
+  background-position: 0 -58px;
 }
 /* line 29, ../scss/_social.scss */
 #social a.facebook {
-  background-position: 0 -228px;
+  background-position: 0 -29px;
 }
 /* line 31, ../scss/_social.scss */
 #social a.facebook:hover {
-  background-position: 0 -257px;
+  background-position: 0 0;
 }
 /* line 36, ../scss/_social.scss */
 #social a.linkedin {
-  background-position: 0 -286px;
+  background-position: 0 -143px;
 }
 /* line 38, ../scss/_social.scss */
 #social a.linkedin:hover {
-  background-position: 0 -315px;
+  background-position: 0 -114px;
 }
 /* line 43, ../scss/_social.scss */
 #social a.twitter {
-  background-position: 0 -170px;
+  background-position: 0 -201px;
 }
 /* line 45, ../scss/_social.scss */
 #social a.twitter:hover {
-  background-position: 0 -199px;
+  background-position: 0 -172px;
 }
 /* line 50, ../scss/_social.scss */
 #social a.vimeo {
-  background-position: 0 -114px;
+  background-position: 0 -258px;
 }
 /* line 52, ../scss/_social.scss */
 #social a.vimeo:hover {
-  background-position: 0 -142px;
+  background-position: 0 -230px;
 }
 /* line 57, ../scss/_social.scss */
 #social a.youtube {
-  background-position: 0 0;
+  background-position: 0 -315px;
 }
 /* line 59, ../scss/_social.scss */
 #social a.youtube:hover {
-  background-position: 0 -29px;
+  background-position: 0 -286px;
 }
 
 /* line 2, ../scss/_productnav.scss */
@@ -742,7 +744,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 0 auto;
   display: none;
 }
-/* line 13, ../scss/_productnav.scss */
+/* line 12, ../scss/_productnav.scss */
 #product-nav > ul > li.selected, #product-nav > ul > li.ancestor {
   display: block;
 }
@@ -835,7 +837,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   visibility: hidden;
 }
 
-/* line 51, ../scss/_products.scss */
+/* line 50, ../scss/_products.scss */
 #products,
 #products-installations {
   display: block;
@@ -885,7 +887,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 18px;
   font-weight: bold;
 }
-/* line 91, ../scss/_products.scss */
+/* line 90, ../scss/_products.scss */
 #products > li a .hover-title,
 #products > li a .hover-bg,
 #products-installations > li a .hover-title,
@@ -918,7 +920,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background-color: #252525;
   z-index: 5;
 }
-/* line 122, ../scss/_products.scss */
+/* line 121, ../scss/_products.scss */
 #products > li a:hover .hover-title,
 #products > li a:hover .hover-bg,
 #products-installations > li a:hover .hover-title,
@@ -1019,13 +1021,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   position: absolute;
   left: 50%;
   top: 7px;
-  -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
-  -o-border-radius: 7px;
+  -webkit-border-radius: 7px;
   border-radius: 7px;
-  -webkit-background-clip: padding;
   -moz-background-clip: padding;
+  -o-background-clip: padding-box;
+  -webkit-background-clip: padding;
   background-clip: padding-box;
   background-color: #000;
   display: inline-block;
@@ -1072,10 +1073,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   bottom: 0px;
 }
 
-/* line 50, icons/*.png */
+/* line 56, icons/*.png */
 .icons-sprite, #products-movies > li a .play-icon, #products-movies > li a:hover .play-icon,
 #products-movies > li a:hover .hover-bg {
-  background: url('../img/icons-sa72cb8a490.png') no-repeat;
+  background-image: url('../img/icons-s241ef4d580.png');
+  background-repeat: no-repeat;
 }
 
 /* line 5, ../scss/_movies.scss */
@@ -1094,17 +1096,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 16, ../scss/_movies.scss */
 #products-movies > li.first {
   margin-left: 0px;
+  clear: left;
 }
-/* line 20, ../scss/_movies.scss */
+/* line 21, ../scss/_movies.scss */
 #products-movies > li a {
   text-decoration: none;
 }
-/* line 23, ../scss/_movies.scss */
+/* line 24, ../scss/_movies.scss */
 #products-movies > li a .img-wrapper {
   position: relative;
   margin-bottom: 10px;
 }
-/* line 28, ../scss/_movies.scss */
+/* line 29, ../scss/_movies.scss */
 #products-movies > li a h3 {
   color: #676d71;
   font-family: "Arial";
@@ -1112,14 +1115,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   margin: 10px 0px;
 }
-/* line 36, ../scss/_movies.scss */
+/* line 37, ../scss/_movies.scss */
 #products-movies > li a p {
   color: #676d71;
   font-family: "Arial";
   font-size: 12px;
   margin-bottom: 20px;
 }
-/* line 47, ../scss/_movies.scss */
+/* line 48, ../scss/_movies.scss */
 #products-movies > li a .play-icon {
   position: absolute;
   width: 100%;
@@ -1129,7 +1132,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   line-height: 37px;
   text-align: center;
 }
-/* line 57, ../scss/_movies.scss */
+/* line 58, ../scss/_movies.scss */
 #products-movies > li a .play-icon {
   color: #fefefe;
   font-family: "Arial";
@@ -1137,7 +1140,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   text-transform: uppercase;
   z-index: 6;
-  background-position: 0 0;
+  background-position: 0 -36px;
   left: 115px;
   top: 108px;
 }
@@ -1145,14 +1148,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 #products-movies > li a:hover .play-icon,
 #products-movies > li a:hover .hover-bg {
   display: block;
-  background-position: 0 -36px;
+  background-position: 0 0;
 }
-/* line 78, ../scss/_movies.scss */
+/* line 79, ../scss/_movies.scss */
 #products-movies > li a:hover h3 {
   color: #fff;
   background-color: #000;
 }
-/* line 86, ../scss/_movies.scss */
+/* line 87, ../scss/_movies.scss */
 #products-movies > li img {
   border: 1px solid #c6cbd0;
   padding: 5px;
@@ -1227,7 +1230,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 0 auto;
   display: none;
 }
-/* line 13, ../scss/_productnav.scss */
+/* line 12, ../scss/_productnav.scss */
 #product-nav > ul > li.selected, #product-nav > ul > li.ancestor {
   display: block;
 }
@@ -1422,9 +1425,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   margin: 0 auto 30px;
 }
 
-/* line 50, submit/*.png */
+/* line 56, submit/*.png */
 .submit-sprite, #contact-form input[type=submit], #contact-form input[type=submit]:active, #contact-form input[type=submit]:hover {
-  background: url('../img/submit-s0022e7c513.png') no-repeat;
+  background-image: url('../img/submit-s0022e7c513.png');
+  background-repeat: no-repeat;
 }
 
 /* line 5, ../scss/_contact.scss */
@@ -1515,7 +1519,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
   margin-bottom: 15px;
 }
-/* line 92, ../scss/_contact.scss */
+/* line 91, ../scss/_contact.scss */
 #contact-form input[type=text],
 #contact-form textarea {
   color: #888;
@@ -1536,7 +1540,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   cursor: auto;
   border: 1px solid #c2c2c2;
 }
-/* line 117, ../scss/_contact.scss */
+/* line 116, ../scss/_contact.scss */
 #contact-form p.error input[type=text],
 #contact-form p.error textarea {
   border: 2px solid #e74e4e;
@@ -1564,7 +1568,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   cursor: pointer;
   background-position: 0 0;
 }
-/* line 145, ../scss/_contact.scss */
+/* line 144, ../scss/_contact.scss */
 #contact-form input[type=submit]:active, #contact-form input[type=submit]:hover {
   background-position: 0 -25px;
 }
@@ -1633,7 +1637,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* line 97, ../scss/global.scss */
+/* line 96, ../scss/global.scss */
 #logos,
 #homepage-content {
   width: 800px;
