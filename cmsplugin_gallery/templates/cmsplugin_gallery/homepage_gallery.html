@@ -70,8 +70,20 @@
 
     setInterval(function() {
         if (paused == false) {
-            doPrevSlide();
+            doNextSlide();
         }
     },  {%  multiply gallery.slide_duration 1000 %});
+
+
+    $(document).on('mouseover', '.slide', function(e){
+        e.preventDefault();
+        paused = true;
+    });
+
+
+    $(document).on('mouseout', '.slide', function(e){
+        e.preventDefault();
+        paused = false;
+    });
 
 </script>
