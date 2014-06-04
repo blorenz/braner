@@ -4,12 +4,19 @@
 <div class="gallery" id="slideshow">
 
     <div id="slides">
+       <i class="fa fa-backward fa-5x"></i>
+       <i class="fa fa-pause fa-5x"></i>
+        <i class="fa fa-forward fa-5x"></i>
+
+
         {% for image in images %}
             <div class="slide" data-order="{{ forloop.counter }}">
                 <img src="{% thumbnail image.src 790x391 crop %}" alt="{{ image.alt }}" title="{{ image.title }}"  rel="#cmspluginGalleryImage{{ image.pk }}" />
 
             </div>
         {% endfor %}
+
+
     </div>
 
     <div class="slideshow-nav">
@@ -32,11 +39,11 @@
     var w = $('.lozenge').width();
     $('.lozenge').css('width',w).css('margin-left',w/2*-1);
     $("#slides > div:gt(0)").hide();
-    var $firstSlide = $('#slides > div:first');
+    var $firstSlide = $('#slides > div.slide:first');
     $('.slideshow-nav .title').html($('img', $firstSlide).attr('title'));
 
     var doNextSlide = function() {
-        var $nextSlide = $('#slides > div:first')
+        var $nextSlide = $('#slides > div.slide:first')
                 .fadeOut({%  multiply gallery.fade_time 1000 %})
                 .next();
         $('.lozenge a.active').removeClass('active');
@@ -52,7 +59,7 @@
     }
 
     var doPrevSlide = function() {
-        var $nextSlide = $('#slides > div:first')
+        var $nextSlide = $('#slides > div.slide:first')
                 .fadeOut({%  multiply gallery.fade_time 1000 %})
                 .parent().children().last();
 
@@ -63,7 +70,7 @@
         $('.lozenge a[data-order=' + order+']').addClass('active');
         $('.slideshow-nav .title').html($('img', $nextSlide).attr('title'));
 
-        $nextSlide.prependTo('#slides')
+        $nextSlide.insertAfter('#slides i.fa-forward')
                 .fadeIn({%  multiply gallery.fade_time 1000 %})
 
     }
@@ -75,15 +82,28 @@
     },  {%  multiply gallery.slide_duration 1000 %});
 
 
-    $(document).on('mouseover', '.slide', function(e){
+    $(document).on('mouseover', '.slide, #slides i', function(e){
         e.preventDefault();
         paused = true;
+        $('#slides').addClass('hovering');
     });
 
 
-    $(document).on('mouseout', '.slide', function(e){
+    $(document).on('mouseout', '.slide, #slides i', function(e){
         e.preventDefault();
         paused = false;
+        $('#slides').removeClass('hovering');
+    });
+
+    $(document).on('click', '#slides i', function(e) {
+       var $t = $(e.target);
+
+        if ($t.hasClass('fa-forward')) {
+            doNextSlide();
+        }
+        if ($t.hasClass('fa-backward')) {
+            doPrevSlide();
+        }
     });
 
 </script>
