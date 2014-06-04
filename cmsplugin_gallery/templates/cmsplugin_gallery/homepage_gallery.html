@@ -63,9 +63,9 @@
         $('.lozenge a[data-order=' + order+']').addClass('active');
         $('.slideshow-nav .title').html($('img', $nextSlide).attr('title'));
 
-        $nextSlide.fadeIn({%  multiply gallery.fade_time 1000 %})
-                .end()
-                .prependTo('#slides');
+        $nextSlide.prependTo('#slides')
+                .fadeIn({%  multiply gallery.fade_time 1000 %})
+
     }
 
     setInterval(function() {
