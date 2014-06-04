@@ -28,6 +28,7 @@
 </div>
 
 <script type="text/javascript">
+    var paused = false;
     var w = $('.lozenge').width();
     $('.lozenge').css('width',w).css('margin-left',w/2*-1);
     $("#slides > div:gt(0)").hide();
@@ -35,19 +36,21 @@
     $('.slideshow-nav .title').html($('img', $firstSlide).attr('title'));
 
     setInterval(function() {
-        var $nextSlide = $('#slides > div:first')
-                .fadeOut({%  multiply gallery.fade_time 1000 %})
-                .next();
-            $('.lozenge a.active').removeClass('active');
-            var order = $nextSlide.data('order');
+        if (paused == false) {
+            var $nextSlide = $('#slides > div:first')
+                    .fadeOut({%  multiply gallery.fade_time 1000 %})
+                    .next();
+                $('.lozenge a.active').removeClass('active');
+                var order = $nextSlide.data('order');
 
 
-            $('.lozenge a[data-order=' + order+']').addClass('active');
-            $('.slideshow-nav .title').html($('img', $nextSlide).attr('title'));
+                $('.lozenge a[data-order=' + order+']').addClass('active');
+                $('.slideshow-nav .title').html($('img', $nextSlide).attr('title'));
 
-            $nextSlide.fadeIn({%  multiply gallery.fade_time 1000 %})
-                .end()
-                .appendTo('#slides');
-
+                $nextSlide.fadeIn({%  multiply gallery.fade_time 1000 %})
+                    .end()
+                    .appendTo('#slides');
+        }
     },  {%  multiply gallery.slide_duration 1000 %});
+
 </script>
