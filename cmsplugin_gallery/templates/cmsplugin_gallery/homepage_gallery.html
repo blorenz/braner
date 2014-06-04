@@ -54,8 +54,7 @@
     var doPrevSlide = function() {
         var $nextSlide = $('#slides > div:first')
                 .fadeOut({%  multiply gallery.fade_time 1000 %})
-                .parent()
-                .last();
+                .parent().children().last();
 
         $('.lozenge a.active').removeClass('active');
         var order = $nextSlide.data('order');
